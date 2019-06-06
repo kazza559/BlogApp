@@ -1,7 +1,10 @@
 import {combineReducers} from 'redux';
+import authReducer from './authReducer';
+import listViewReducer from './listViewReducer';
+import tagsReducer from './tagsReducer'
 
 export default combineReducers({
-  auth: 'auth',
-  listView: 'list',
-  tags: 'tags'
+  auth: authReducer,
+  listView: listViewReducer,
+  tags: tagsReducer
 })
