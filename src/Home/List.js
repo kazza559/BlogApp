@@ -6,7 +6,8 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
-import { getListView } from '../actions'
+import { getListView } from '../actions';
+import PreviewArticle from './PreviewArticle';
 
 function TabContainer(props) {
   return (
@@ -53,12 +54,15 @@ function ListPreview(props) {
   const {getListView, list} = props;
   useEffect(() => {
     getListView();
-    console.log(props)
-  });
-  return (
-    <div>List</div>
-  )
+  }, []);
+  if (!list) {
+    return <div>Loading...</div>
+  }
+  list.map(item => {
+    return <PreviewArticle {...item} />
+  })
 }
+
 
 const mapStateToProps = state => {
   return {list: state.listView}
