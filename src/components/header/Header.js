@@ -6,6 +6,8 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import Slide from "@material-ui/core/Slide";
 import { withStyles } from "@material-ui/core/styles";
+import { BrowserRouter as  Link } from "react-router-dom";
+
 import "./Header.css";
 
 function HideOnScroll(props) {
@@ -39,7 +41,7 @@ function Header(props) {
       <HideOnScroll {...props}>
         <AppBar classes={{ root: classes.root }}>
           <Toolbar>
-            <div className="header-container">
+            {/* <div className="header-container">
               <div className="header-title">Conduit</div>
               <div className="header-right">
                 <div className="header-home">Home</div>
@@ -49,6 +51,20 @@ function Header(props) {
                   Settings
                 </div>
                 <div className="header-inforUser">inforUser</div>
+              </div>
+            </div> */}
+            <div className="header-container">
+              <div className="header-title">Conduit</div>
+              <div className="header-right">
+                <div className="header-home">
+                  <Link to="/">Home</Link>
+                </div>
+                <div className="header-Article">
+                  <Link to="/signin">Sign In</Link>
+                </div>
+                <div className="header-Settings">
+                  <Link to="/register">Sign Up</Link>
+                </div>
               </div>
             </div>
           </Toolbar>

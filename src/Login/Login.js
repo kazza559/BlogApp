@@ -1,5 +1,4 @@
 import React from "react";
-import Headers from "../components/Header/Header";
 import { makeStyles } from "@material-ui/core/styles";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -36,7 +35,6 @@ function Login() {
 
   return (
     <div className={classes.container}>
-      <Headers />
       <div className="tittle">Sign in</div>
       <div className="to-register">Need an account?</div>
       <FormControl className={classes.formControl} variant="outlined">
