@@ -6,7 +6,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import Slide from "@material-ui/core/Slide";
 import { withStyles } from "@material-ui/core/styles";
-import { BrowserRouter as  Link, withRouter } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import "./Header.css";
 
@@ -34,7 +34,7 @@ const styles = {
   }
 };
 function Header(props) {
-  const { classes, history } = props;
+  const { classes } = props;
   return (
     <React.Fragment>
       <CssBaseline />
@@ -57,13 +57,13 @@ function Header(props) {
               <div className="header-title">Conduit</div>
               <div className="header-right">
                 <div className="header-home">
-                  <a  onClick={() => history.push('/')} >Home</a>
+                  <NavLink to="/" exact activeClassName="selected">Home</NavLink>
                 </div>
                 <div className="header-Article">
-                  <a onClick={() => history.push('/signin')}>Sign In</a>
+                  <NavLink to="/login" activeClassName="selected">Sign In</NavLink>
                 </div>
                 <div className="header-Settings">
-                  <a onClick={() => history.push('/signin')}>Sign Up</a>
+                  <NavLink to="/register" activeClassName="selected">Sign Up</NavLink>
                 </div>
               </div>
             </div>
@@ -74,4 +74,4 @@ function Header(props) {
     </React.Fragment>
   );
 }
-export default withRouter(withStyles(styles)(Header));
+export default withStyles(styles)(Header);
