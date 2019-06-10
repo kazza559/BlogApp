@@ -39,7 +39,7 @@ function Header(props) {
       <HideOnScroll {...props}>
         <AppBar classes={{ root: classes.root }}>
           <Toolbar>
-            <ul className="header-container">
+            <div className="header-container">
               <div className="header-title">Conduit</div>
               <div className="header-right">
                 <div className="header-home">Home</div>
@@ -50,7 +50,7 @@ function Header(props) {
                 </div>
                 <div className="header-inforUser">inforUser</div>
               </div>
-            </ul>
+            </div>
           </Toolbar>
         </AppBar>
       </HideOnScroll>
