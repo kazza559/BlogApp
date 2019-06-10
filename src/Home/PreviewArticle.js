@@ -4,65 +4,48 @@ import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
-import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
-import red from "@material-ui/core/colors/red";
 import FavoriteIcon from "@material-ui/icons/Favorite";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
 
 const useStyles = makeStyles(theme => ({
   card: {
-    maxWidth: 345
+    maxWidth: "95%",
+    backgroundColor: "#f2f2f2",
+    marginBottom: "5px",
+    clear: "both"
   },
-  media: {
-    height: 0,
-    paddingTop: "56.25%" // 16:9
+  face: {
+    width: "40px",
+    height: "40px",
+    borderRadius: "30px"
   },
-  expand: {
-    transform: "rotate(0deg)",
-    marginLeft: "auto",
-    transition: theme.transitions.create("transform", {
-      duration: theme.transitions.duration.shortest
-    })
-  },
-  expandOpen: {
-    transform: "rotate(180deg)"
-  },
-  avatar: {
-    backgroundColor: red[500]
+  float: {
+    float: "right"
   }
 }));
 
-function PreviewArticle() {
+function PreviewArticle(props) {
   const classes = useStyles();
-
+  const { author, createdAt, title, description, favoritesCount } = props;
   return (
     <Card className={classes.card}>
       <CardHeader
-        avatar={
-          <Avatar aria-label="Recipe" className={classes.avatar}>
-            R
-          </Avatar>
-        }
-        action={
-          <IconButton aria-label="Settings">
-            <MoreVertIcon />
-          </IconButton>
-        }
-        title="Shrimp and Chorizo Paella"
-        subheader="September 14, 2016"
+        avatar={<img className={classes.face} src={author.image} />}
+        title={author.username}
+        subheader={createdAt}
       />
       <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
-          This impressive paella is a perfect party dish and a fun meal to cook
-          together with your guests. Add 1 cup of frozen peas along with the
-          mussels, if you like.
+        <Typography variant="h5" color="textPrimary" component="p">
+          {title}
+        </Typography>
+        <Typography variant="body1" color="textSecondary" component="p">
+          {description}
         </Typography>
       </CardContent>
-      <CardActions disableSpacing>
+      <CardActions className={classes.float}>
         <IconButton aria-label="Add to favorites">
-          <FavoriteIcon />
+          <FavoriteIcon /> {favoritesCount}
         </IconButton>
       </CardActions>
     </Card>
