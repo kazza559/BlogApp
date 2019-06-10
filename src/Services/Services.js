@@ -5,7 +5,8 @@ import axios from "axios";
 export const Service = {
   login,
   logout,
-  getAllTags
+  getAllTags,
+  getListView
 };
 
 function login(username, password) {
@@ -54,4 +55,11 @@ function handleResponse(response) {
 
     return data;
   });
+}
+
+function getListView() {
+  return axios.get(API_ENDPOINTS.GET_LIST_ARTICLE.path, {params: {
+    offset: 0,
+    limit: 10
+  }})
 }

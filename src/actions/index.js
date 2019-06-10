@@ -1,4 +1,4 @@
-import { GET_TAGLIST } from "../Constants/index";
+import { GET_TAGLIST, GET_LISTVIEW } from "../Constants/index";
 import { Service } from "../Services";
 
 export const getTagList = () => {
@@ -9,3 +9,11 @@ export const getTagList = () => {
     });
   };
 };
+
+export const getListView = () => async dispatch => {
+  const response = await Service.getListView();
+  dispatch({
+    type: GET_LISTVIEW,
+    payload: response.data
+  })
+}

@@ -1,4 +1,5 @@
 export const GET_TAGLIST = "GET_TAGLIST";
+export const GET_LISTVIEW = 'GET_LISTVIEW';
 export const APIURL = 'https://conduit.productionready.io/api';
 export const API_ENDPOINTS = {
     GET_LIST_ARTICLE: {
