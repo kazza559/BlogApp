@@ -4,8 +4,8 @@ import { Service } from "../Services";
 export const getTagList = () => {
   return dispatch => {
     Service.getAllTags().then(tag => {
-      tag = tag.tags;
-      dispatch({ type: GET_TAGLIST, tag });
+      const { tags } = tag.data;
+      dispatch({ type: GET_TAGLIST, tags });
     });
   };
 };

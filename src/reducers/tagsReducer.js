@@ -4,7 +4,7 @@ const intinitalStateTag = [];
 export default (state = intinitalStateTag, action) => {
   switch (action.type) {
     case GET_TAGLIST:
-      return [...state, ...action.tag];
+      return [...state, ...action.tags];
     default:
       return state;
   }
