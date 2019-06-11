@@ -1,6 +1,6 @@
 import React from "react";
 import Banner from "./Banner";
-import Headers from "../components/header/Header";
+import Headers from "../components/Header/Header";
 import Tags from "./Tags";
 import List from "./List";
 import "./style.css";
