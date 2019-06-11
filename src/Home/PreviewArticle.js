@@ -7,6 +7,7 @@ import CardActions from "@material-ui/core/CardActions";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import FavoriteIcon from "@material-ui/icons/Favorite";
+import convertTime from '../Helpers/datePipe'
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -32,7 +33,7 @@ function PreviewArticle(props) {
       <CardHeader
         avatar={<img className={classes.face} src={author.image} />}
         title={author.username}
-        subheader={createdAt}
+        subheader={convertTime(createdAt)}
       />
       <CardContent>
         <Typography variant="h5" color="textPrimary" component="p">
