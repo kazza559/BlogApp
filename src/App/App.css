@@ -9,13 +9,12 @@
     font-size: 1.5rem;
   }
   .container {
-    background: #5cb85c;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 0px;
     padding: 0px;
-    color: white;
+    color: #FE6B8B;
     flex-direction: column;
     height: 180px;
   }

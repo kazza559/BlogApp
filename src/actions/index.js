@@ -1,4 +1,4 @@
-import { GET_TAGLIST } from "../Constants/index";
+import { GET_TAGLIST, GET_LISTVIEW } from "../Constants/index";
 import { Service } from "../Services";
 import { userConstants } from "../Constants/index";
 
@@ -10,6 +10,14 @@ export const getTagList = () => {
     });
   };
 };
+
+export const getListView = (offset, limit) => async dispatch => {
+  const response = await Service.getListView(offset, limit);
+  dispatch({
+    type: GET_LISTVIEW,
+    payload: response.data
+  })
+}
 export const logIn = inforUser => {
   function success(user) {
     return { type: userConstants.LOGIN_SUCCESS, user };
