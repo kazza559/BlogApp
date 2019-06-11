@@ -18,15 +18,27 @@ export const getListView = (offset, limit) => async dispatch => {
     payload: response.data
   })
 }
-export const logIn = inforUser => {
-  function success(user) {
-    return { type: userConstants.LOGIN_SUCCESS, user };
-  }
-  function failure(error) {
-    return { type: userConstants.LOGIN_FAILURE, error };
-  }
+function success(user) {
+  return { type: userConstants.LOGIN_REGISTER_SUCCESS, user };
+}
+function failure(error) {
+  return { type: userConstants.LOGIN_REGISTER_FAILURE, error };
+}
+export const loginForm = inforUser => {
   return dispatch => {
     Service.login(inforUser).then(
+      user => {
+        dispatch(success(user));
+      },
+      error => {
+        dispatch(failure(error));
+      }
+    );
+  };
+};
+export const registerForm = inforUser => {
+  return dispatch => {
+    Service.register(inforUser).then(
       user => {
         dispatch(success(user));
       },

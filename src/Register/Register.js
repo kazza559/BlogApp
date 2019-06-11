@@ -7,7 +7,7 @@ import ButtonCustomer from "../components/ButtonCustomer/Button";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import useForm from "react-hook-form";
 import { connect } from "react-redux";
-import { loginForm } from "../actions/index";
+import { registerForm } from "../actions/index";
 import { NavLink } from "react-router-dom";
 
 
@@ -21,8 +21,8 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function Login(props) {
-  const { loginForm } = props;
+function Register(props) {
+  const { registerForm } = props;
   const { handleSubmit, register, errors } = useForm();
   const [labelWidth, setLabelWidth] = React.useState(0);
   const labelRef = React.useRef(null);
@@ -30,17 +30,40 @@ function Login(props) {
   React.useEffect(() => {
     setLabelWidth(labelRef.current.offsetWidth);
   }, []);
-  const onSubmit =  user => {
+  const onSubmit = user => {
     const inforUser = { user };
-    loginForm(inforUser);
+    registerForm(inforUser);
+    console.log(inforUser);
   };
   return (
     <div className={classes.container}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="tittle">Sign in</div>
-        <NavLink to="/register" className="login-register">
-        Need an account?
+        <div className="tittle">Sign up</div>
+        <NavLink to="/login" className="login-register">
+        Have an account?
         </NavLink>
+        <FormControl className={classes.formControl} variant="outlined">
+          <InputLabel
+            ref={labelRef}
+            htmlFor="component-outlined"
+            error={errors.username ? true : false}
+          >
+            Enter your username
+          </InputLabel>
+          <OutlinedInput
+            error={errors.username ? true : false}
+            labelWidth={labelWidth}
+            name="username"
+            inputRef={register({
+              required: "Username is required"
+            })}
+          />
+          {errors.username && (
+            <FormHelperText id="component-error-text" error>
+              {errors.username.message}
+            </FormHelperText>
+          )}
+        </FormControl>
         <FormControl className={classes.formControl} variant="outlined">
           <InputLabel
             ref={labelRef}
@@ -94,7 +117,7 @@ function Login(props) {
             </FormHelperText>
           )}
         </FormControl>
-        <ButtonCustomer text="Sign in" />
+        <ButtonCustomer text="Sign Up" />
       </form>
     </div>
   );
@@ -102,5 +125,5 @@ function Login(props) {
 
 export default connect(
   null,
-  { loginForm }
-)(Login);
+  { registerForm }
+)(Register);
