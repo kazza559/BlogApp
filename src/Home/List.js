@@ -8,7 +8,6 @@ import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import { getListView } from "../actions";
 import PreviewArticle from "./PreviewArticle";
-import { TablePagination } from "@material-ui/core";
 import Pagination from "../components/Pagination";
 
 
