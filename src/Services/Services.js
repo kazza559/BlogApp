@@ -1,30 +1,28 @@
 import { authHeader } from "../Helpers/authHeader";
-import { API_ENDPOINTS } from "../Constants/index";
+import { API_ENDPOINTS, REGISTER, LOGIN } from "../Constants/index";
 import axios from "axios";
 
 export const Service = {
-  login,
   logout,
   getAllTags,
   getListView,
-  register
+  loginRegister
 };
 
-function login(inforUser) {
-  return axios
-    .post(API_ENDPOINTS.LOGIN.path, inforUser, authHeader())
-    .then(user => {
-      localStorage.setItem("user", JSON.stringify(user.data));
-      return user.data;
-    });
+function loginRegister(User, infor) {
+  const patch = getPatch(infor);
+  return axios.post(patch, User, authHeader()).then(res => {
+    localStorage.setItem("user", JSON.stringify(res.data));
+    return res.data;
+  });
 }
-function register(user) {
-  return axios
-    .post(API_ENDPOINTS.CREATE_USERS.path, user, authHeader())
-    .then(res => {
-      localStorage.setItem("user", JSON.stringify(res.data));
-      return res.data;
-    });
+function getPatch(infor) {
+  if (infor === LOGIN) {
+    return API_ENDPOINTS.LOGIN.path;
+  }
+  if (infor === REGISTER) {
+    return API_ENDPOINTS.CREATE_USERS.path;
+  }
 }
 
 function logout() {

@@ -7,9 +7,9 @@ import ButtonCustomer from "../components/ButtonCustomer/Button";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import useForm from "react-hook-form";
 import { connect } from "react-redux";
-import { registerForm } from "../actions/index";
+import { loginRegister } from "../actions/index";
 import { NavLink } from "react-router-dom";
-
+import { REGISTER } from "../Constants/index";
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function Register(props) {
-  const { registerForm } = props;
+  const { loginRegister } = props;
   const { handleSubmit, register, errors } = useForm();
   const [labelWidth, setLabelWidth] = React.useState(0);
   const labelRef = React.useRef(null);
@@ -32,15 +32,14 @@ function Register(props) {
   }, []);
   const onSubmit = user => {
     const inforUser = { user };
-    registerForm(inforUser);
-    console.log(inforUser);
+    loginRegister(inforUser, REGISTER);
   };
   return (
     <div className={classes.container}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="tittle">Sign up</div>
         <NavLink to="/login" className="login-register">
-        Have an account?
+          Have an account?
         </NavLink>
         <FormControl className={classes.formControl} variant="outlined">
           <InputLabel
@@ -125,5 +124,5 @@ function Register(props) {
 
 export default connect(
   null,
-  { registerForm }
+  { loginRegister }
 )(Register);
