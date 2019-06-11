@@ -1,6 +1,12 @@
 export const GET_TAGLIST = "GET_TAGLIST";
 export const GET_LISTVIEW = 'GET_LISTVIEW';
 export const APIURL = 'https://conduit.productionready.io/api';
+export const userConstants = {
+  LOGIN_SUCCESS: 'USERS_LOGIN_SUCCESS',
+  LOGIN_FAILURE: 'USERS_LOGIN_FAILURE',
+
+  LOGOUT: 'USERS_LOGOUT'
+}
 export const API_ENDPOINTS = {
     GET_LIST_ARTICLE: {
       path: APIURL + '/articles',

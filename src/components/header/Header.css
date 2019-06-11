@@ -19,10 +19,17 @@
   align-items: center;
   justify-content: center;
 }
-.header-right > div:hover {
+.header-right a:hover {
   color: #ffeb3b;
 }
 i {
   font-size: 20px !important;
   padding-right: 3px;
+}
+.header-right a{
+  text-decoration: none;
+  color: white;
+}
+.selected{
+  color: #ffeb3b !important;
 }

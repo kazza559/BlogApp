@@ -9,21 +9,14 @@ export const Service = {
   getListView
 };
 
-function login(username, password) {
-  const requestOptions = {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ username, password })
-  };
-
-  return fetch(API_ENDPOINTS.LOGIN.path, requestOptions)
-    .then(handleResponse)
+function login(inforUser) {
+  return axios
+    .post(API_ENDPOINTS.LOGIN.path, inforUser, authHeader())
     .then(user => {
-      localStorage.setItem("user", JSON.stringify(user));
-
-      return user;
-    });
-}
+      localStorage.setItem('user', JSON.stringify(user.data));
+      return user.data;
+    })
+  }
 
 function logout() {
   localStorage.removeItem("user");
@@ -34,9 +27,6 @@ function getAllTags() {
     .get(API_ENDPOINTS.GET_TAGS_LIST.path, authHeader())
     .then(response => {
       return response;
-    })
-    .catch(err => {
-      console.log(err);
     });
 }
 

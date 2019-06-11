@@ -1,5 +1,6 @@
 import { GET_TAGLIST, GET_LISTVIEW } from "../Constants/index";
 import { Service } from "../Services";
+import { userConstants } from "../Constants/index";
 
 export const getTagList = () => {
   return dispatch => {
@@ -17,3 +18,21 @@ export const getListView = (offset, limit) => async dispatch => {
     payload: response.data
   })
 }
+export const logIn = inforUser => {
+  function success(user) {
+    return { type: userConstants.LOGIN_SUCCESS, user };
+  }
+  function failure(error) {
+    return { type: userConstants.LOGIN_FAILURE, error };
+  }
+  return dispatch => {
+    Service.login(inforUser).then(
+      user => {
+        dispatch(success(user));
+      },
+      error => {
+        dispatch(failure(error));
+      }
+    );
+  };
+};

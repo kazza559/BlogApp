@@ -14,7 +14,7 @@ const style = {
 };
 
 function ButtonCustomer(props) {
-  return <Button style={style}>{props.text}</Button>;
+  return <Button style={style} type="submit">{props.text}</Button>;
 }
 
 export default ButtonCustomer;

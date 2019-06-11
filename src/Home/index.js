@@ -1,6 +1,5 @@
 import React from "react";
 import Banner from "./Banner";
-import Headers from "../components/Header/Header";
 import Tags from "./Tags";
 import List from "./List";
 import "./style.css";
@@ -8,7 +7,6 @@ import "./style.css";
 function Home() {
   return (
     <div className="home">
-      <Headers />
       <Banner />
       <div className="flex">
         <List />
