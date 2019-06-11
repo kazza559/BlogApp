@@ -4,6 +4,7 @@ import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
 import ButtonCustomer from "../components/ButtonCustomer/Button";
+import FormHelperText from "@material-ui/core/FormHelperText";
 import useForm from "./userForm";
 import validate from "./LoginFormValidationRules";
 
@@ -30,6 +31,7 @@ function Login() {
     setLabelWidth(labelRef.current.offsetWidth);
   }, []);
   function loginForm() {
+    console.log(values);
     console.log("No errors, submit callback called!");
   }
   return (
@@ -48,7 +50,11 @@ function Login() {
             type="email"
             name="email"
           />
-          {errors.email && <p className="help is-danger">{errors.email}</p>}
+          {errors.email && (
+            <FormHelperText id="component-error-text" error>
+              {errors.email}
+            </FormHelperText>
+          )}
         </FormControl>
         <FormControl className={classes.formControl} variant="outlined">
           <InputLabel ref={labelRef} htmlFor="component-outlined">
@@ -62,7 +68,9 @@ function Login() {
             name="password"
           />
           {errors.password && (
-            <p className="help is-danger">{errors.password}</p>
+            <FormHelperText id="component-error-text" error>
+              {errors.password}
+            </FormHelperText>
           )}
         </FormControl>
         <ButtonCustomer text="Sign in" />
