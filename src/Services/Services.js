@@ -57,9 +57,9 @@ function handleResponse(response) {
   });
 }
 
-function getListView() {
+function getListView(offset=0, limit=10) {
   return axios.get(API_ENDPOINTS.GET_LIST_ARTICLE.path, {params: {
-    offset: 0,
-    limit: 10
+    offset: offset,
+    limit: limit
   }})
 }

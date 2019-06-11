@@ -10,8 +10,8 @@ export const getTagList = () => {
   };
 };
 
-export const getListView = () => async dispatch => {
-  const response = await Service.getListView();
+export const getListView = (offset, limit) => async dispatch => {
+  const response = await Service.getListView(offset, limit);
   dispatch({
     type: GET_LISTVIEW,
     payload: response.data

@@ -8,6 +8,9 @@ import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import { getListView } from "../actions";
 import PreviewArticle from "./PreviewArticle";
+import { TablePagination } from "@material-ui/core";
+import Pagination from "../components/Pagination";
+
 
 function TabContainer(props) {
   return (
@@ -63,10 +66,16 @@ function ListPreview(props) {
     getListView();
   }, [getListView]);
 
+  const renderList = (list) => {
+    return list.map(item => <PreviewArticle {...item} key={item.slug} />)
+  }
+
   return !list ? (
     <div>Loading...</div>
-  ) : (
-    list.map(item => <PreviewArticle {...item} key={item.slug} />)
+  ) : ( <>
+    {renderList(list)}
+    <Pagination {...list} />
+    </>
   );
 }
 
