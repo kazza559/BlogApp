@@ -7,6 +7,7 @@ import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import Slide from "@material-ui/core/Slide";
 import { withStyles } from "@material-ui/core/styles";
 import { NavLink } from "react-router-dom";
+import { connect } from "react-redux";
 
 import "./Header.css";
 
@@ -34,39 +35,49 @@ const styles = {
   }
 };
 function Header(props) {
-  const { classes } = props;
+  const { classes, user } = props;
   return (
     <React.Fragment>
       <CssBaseline />
       <HideOnScroll {...props}>
         <AppBar classes={{ root: classes.root }}>
           <Toolbar>
-            {/* <div className="header-container">
-              <div className="header-title">Conduit</div>
-              <div className="header-right">
-                <div className="header-home">Home</div>
-                <div className="header-Article">New Article</div>
-                <div className="header-Settings">
-                  <i className="material-icons"> settings </i>
-                  Settings
-                </div>
-                <div className="header-inforUser">inforUser</div>
-              </div>
-            </div> */}
-            <div className="header-container">
-              <div className="header-title">Conduit</div>
-              <div className="header-right">
-                <div className="header-home">
-                  <NavLink to="/" exact activeClassName="selected">Home</NavLink>
-                </div>
-                <div className="header-Article">
-                  <NavLink to="/login" activeClassName="selected">Sign In</NavLink>
-                </div>
-                <div className="header-Settings">
-                  <NavLink to="/register" activeClassName="selected">Sign Up</NavLink>
+            {user.loggedIn && (
+              <div className="header-container">
+                <div className="header-title">Conduit</div>
+                <div className="header-right">
+                  <div className="header-home">Home</div>
+                  <div className="header-Article">New Article</div>
+                  <div className="header-Settings">
+                    <i className="material-icons"> settings </i>
+                    Settings
+                  </div>
+                  <div className="header-inforUser">inforUser</div>
                 </div>
               </div>
-            </div>
+            )}
+            {!user.loggedIn && (
+              <div className="header-container">
+                <div className="header-title">Conduit</div>
+                <div className="header-right">
+                  <div className="header-home">
+                    <NavLink to="/" exact activeClassName="selected">
+                      Home
+                    </NavLink>
+                  </div>
+                  <div className="header-Article">
+                    <NavLink to="/login" activeClassName="selected">
+                      Sign In
+                    </NavLink>
+                  </div>
+                  <div className="header-Settings">
+                    <NavLink to="/register" activeClassName="selected">
+                      Sign Up
+                    </NavLink>
+                  </div>
+                </div>
+              </div>
+            )}
           </Toolbar>
         </AppBar>
       </HideOnScroll>
@@ -74,4 +85,10 @@ function Header(props) {
     </React.Fragment>
   );
 }
-export default withStyles(styles)(Header);
+
+function mapStateToProps(state) {
+  return {
+    user: state.auth
+  };
+}
+export default connect(mapStateToProps)(withStyles(styles)(Header));
