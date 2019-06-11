@@ -33,7 +33,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function List() {
+function List(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
