@@ -2,6 +2,7 @@ import { GET_TAGLIST, GET_LISTVIEW, GET_FEED } from "../Constants/index";
 import { Service } from "../Services";
 import { userConstants } from "../Constants/index";
 import { alertActions } from "../actions/alert.actions";
+import { history } from './../Helpers/history';
 
 export const getTagList = () => {
   return dispatch => {
@@ -39,6 +40,7 @@ export const loginRegister = (User, infor) => {
       user => {
         dispatch(success(user));
         dispatch(alertActions.clear());
+        history.push('/');
       },
       error => {
         const { errors } = error.response.data;
@@ -50,5 +52,6 @@ export const loginRegister = (User, infor) => {
 };
 export const logout = () => {
   Service.logout();
+  history.push('/');
   return { type: userConstants.LOGOUT };
 };

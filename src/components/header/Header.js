@@ -46,13 +46,24 @@ function Header(props) {
               <div className="header-container">
                 <div className="header-title">Conduit</div>
                 <div className="header-right">
-                  <div className="header-home">Home</div>
-                  <div className="header-Article">New Article</div>
+                  <div className="header-home">
+                    <NavLink to="/" exact activeClassName="selected">
+                      Home
+                    </NavLink>
+                  </div>
+                  <div className="header-Article">
+                    <NavLink to="/login" activeClassName="selected">
+                      New Article
+                    </NavLink>
+                  </div>
                   <div className="header-Settings">
                     <i className="material-icons"> settings </i>
                     Settings
                   </div>
-                  <div className="header-inforUser">inforUser</div>
+                  <div className="header-inforUser">
+                    <img src={user.user.user.image} alt="" />
+                    {user.user.user.username}
+                  </div>
                 </div>
               </div>
             )}
@@ -86,7 +97,7 @@ function Header(props) {
   );
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state) {  
   return {
     user: state.auth
   };

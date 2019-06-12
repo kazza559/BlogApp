@@ -4,11 +4,12 @@ import Home from "../Home/index";
 import Header from "../components/Header/Header";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Router, Route, Switch } from "react-router-dom";
+import { history } from "./../Helpers/history";
 
 function App() {
   return (
-    <Router>
+    <Router history={history}>
       <div className="App">
         <Header />
         <Switch>
