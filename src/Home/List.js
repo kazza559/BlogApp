@@ -60,8 +60,9 @@ function List(props) {
 }
 
 function ListPreview(props) {
-  const { getListView, list } = props;
+  const { getListView, list, isAuth } = props;
   useEffect(() => {
+    console.log(isAuth)
     getListView();
   }, [getListView]);
 
