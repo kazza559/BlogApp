@@ -2,6 +2,7 @@ export const GET_TAGLIST = "GET_TAGLIST";
 export const LOGIN = "LOGIN";
 export const REGISTER = "REGISTER";
 export const GET_LISTVIEW = 'GET_LISTVIEW';
+export const GET_FEED = 'GET_FEED';
 export const APIURL = 'https://conduit.productionready.io/api';
 export const userConstants = {
   LOGIN_REGISTER_SUCCESS: 'USERS_LOGIN_REGISTER_SUCCESS',

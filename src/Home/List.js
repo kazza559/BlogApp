@@ -9,6 +9,7 @@ import Typography from "@material-ui/core/Typography";
 import { getListView } from "../actions";
 import PreviewArticle from "./PreviewArticle";
 import Pagination from "../components/Pagination";
+import Feed from './Feed'
 
 
 function TabContainer(props) {
@@ -36,21 +37,26 @@ const useStyles = makeStyles(theme => ({
 function List(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
+  const {isAuth, user} = props;
 
+  useEffect(() => {
+    
+  }, [])
   function handleChange(event, newValue) {
     setValue(newValue);
   }
+
 
   return (
     <div className={classes.root}>
       <AppBar className={classes.border} color="inherit" position="static">
         <Tabs value={value} onChange={handleChange}>
-          <Tab label="Your Feed" />
+          {isAuth && <Tab label="Your Feed" />}
           <Tab label="Global Feed" />
         </Tabs>
       </AppBar>
-      {value === 0 && <TabContainer>No articles are here...yet.</TabContainer>}
-      {value === 1 && (
+      {value === 0 && <TabContainer><Feed user={user} /></TabContainer>}
+      {(value === 1 || !isAuth )&& (
         <TabContainer>
           <WrappedComponent />
         </TabContainer>
@@ -59,10 +65,10 @@ function List(props) {
   );
 }
 
+
 function ListPreview(props) {
-  const { getListView, list, isAuth } = props;
+  const { getListView, list } = props;
   useEffect(() => {
-    console.log(isAuth)
     getListView();
   }, [getListView]);
 

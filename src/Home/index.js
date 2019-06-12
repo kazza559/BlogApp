@@ -10,7 +10,7 @@ function Home(props) {
   const [isAuth, setIsAuth] = useState(false)
   useEffect(() => {
     if (auth && auth.loggedIn) setIsAuth(true)
-  },[auth.loggedIn])
+  },[auth])
   return (
     <div className="home">
       <Banner />
