@@ -9,9 +9,8 @@ import Typography from "@material-ui/core/Typography";
 import { getListView } from "../actions";
 import PreviewArticle from "./PreviewArticle";
 import Pagination from "../components/Pagination";
-import Feed from './Feed'
+import Feed from "./Feed";
 import TagListPreview from "./TagListPreview";
-
 
 function TabContainer(props) {
   return (
@@ -28,7 +27,7 @@ TabContainer.propTypes = {
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: theme.palette.background.paper
   },
   border: {
     boxShadow: "none"
@@ -38,40 +37,76 @@ const useStyles = makeStyles(theme => ({
 function List(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
-  const {isAuth, user, tag, removeTag} = props;
+  const { isAuth, user, tag, removeTag } = props;
 
   useEffect(() => {
-    if (tag) {
-      setValue(2)
+    if (isAuth && tag) {
+      setValue(2);
+      return;
     }
-  },[tag])
+    if (tag) {
+      setValue(1);
+    }
+  }, [tag, isAuth]);
   function handleChange(event, newValue) {
     setValue(newValue);
-    removeTag()
+    removeTag();
   }
 
+  const renderTab = () => {
+    if (isAuth) {
+      return (
+        <div className={classes.root}>
+          <AppBar className={classes.border} color="inherit" position="static">
+            <Tabs value={value} onChange={handleChange}>
+              {isAuth && <Tab label="Your Feed" />}
+              <Tab label="Global Feed" />
+              {tag && <Tab label={tag} />}
+            </Tabs>
+          </AppBar>
+          {value === 0 && isAuth && (
+            <TabContainer>
+              <Feed user={user} />
+            </TabContainer>
+          )}
+          {(value === 0 || value === 1) && (
+            <TabContainer>
+              <WrappedComponent />
+            </TabContainer>
+          )}
+          {tag && (value === 1 || value === 2) && (
+            <TabContainer>
+              <TagListPreview />
+            </TabContainer>
+          )}
+        </div>
+      );
+    } else {
+      return (
+        <div className={classes.root}>
+          <AppBar className={classes.border} color="inherit" position="static">
+            <Tabs value={value} onChange={handleChange}>
+              <Tab label="Global Feed" />
+              {tag && <Tab label={tag} />}
+            </Tabs>
+          </AppBar>
+          {value === 0 && (
+            <TabContainer>
+              <WrappedComponent />
+            </TabContainer>
+          )}
+          {tag && value === 1 && (
+            <TabContainer>
+              <TagListPreview />
+            </TabContainer>
+          )}
+        </div>
+      );
+    }
+  };
 
-  return (
-    <div className={classes.root}>
-      <AppBar className={classes.border} color="inherit" position="static">
-        <Tabs value={value} onChange={handleChange}>
-          {isAuth && <Tab label="Your Feed" />}
-          <Tab label="Global Feed" />
-          {tag &&<Tab label={tag} />}
-        </Tabs>
-      </AppBar>
-      {(value === 0 && isAuth) && <TabContainer><Feed user={user} /></TabContainer>}
-      {(value === 1 || !isAuth )&& (
-        <TabContainer>
-          <WrappedComponent />
-        </TabContainer>
-      )}
-      {tag && <TabContainer><TagListPreview /></TabContainer>}
-
-    </div>
-  );
+  return renderTab();
 }
-
 
 function ListPreview(props) {
   const { getListView, list } = props;
@@ -79,15 +114,16 @@ function ListPreview(props) {
     getListView();
   }, [getListView]);
 
-  const renderList = (list) => {
-    return list.map(item => <PreviewArticle {...item} key={item.slug} />)
-  }
+  const renderList = list => {
+    return list.map(item => <PreviewArticle {...item} key={item.slug} />);
+  };
 
   return !list ? (
     <div>Loading...</div>
-  ) : ( <>
-    {renderList(list)}
-    <Pagination {...list} />
+  ) : (
+    <>
+      {renderList(list)}
+      <Pagination {...list} />
     </>
   );
 }
