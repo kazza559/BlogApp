@@ -11,14 +11,14 @@ function Pagination(props) {
     setPage(newPage);
     props.feed
       ? props.getFeed(newPage, rowsPerPage)
-      : props.getListView(newPage, rowsPerPage);
+      : props.getListView(newPage, rowsPerPage, props.tag);
   };
   const handleChangeRowsPerPage = event => {
     setRowsPerPage(+event.target.value);
     setPage(0);
     props.feed
       ? props.getFeed(0, +event.target.value)
-      : props.getListView(0, +event.target.value);
+      : props.getListView(0, +event.target.value, props.tag);
   };
   return (
     <TablePagination
