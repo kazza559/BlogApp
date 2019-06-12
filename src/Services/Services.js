@@ -48,8 +48,6 @@ function getListView(offset = 0, limit = 10) {
 }
 
 function getFeed(offset = 0, limit = 10) {
-  const res = authHeader();
-  console.log(res)
   return axios.get(API_ENDPOINTS.GET_MY_FEED.path, {
     params: {
       offset: offset,

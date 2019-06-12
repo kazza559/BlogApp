@@ -14,7 +14,7 @@ import Feed from './Feed'
 
 function TabContainer(props) {
   return (
-    <Typography component="div" style={{ padding: 8 * 3 }}>
+    <Typography component="div" style={{ paddingTop: 24 }}>
       {props.children}
     </Typography>
   );
@@ -27,7 +27,7 @@ TabContainer.propTypes = {
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-    backgroundColor: theme.palette.background.paper
+    backgroundColor: theme.palette.background.paper,
   },
   border: {
     boxShadow: "none"
@@ -39,9 +39,9 @@ function List(props) {
   const [value, setValue] = React.useState(0);
   const {isAuth, user} = props;
 
-  useEffect(() => {
-    
-  }, [])
+  // useEffect(() => {
+  //   console.log(props)
+  // }, [props])
   function handleChange(event, newValue) {
     setValue(newValue);
   }
@@ -55,7 +55,7 @@ function List(props) {
           <Tab label="Global Feed" />
         </Tabs>
       </AppBar>
-      {value === 0 && <TabContainer><Feed user={user} /></TabContainer>}
+      {(value === 0 && isAuth) && <TabContainer><Feed user={user} /></TabContainer>}
       {(value === 1 || !isAuth )&& (
         <TabContainer>
           <WrappedComponent />

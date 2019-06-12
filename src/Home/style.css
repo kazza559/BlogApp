@@ -1,5 +1,6 @@
 .flex {
   display: flex;
-  max-width: 90%;
-  margin: auto;
+  /* max-width: 90%; */
+  padding: 0 10%;
+  background: white
 }

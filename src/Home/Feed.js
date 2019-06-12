@@ -1,14 +1,19 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { getFeed } from '../actions';
+import PreviewArticle from './PreviewArticle'
 
 function Feed(props) {
   const {getFeed, feed} = props;
   useEffect(() => {
     getFeed();
-  }, [getFeed])
+  }, [getFeed,feed])
+
+  const renderList = () => {
+    return feed.map(item => <PreviewArticle {...item} />)
+  }
   return (
-    <div>No articles here...yet</div>
+    !feed.length ? <div>No articles here...yet</div> : renderList()
   )
 }
 
