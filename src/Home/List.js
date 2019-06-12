@@ -69,14 +69,14 @@ function List(props) {
               <Feed user={user} />
             </TabContainer>
           )}
-          {(value === 0 || value === 1) && (
+          {value === 1 && (
             <TabContainer>
               <WrappedComponent />
             </TabContainer>
           )}
           {tag && (value === 1 || value === 2) && (
             <TabContainer>
-              <TagListPreview />
+              <TagListPreview tag={tag} />
             </TabContainer>
           )}
         </div>
@@ -97,7 +97,7 @@ function List(props) {
           )}
           {tag && value === 1 && (
             <TabContainer>
-              <TagListPreview />
+              <TagListPreview tag={tag} />
             </TabContainer>
           )}
         </div>
