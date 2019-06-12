@@ -38,11 +38,12 @@ function getAllTags() {
     });
 }
 
-function getListView(offset = 0, limit = 10) {
+function getListView(offset = 0, limit = 10, byTag) {
   return axios.get(API_ENDPOINTS.GET_LIST_ARTICLE.path, {
     params: {
       offset: offset,
-      limit: limit
+      limit: limit,
+      tag: byTag
     }
   });
 }

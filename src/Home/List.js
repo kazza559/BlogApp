@@ -10,6 +10,7 @@ import { getListView } from "../actions";
 import PreviewArticle from "./PreviewArticle";
 import Pagination from "../components/Pagination";
 import Feed from './Feed'
+import TagListPreview from "./TagListPreview";
 
 
 function TabContainer(props) {
@@ -37,13 +38,16 @@ const useStyles = makeStyles(theme => ({
 function List(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
-  const {isAuth, user} = props;
+  const {isAuth, user, tag, removeTag} = props;
 
-  // useEffect(() => {
-  //   console.log(props)
-  // }, [props])
+  useEffect(() => {
+    if (tag) {
+      setValue(2)
+    }
+  },[tag])
   function handleChange(event, newValue) {
     setValue(newValue);
+    removeTag()
   }
 
 
@@ -53,6 +57,7 @@ function List(props) {
         <Tabs value={value} onChange={handleChange}>
           {isAuth && <Tab label="Your Feed" />}
           <Tab label="Global Feed" />
+          {tag &&<Tab label={tag} />}
         </Tabs>
       </AppBar>
       {(value === 0 && isAuth) && <TabContainer><Feed user={user} /></TabContainer>}
@@ -61,6 +66,8 @@ function List(props) {
           <WrappedComponent />
         </TabContainer>
       )}
+      {tag && <TabContainer><TagListPreview /></TabContainer>}
+
     </div>
   );
 }

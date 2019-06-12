@@ -7,10 +7,10 @@ function Feed(props) {
   const {getFeed, feed} = props;
   useEffect(() => {
     getFeed();
-  }, [getFeed,feed])
+  }, [getFeed])
 
   const renderList = () => {
-    return feed.map(item => <PreviewArticle {...item} />)
+    return feed.map(item => <PreviewArticle key={item.slug} {...item} />)
   }
   return (
     !feed.length ? <div>No articles here...yet</div> : renderList()

@@ -7,16 +7,24 @@ import "./style.css";
 
 function Home(props) {
   const {auth} = props;
-  const [isAuth, setIsAuth] = useState(false)
+  const [isAuth, setIsAuth] = useState(false);
+  const [tag,setTag] = useState(null)
   useEffect(() => {
     if (auth && auth.loggedIn) setIsAuth(true)
   },[auth, isAuth])
+
+  const handleSetTag = tag => {
+    setTag(tag);
+  }
+  const removeTag = () => {
+    setTag(null)
+  }
   return (
     <div className="home">
       <Banner />
       <div className="flex">
-        <List {...auth} isAuth={isAuth}/>
-        <Tags />
+        <List {...auth} tag={tag} isAuth={isAuth} removeTag={removeTag}/>
+        <Tags handleSetTag={handleSetTag} />
       </div>
     </div>
   );
