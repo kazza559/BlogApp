@@ -1,4 +1,4 @@
-import { GET_TAGLIST, GET_LISTVIEW } from "../Constants/index";
+import { GET_TAGLIST, GET_LISTVIEW, GET_FEED } from "../Constants/index";
 import { Service } from "../Services";
 import { userConstants } from "../Constants/index";
 import { alertActions } from "../actions/alert.actions";
@@ -19,6 +19,14 @@ export const getListView = (offset, limit) => async dispatch => {
     payload: response.data
   });
 };
+
+export const getFeed = (offset, limit) => async dispatch => {
+  const response = await Service.getFeed(offset,limit);
+  dispatch({
+    type: GET_FEED,
+    payload: response.data.articles
+  })
+}
 function success(user) {
   return { type: userConstants.LOGIN_REGISTER_SUCCESS, user };
 }

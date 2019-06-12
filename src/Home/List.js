@@ -9,11 +9,12 @@ import Typography from "@material-ui/core/Typography";
 import { getListView } from "../actions";
 import PreviewArticle from "./PreviewArticle";
 import Pagination from "../components/Pagination";
+import Feed from './Feed'
 
 
 function TabContainer(props) {
   return (
-    <Typography component="div" style={{ padding: 8 * 3 }}>
+    <Typography component="div" style={{ paddingTop: 24 }}>
       {props.children}
     </Typography>
   );
@@ -26,31 +27,36 @@ TabContainer.propTypes = {
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-    backgroundColor: theme.palette.background.paper
+    backgroundColor: theme.palette.background.paper,
   },
   border: {
     boxShadow: "none"
   }
 }));
 
-function List() {
+function List(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
+  const {isAuth, user} = props;
 
+  // useEffect(() => {
+  //   console.log(props)
+  // }, [props])
   function handleChange(event, newValue) {
     setValue(newValue);
   }
+
 
   return (
     <div className={classes.root}>
       <AppBar className={classes.border} color="inherit" position="static">
         <Tabs value={value} onChange={handleChange}>
-          <Tab label="Your Feed" />
+          {isAuth && <Tab label="Your Feed" />}
           <Tab label="Global Feed" />
         </Tabs>
       </AppBar>
-      {value === 0 && <TabContainer>No articles are here...yet.</TabContainer>}
-      {value === 1 && (
+      {(value === 0 && isAuth) && <TabContainer><Feed user={user} /></TabContainer>}
+      {(value === 1 || !isAuth )&& (
         <TabContainer>
           <WrappedComponent />
         </TabContainer>
@@ -58,6 +64,7 @@ function List() {
     </div>
   );
 }
+
 
 function ListPreview(props) {
   const { getListView, list } = props;

@@ -2,6 +2,7 @@ export const GET_TAGLIST = "GET_TAGLIST";
 export const LOGIN = "LOGIN";
 export const REGISTER = "REGISTER";
 export const GET_LISTVIEW = 'GET_LISTVIEW';
+export const GET_FEED = 'GET_FEED';
 export const alertConstants = {
   SUCCESS: 'ALERT_SUCCESS',
   ERROR: 'ALERT_ERROR',
