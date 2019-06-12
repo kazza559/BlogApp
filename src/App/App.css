@@ -57,13 +57,16 @@
     margin: 25px 0 15px 0;
     color: #FE6B8B;
   }
-  .to-register {
+  .login-register {
     color: #FF8E53;
     text-align: center;
     margin-bottom: 15px;
     cursor: pointer;
     font-size: 20px;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
   }
-  .to-register:hover{
+  .login-register:hover{
     text-decoration: underline;
   }

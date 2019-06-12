@@ -9,7 +9,7 @@ import useForm from "react-hook-form";
 import { connect } from "react-redux";
 import { loginRegister } from "../actions/index";
 import { NavLink } from "react-router-dom";
-import { LOGIN } from "../Constants/index";
+import { REGISTER } from "../Constants/index";
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function Login(props) {
+function Register(props) {
   const { loginRegister } = props;
   const { handleSubmit, register, errors } = useForm();
   const [labelWidth, setLabelWidth] = React.useState(0);
@@ -32,15 +32,37 @@ function Login(props) {
   }, []);
   const onSubmit = user => {
     const inforUser = { user };
-    loginRegister(inforUser, LOGIN);
+    loginRegister(inforUser, REGISTER);
   };
   return (
     <div className={classes.container}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="tittle">Sign in</div>
-        <NavLink to="/register" className="login-register">
-          Need an account?
+        <div className="tittle">Sign up</div>
+        <NavLink to="/login" className="login-register">
+          Have an account?
         </NavLink>
+        <FormControl className={classes.formControl} variant="outlined">
+          <InputLabel
+            ref={labelRef}
+            htmlFor="component-outlined"
+            error={errors.username ? true : false}
+          >
+            Enter your username
+          </InputLabel>
+          <OutlinedInput
+            error={errors.username ? true : false}
+            labelWidth={labelWidth}
+            name="username"
+            inputRef={register({
+              required: "Username is required"
+            })}
+          />
+          {errors.username && (
+            <FormHelperText id="component-error-text" error>
+              {errors.username.message}
+            </FormHelperText>
+          )}
+        </FormControl>
         <FormControl className={classes.formControl} variant="outlined">
           <InputLabel
             ref={labelRef}
@@ -94,7 +116,7 @@ function Login(props) {
             </FormHelperText>
           )}
         </FormControl>
-        <ButtonCustomer text="Sign in" />
+        <ButtonCustomer text="Sign Up" />
       </form>
     </div>
   );
@@ -103,4 +125,4 @@ function Login(props) {
 export default connect(
   null,
   { loginRegister }
-)(Login);
+)(Register);

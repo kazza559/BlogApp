@@ -1,9 +1,11 @@
 export const GET_TAGLIST = "GET_TAGLIST";
+export const LOGIN = "LOGIN";
+export const REGISTER = "REGISTER";
 export const GET_LISTVIEW = 'GET_LISTVIEW';
 export const APIURL = 'https://conduit.productionready.io/api';
 export const userConstants = {
-  LOGIN_SUCCESS: 'USERS_LOGIN_SUCCESS',
-  LOGIN_FAILURE: 'USERS_LOGIN_FAILURE',
+  LOGIN_REGISTER_SUCCESS: 'USERS_LOGIN_REGISTER_SUCCESS',
+  LOGIN_REGISTER_FAILURE: 'USERS_LOGIN_REGISTER_FAILURE',
 
   LOGOUT: 'USERS_LOGOUT'
 }

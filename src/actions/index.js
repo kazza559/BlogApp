@@ -16,17 +16,17 @@ export const getListView = (offset, limit) => async dispatch => {
   dispatch({
     type: GET_LISTVIEW,
     payload: response.data
-  })
+  });
+};
+function success(user) {
+  return { type: userConstants.LOGIN_REGISTER_SUCCESS, user };
 }
-export const logIn = inforUser => {
-  function success(user) {
-    return { type: userConstants.LOGIN_SUCCESS, user };
-  }
-  function failure(error) {
-    return { type: userConstants.LOGIN_FAILURE, error };
-  }
+function failure(error) {
+  return { type: userConstants.LOGIN_REGISTER_FAILURE, error };
+}
+export const loginRegister = (User, infor) => {
   return dispatch => {
-    Service.login(inforUser).then(
+    Service.loginRegister(User, infor).then(
       user => {
         dispatch(success(user));
       },
