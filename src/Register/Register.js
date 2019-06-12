@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function Register(props) {
-  const { loginRegister } = props;
+  const { loginRegister, alertErrors } = props;
   const { handleSubmit, register, errors } = useForm();
   const [labelWidth, setLabelWidth] = React.useState(0);
   const labelRef = React.useRef(null);
@@ -58,7 +58,7 @@ function Register(props) {
             })}
           />
           {errors.username && (
-            <FormHelperText id="component-error-text" error>
+            <FormHelperText className="component-error-text" error>
               {errors.username.message}
             </FormHelperText>
           )}
@@ -84,7 +84,7 @@ function Register(props) {
             })}
           />
           {errors.email && (
-            <FormHelperText id="component-error-text" error>
+            <FormHelperText className="component-error-text" error>
               {errors.email.message}
             </FormHelperText>
           )}
@@ -111,18 +111,26 @@ function Register(props) {
             })}
           />
           {errors.password && (
-            <FormHelperText id="component-error-text" error>
+            <FormHelperText className="component-error-text" error>
               {errors.password.message}
             </FormHelperText>
           )}
         </FormControl>
+        {alertErrors.message && (
+          <FormHelperText className="component-error-text" error>
+            Email or Username has already been taken
+          </FormHelperText>
+        )}
         <ButtonCustomer text="Sign Up" />
       </form>
     </div>
   );
 }
-
+function mapStateToProps(state) {
+  const { alertErrors } = state;
+  return { alertErrors };
+}
 export default connect(
-  null,
+  mapStateToProps,
   { loginRegister }
 )(Register);

@@ -1,6 +1,7 @@
 import { GET_TAGLIST, GET_LISTVIEW } from "../Constants/index";
 import { Service } from "../Services";
 import { userConstants } from "../Constants/index";
+import { alertActions } from "../actions/alert.actions";
 
 export const getTagList = () => {
   return dispatch => {
@@ -29,10 +30,17 @@ export const loginRegister = (User, infor) => {
     Service.loginRegister(User, infor).then(
       user => {
         dispatch(success(user));
+        dispatch(alertActions.clear());
       },
       error => {
-        dispatch(failure(error));
+        const { errors } = error.response.data;
+        dispatch(failure(errors));
+        dispatch(alertActions.error(errors));
       }
     );
   };
+};
+export const logout = () => {
+  Service.logout();
+  return { type: userConstants.LOGOUT };
 };

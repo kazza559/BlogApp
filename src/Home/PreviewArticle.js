@@ -31,7 +31,7 @@ function PreviewArticle(props) {
   return (
     <Card className={classes.card}>
       <CardHeader
-        avatar={<img className={classes.face} src={author.image} />}
+        avatar={<img className={classes.face} src={author.image} alt=""/>}
         title={author.username}
         subheader={convertTime(createdAt)}
       />

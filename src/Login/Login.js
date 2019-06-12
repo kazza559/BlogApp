@@ -7,9 +7,11 @@ import ButtonCustomer from "../components/ButtonCustomer/Button";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import useForm from "react-hook-form";
 import { connect } from "react-redux";
-import { loginRegister } from "../actions/index";
+import { loginRegister, logout } from "../actions/index";
 import { NavLink } from "react-router-dom";
 import { LOGIN } from "../Constants/index";
+import Button from "@material-ui/core/Button";
+
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -22,7 +24,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function Login(props) {
-  const { loginRegister } = props;
+  const { loginRegister, alertErrors, logout } = props;
   const { handleSubmit, register, errors } = useForm();
   const [labelWidth, setLabelWidth] = React.useState(0);
   const labelRef = React.useRef(null);
@@ -62,7 +64,7 @@ function Login(props) {
             })}
           />
           {errors.email && (
-            <FormHelperText id="component-error-text" error>
+            <FormHelperText className="component-error-text" error>
               {errors.email.message}
             </FormHelperText>
           )}
@@ -89,18 +91,27 @@ function Login(props) {
             })}
           />
           {errors.password && (
-            <FormHelperText id="component-error-text" error>
+            <FormHelperText className="component-error-text" error>
               {errors.password.message}
             </FormHelperText>
           )}
         </FormControl>
+        {alertErrors.message && (
+          <FormHelperText className="component-error-text" error>
+            Email or Password is incorrect
+          </FormHelperText>
+        )}
         <ButtonCustomer text="Sign in" />
       </form>
+      <Button onClick={logout} fullWidth={true} variant="contained" color="primary">Log out</Button>
     </div>
   );
 }
-
+function mapStateToProps(state) {
+  const { alertErrors } = state;
+  return { alertErrors };
+}
 export default connect(
-  null,
-  { loginRegister }
+  mapStateToProps,
+  { loginRegister, logout }
 )(Login);
