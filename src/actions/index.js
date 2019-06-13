@@ -55,3 +55,8 @@ export const logout = () => {
   history.push('/');
   return { type: userConstants.LOGOUT };
 };
+export const clearMessege = () => {
+  return dispatch => {
+      dispatch(alertActions.clear());
+  };
+};

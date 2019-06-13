@@ -7,7 +7,7 @@ import ButtonCustomer from "../components/ButtonCustomer/Button";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import useForm from "react-hook-form";
 import { connect } from "react-redux";
-import { loginRegister } from "../actions/index";
+import { loginRegister , clearMessege} from "../actions/index";
 import { NavLink } from "react-router-dom";
 import { REGISTER } from "../Constants/index";
 
@@ -22,14 +22,15 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function Register(props) {
-  const { loginRegister, alertErrors } = props;
+  const { loginRegister, alertErrors , clearMessege} = props;
   const { handleSubmit, register, errors } = useForm();
   const [labelWidth, setLabelWidth] = React.useState(0);
   const labelRef = React.useRef(null);
   const classes = useStyles();
   React.useEffect(() => {
     setLabelWidth(labelRef.current.offsetWidth);
-  }, []);
+    clearMessege();
+  }, [clearMessege]);
   const onSubmit = user => {
     const inforUser = { user };
     loginRegister(inforUser, REGISTER);
@@ -132,5 +133,5 @@ function mapStateToProps(state) {
 }
 export default connect(
   mapStateToProps,
-  { loginRegister }
+  { loginRegister , clearMessege}
 )(Register);

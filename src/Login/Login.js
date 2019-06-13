@@ -7,7 +7,7 @@ import ButtonCustomer from "../components/ButtonCustomer/Button";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import useForm from "react-hook-form";
 import { connect } from "react-redux";
-import { loginRegister, logout } from "../actions/index";
+import { loginRegister, logout, clearMessege } from "../actions/index";
 import { NavLink } from "react-router-dom";
 import { LOGIN } from "../Constants/index";
 import Button from "@material-ui/core/Button";
@@ -24,14 +24,15 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function Login(props) {
-  const { loginRegister, alertErrors, logout } = props;
+  const { loginRegister, alertErrors, logout , clearMessege } = props;
   const { handleSubmit, register, errors } = useForm();
   const [labelWidth, setLabelWidth] = React.useState(0);
   const labelRef = React.useRef(null);
   const classes = useStyles();
   React.useEffect(() => {
     setLabelWidth(labelRef.current.offsetWidth);
-  }, []);
+    clearMessege()
+  }, [clearMessege]);
   const onSubmit = user => {
     const inforUser = { user };
     loginRegister(inforUser, LOGIN);
@@ -113,5 +114,5 @@ function mapStateToProps(state) {
 }
 export default connect(
   mapStateToProps,
-  { loginRegister, logout }
+  { loginRegister, logout , clearMessege}
 )(Login);
