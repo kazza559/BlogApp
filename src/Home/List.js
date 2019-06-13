@@ -115,7 +115,7 @@ function ListPreview(props) {
   }, [getListView]);
 
   const renderList = list => {
-    return list.map(item => <PreviewArticle {...item} key={item.slug} />);
+    return list.articles.map(item => <PreviewArticle {...item} key={item.slug} />);
   };
 
   return !list ? (
@@ -123,7 +123,7 @@ function ListPreview(props) {
   ) : (
     <>
       {renderList(list)}
-      <Pagination {...list} />
+      {list.articlesCount > 10 &&<Pagination {...list} count={list.articlesCount} />}
     </>
   );
 }

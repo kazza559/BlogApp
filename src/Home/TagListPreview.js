@@ -5,14 +5,14 @@ import Pagination from "../components/Pagination";
 
 function TagListPreview(props) {
   const renderList = () => {
-    return props.list.map(item => <PreviewArticle key={item.slug} {...item} />);
+    return props.list.articles.map(item => <PreviewArticle key={item.slug} {...item} />);
   };
-  return !props.list ? (
+  return !props.list.articles ? (
     <div>Loading...</div>
   ) : (
     <>
       {renderList()}
-      <Pagination tag={props.tag} {...props.list} />
+      {props.list.articlesCount > 10 && <Pagination tag={props.tag} {...props.list} count={props.list.articlesCount} />}
     </>
   );
 }

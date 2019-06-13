@@ -24,7 +24,7 @@ function Pagination(props) {
     <TablePagination
       rowsPerPageOptions={[10, 15, 20]}
       component="div"
-      count={500}
+      count={props.count}
       rowsPerPage={rowsPerPage}
       page={page}
       backIconButtonProps={{

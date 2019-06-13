@@ -25,7 +25,7 @@ export const getFeed = (offset, limit) => async dispatch => {
   const response = await Service.getFeed(offset,limit);
   dispatch({
     type: GET_FEED,
-    payload: response.data.articles
+    payload: response.data
   })
 }
 function success(user) {

@@ -1,6 +1,6 @@
 import {GET_FEED} from '../Constants';
-
-export default (state = [], action) => {
+const initial = {articles: [], articlesCount: 0}
+export default (state = initial, action) => {
   switch (action.type) {
     case GET_FEED:
       return action.payload;

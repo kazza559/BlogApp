@@ -1,9 +1,9 @@
 import {GET_LISTVIEW} from '../Constants';
-
-export default (state = [], action) => {
+const initial = {articles: [], articlesCount: 0}
+export default (state = initial, action) => {
   switch (action.type) {
     case GET_LISTVIEW:
-      return action.payload.articles;
+      return action.payload;
     default:
       return state;
   }

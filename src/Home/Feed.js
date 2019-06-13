@@ -11,14 +11,14 @@ function Feed(props) {
   }, [getFeed]);
 
   const renderList = () => {
-    return feed.map(item => <PreviewArticle key={item.slug} {...item} />);
+    return feed.articles.map(item => <PreviewArticle key={item.slug} {...item} />);
   };
-  return !feed.length ? (
+  return !feed.articles.length ? (
     <div>No articles here...yet</div>
   ) : (
     <>
       {renderList()}
-      <Pagination feed="feed" />
+      {feed.articlesCount > 10 && <Pagination feed="feed" count={feed.articlesCount} />}
     </>
   );
 }
