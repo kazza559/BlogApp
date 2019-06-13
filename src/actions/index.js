@@ -56,3 +56,8 @@ export const logout = () => {
   return { type: userConstants.LOGOUT };
 };
 
+export const clearMessege = () => {
+  return dispatch => {
+      dispatch(alertActions.clear());
+  };
+};
