@@ -11,17 +11,10 @@ import { loginRegister, logout, clearMessege } from "../actions/index";
 import { NavLink } from "react-router-dom";
 import { LOGIN } from "../Constants/index";
 import Button from "@material-ui/core/Button";
+import { Style } from './../components/Style/Style';
 
 
-const useStyles = makeStyles(theme => ({
-  container: {
-    padding: "0 30%"
-  },
-  formControl: {
-    width: "100%",
-    margin: "20px 0"
-  }
-}));
+const useStyles = makeStyles(theme => Style.styleLogin);
 
 function Login(props) {
   const { loginRegister, alertErrors, logout , clearMessege } = props;
@@ -102,7 +95,7 @@ function Login(props) {
             Email or Password is incorrect
           </FormHelperText>
         )}
-        <ButtonCustomer text="Sign in" />
+        <ButtonCustomer text="Sign in" style={Style.buttonLogin}/>
       </form>
       <Button onClick={logout} fullWidth={true} variant="contained" color="primary">Log out</Button>
     </div>

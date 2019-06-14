@@ -7,22 +7,15 @@ import ButtonCustomer from "../components/ButtonCustomer/Button";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import useForm from "react-hook-form";
 import { connect } from "react-redux";
-import { loginRegister , clearMessege} from "../actions/index";
+import { loginRegister, clearMessege } from "../actions/index";
 import { NavLink } from "react-router-dom";
 import { REGISTER } from "../Constants/index";
+import { Style } from "./../components/Style/Style";
 
-const useStyles = makeStyles(theme => ({
-  container: {
-    padding: "0 30%"
-  },
-  formControl: {
-    width: "100%",
-    margin: "20px 0"
-  }
-}));
+const useStyles = makeStyles(theme => Style.styleLogin);
 
 function Register(props) {
-  const { loginRegister, alertErrors , clearMessege} = props;
+  const { loginRegister, alertErrors, clearMessege } = props;
   const { handleSubmit, register, errors } = useForm();
   const [labelWidth, setLabelWidth] = React.useState(0);
   const labelRef = React.useRef(null);
@@ -122,7 +115,7 @@ function Register(props) {
             Email or Username has already been taken
           </FormHelperText>
         )}
-        <ButtonCustomer text="Sign Up" />
+        <ButtonCustomer text="Sign Up" style={Style.buttonLogin} />
       </form>
     </div>
   );
@@ -133,5 +126,5 @@ function mapStateToProps(state) {
 }
 export default connect(
   mapStateToProps,
-  { loginRegister , clearMessege}
+  { loginRegister, clearMessege }
 )(Register);
