@@ -21,7 +21,7 @@ function Tags(props) {
   }, [getTagList], currentTag);
 
   const handleClick = (tag, index) => {
-    setCurrentTag(index);
+    setCurrentTag(tag);
     
     getListView(0,10,tag);
     handleSetTag(tag)
@@ -33,7 +33,7 @@ function Tags(props) {
       <div className="title-tag">Popular Tags</div>
       <div className="sidebar-tag-list">
         {props.tags.map((el, index) => (
-          <SmallTag key={index} clickTag={handleClick} className={currentTag === index ? classes.active : null} index={index} tag={el} bg={'#FF8E53'} />
+          <SmallTag key={index} clickTag={handleClick} currentTag={currentTag} tag={el} bg={'#FF8E53'} />
         ))}
       </div>
     </div>

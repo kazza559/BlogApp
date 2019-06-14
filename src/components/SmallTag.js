@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(() => ({
@@ -21,18 +21,10 @@ const useStyles = makeStyles(() => ({
 
 function SmallTag(props) {
   const classes = useStyles(props);
-  const [onTag, setOnTag] = useState(false)
   const handleClick = () => {
-    console.log(props.tag, props.index)
-    props.clickTag(props.tag, props.index);
-    setOnTag(true)
+    props.clickTag(props.tag);
   }
-  useEffect(() => {
-    if (!props.tag) {
-      setOnTag(false)
-    }
-  }, [props])
-  const style =  `${classes.core}`
+  const style = props.currentTag === props.tag ? `${classes.core} ${classes.active}` : `${classes.core}`
   return (
     <span onClick={handleClick} className={style}>{props.tag}</span>
   )
