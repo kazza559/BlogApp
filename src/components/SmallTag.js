@@ -23,7 +23,8 @@ function SmallTag(props) {
   const classes = useStyles(props);
   const [onTag, setOnTag] = useState(false)
   const handleClick = () => {
-    props.clickTag(props.tag);
+    console.log(props.tag, props.index)
+    props.clickTag(props.tag, props.index);
     setOnTag(true)
   }
   useEffect(() => {
@@ -31,7 +32,7 @@ function SmallTag(props) {
       setOnTag(false)
     }
   }, [props])
-  const style = onTag ? `${classes.core} ${classes.active}` : `${classes.core}`
+  const style =  `${classes.core}`
   return (
     <span onClick={handleClick} className={style}>{props.tag}</span>
   )

@@ -9,10 +9,6 @@ const useStyles = makeStyles(() => ({
   active: {
     textDecoration: 'underline',
     opacity: '1'
-  },
-  deactive: {
-    textDecoration: 'unset',
-    opacity: '0.7'
   }
 }));
 
@@ -24,8 +20,8 @@ function Tags(props) {
     getTagList();
   }, [getTagList], currentTag);
 
-  const handleClick = (tag) => {
-    setCurrentTag(tag);
+  const handleClick = (tag, index) => {
+    setCurrentTag(index);
     
     getListView(0,10,tag);
     handleSetTag(tag)
@@ -37,7 +33,7 @@ function Tags(props) {
       <div className="title-tag">Popular Tags</div>
       <div className="sidebar-tag-list">
         {props.tags.map((el, index) => (
-          <SmallTag key={index} clickTag={handleClick} className={currentTag === el ? classes.active : classes.deactive} tag={el} bg={'#FF8E53'} />
+          <SmallTag key={index} clickTag={handleClick} className={currentTag === index ? classes.active : null} index={index} tag={el} bg={'#FF8E53'} />
         ))}
       </div>
     </div>
