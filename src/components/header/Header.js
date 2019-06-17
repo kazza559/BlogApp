@@ -8,7 +8,9 @@ import Slide from "@material-ui/core/Slide";
 import { withStyles } from "@material-ui/core/styles";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
-
+import PersonAdd from "@material-ui/icons/PersonAdd";
+import Fingerprint from "@material-ui/icons/Fingerprint";
+import Settings from "@material-ui/icons/Settings";
 import "./Header.css";
 
 function HideOnScroll(props) {
@@ -48,16 +50,16 @@ function Header(props) {
                 <div className="header-right">
                   <div className="header-home">
                     <NavLink to="/" exact activeClassName="selected">
-                      Home
+                      HOME
                     </NavLink>
                   </div>
-                  <div className="header-Article">
+                  <div className="header-item">
                     <NavLink to="/login" activeClassName="selected">
                       New Article
                     </NavLink>
                   </div>
-                  <div className="header-Settings">
-                    <i className="material-icons"> settings </i>
+                  <div className="header-item">
+                    <Settings />
                     Settings
                   </div>
                   <div className="header-inforUser">
@@ -71,21 +73,21 @@ function Header(props) {
               <div className="header-container">
                 <div className="header-title">Conduit</div>
                 <div className="header-right">
-                  <div className="header-home">
-                    <NavLink to="/" exact activeClassName="selected">
-                      Home
-                    </NavLink>
-                  </div>
-                  <div className="header-Article">
-                    <NavLink to="/login" activeClassName="selected">
-                      Sign In
-                    </NavLink>
-                  </div>
-                  <div className="header-Settings">
-                    <NavLink to="/register" activeClassName="selected">
-                      Sign Up
-                    </NavLink>
-                  </div>
+                  <NavLink to="/" exact activeClassName="selected">
+                    <div className="header-home">HOME</div>
+                  </NavLink>
+                  <NavLink to="/login" activeClassName="selected">
+                    <div className="header-item">
+                      <Fingerprint />
+                      LOGIN
+                    </div>
+                  </NavLink>
+                  <NavLink to="/register" activeClassName="selected">
+                    <div className="header-item">
+                      <PersonAdd />
+                      REGISTER
+                    </div>
+                  </NavLink>
                 </div>
               </div>
             )}
@@ -97,7 +99,7 @@ function Header(props) {
   );
 }
 
-function mapStateToProps(state) {  
+function mapStateToProps(state) {
   return {
     user: state.auth
   };
