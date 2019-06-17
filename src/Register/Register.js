@@ -29,9 +29,7 @@ const themes = createMuiTheme({
 
 function Register(props) {
   const { loginRegister, alertErrors, clearMessege } = props;
-  const { handleSubmit, register, errors } = useForm({
-    mode: "onChange"
-  });
+  const { handleSubmit, register, errors } = useForm();
   const classes = useStyles();
   React.useEffect(() => {
     clearMessege();
