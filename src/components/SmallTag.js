@@ -24,7 +24,7 @@ function SmallTag(props) {
   const handleClick = () => {
     props.clickTag(props.tag);
   }
-  const style = props.currentTag === props.tag ? `${classes.core} ${classes.active}` : `${classes.core}`
+  const style = (props.currentTag === props.tag && props.removeTag) ? `${classes.core} ${classes.active}` : `${classes.core}`
   return (
     <span onClick={handleClick} className={style}>{props.tag}</span>
   )

@@ -24,7 +24,7 @@ function Home(props) {
       <Banner />
       <div className="flex">
         <List {...auth} tag={tag} isAuth={isAuth} removeTag={removeTag}/>
-        <Tags handleSetTag={handleSetTag} />
+        <Tags removeTag={tag} handleSetTag={handleSetTag} />
       </div>
     </div>
   );
