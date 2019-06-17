@@ -1,20 +1,22 @@
-import React, {useState} from "react";
+import React from "react";
 import { connect } from "react-redux";
-
+import { makeStyles } from "@material-ui/core/styles";
 import { getTagList, getListView } from "../actions/index";
-import SmallTag from "../components/SmallTag";
+import Chip from '@material-ui/core/Chip';
+import { Style } from './../components/Style/Style';
+
+const useStyles = makeStyles(() => Style.tag);
 
 function Tags(props) {
-  const { getTagList, getListView, handleSetTag, removeTag } = props;
-  const [currentTag, setCurrentTag] = useState(null)
+  const { getTagList, getListView, handleSetTag, currentTag } = props;
+  const classes = useStyles();
   React.useEffect(() => {
     getTagList();
-  }, [getTagList], currentTag);
+  }, [getTagList]);
 
   const handleClick = (tag) => {
-    setCurrentTag(tag);
-    getListView(0,10,tag);
-    handleSetTag(tag)
+    getListView(0, 10, tag);
+    handleSetTag(tag);
   }
 
   return (
@@ -22,7 +24,17 @@ function Tags(props) {
       <div className="title-tag">Popular Tags</div>
       <div className="sidebar-tag-list">
         {props.tags.map((el, index) => (
-          <SmallTag key={index} clickTag={handleClick} currentTag={currentTag} tag={el} removeTag={removeTag} bg={'#FF8E53'} />
+          <Chip
+            onClick={() => handleClick(el)}
+            className={
+              currentTag === el
+                ? `${classes.active} ${classes.chip}`
+                : `${classes.chip}`
+            }
+            label={el}
+            key={index}
+            size="small"
+          />
         ))}
       </div>
     </div>

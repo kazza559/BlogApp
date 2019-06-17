@@ -7,40 +7,26 @@ import CardActions from "@material-ui/core/CardActions";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import FavoriteIcon from "@material-ui/icons/Favorite";
-import convertTime from '../Helpers/datePipe'
-import SmallTag from "../components/SmallTag";
+import convertTime from '../Helpers/datePipe';
+import Chip from '@material-ui/core/Chip';
+import { Style } from './../components/Style/Style';
 
-const useStyles = makeStyles(theme => ({
-  card: {
-    maxWidth: "1200px",
-    marginBottom: "5px",
-    clear: "both"
-  },
-  face: {
-    width: "40px",
-    height: "40px",
-    borderRadius: "30px"
-  },
-  float: {
-    float: "right"
-  },
-  mgb10: {
-    marginBottom: '20px'
-  }
-}));
+
+const useStyles = makeStyles(theme => Style.Preview)
 
 function PreviewArticle(props) {
   const classes = useStyles();
   const { author, createdAt, title, description, favoritesCount, tagList } = props;
 
   const renderTag = () => {
-   return tagList.map((tag, index) =>  <SmallTag tag={tag} key={index} bg={'#FE6B8B'} /> ) 
+    return tagList.map((tag, index) => <Chip className={classes.chip} label={tag} key={index} size="small"
+    />)
   }
 
   return (
     <Card className={classes.card}>
       <CardHeader
-        avatar={<img className={classes.face} src={author.image} alt=""/>}
+        avatar={<img className={classes.face} src={author.image} alt="" />}
         title={author.username}
         subheader={convertTime(createdAt)}
       />
@@ -51,7 +37,7 @@ function PreviewArticle(props) {
         <Typography className={classes.mgb10} variant="body1" color="textSecondary" component="p">
           {description}
         </Typography>
-        {tagList &&  renderTag() }
+        {tagList && renderTag()}
       </CardContent>
       <CardActions className={classes.float}>
         <IconButton aria-label="Add to favorites">
