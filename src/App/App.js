@@ -6,6 +6,7 @@ import Login from "../Login/Login";
 import Register from "../Register/Register";
 import { Router, Route, Switch } from "react-router-dom";
 import { history } from "./../Helpers/history";
+import EditArticle from "../Editor/EditArticle";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route exact path="/" component={Home} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
+          <Route exact path="/editor" component={EditArticle} />
         </Switch>
       </div>
     </Router>

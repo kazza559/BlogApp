@@ -8,13 +8,13 @@ export const Style = {
     width: "30%",
     marginTop: "15px"
   },
-  styleLogin: {
+  styleForm: {
     container: {
-      margin: "0 30%"
+      margin: "30px 30%"
     },
     formControl: {
       width: "100%",
-      margin: "20px 0"
+      margin: "20px 0",
     }
   },
   tag: {
@@ -48,5 +48,14 @@ export const Style = {
       margin: "5px",
       cursor: "pointer"
     },
+  },
+  buttonEditor : {
+    background:"#4caf50" ,
+    borderRadius: "30px",
+    border: 0,
+    color: "white",
+    height: 48,
+    width: "30%",
+    marginTop: "15px"
   }
 };

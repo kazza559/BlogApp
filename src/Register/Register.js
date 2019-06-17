@@ -20,7 +20,7 @@ import EmailOutlined from "@material-ui/icons/EmailOutlined";
 import LockOutlined from "@material-ui/icons/LockOutlined";
 import InputAdornment from "@material-ui/core/InputAdornment";
 
-const useStyles = makeStyles(theme => Style.styleLogin);
+const useStyles = makeStyles(theme => Style.styleForm);
 const themes = createMuiTheme({
   palette: {
     primary: { main: "#9c27b0" }
