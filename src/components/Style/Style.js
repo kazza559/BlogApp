@@ -29,7 +29,7 @@ export const Style = {
   },
   Preview:{
     card: {
-      maxWidth: "1200px",
+      width: "95%",
       marginBottom: "5px",
       clear: "both"
     },
