@@ -11,6 +11,7 @@ import { connect } from "react-redux";
 import PersonAdd from "@material-ui/icons/PersonAdd";
 import Fingerprint from "@material-ui/icons/Fingerprint";
 import Settings from "@material-ui/icons/Settings";
+import Launch from "@material-ui/icons/Launch";
 import "./Header.css";
 
 function HideOnScroll(props) {
@@ -48,21 +49,22 @@ function Header(props) {
               <div className="header-container">
                 <div className="header-title">Conduit</div>
                 <div className="header-right">
-                  <div className="header-home">
-                    <NavLink to="/" exact activeClassName="selected">
-                      HOME
-                    </NavLink>
-                  </div>
-                  <div className="header-item">
-                    <NavLink to="/login" activeClassName="selected">
+                  <NavLink to="/" exact activeClassName="selected">
+                    <div className="header-home">HOME</div>
+                  </NavLink>
+                  <NavLink to="/editor" activeClassName="selected">
+                    <div className="header-item">
+                      <Launch />
                       New Article
-                    </NavLink>
-                  </div>
+                    </div>
+                  </NavLink>
+                  <NavLink to="/login" activeClassName="selected">
+                    <div className="header-item">
+                      <Settings />
+                      Settings
+                    </div>
+                  </NavLink>
                   <div className="header-item">
-                    <Settings />
-                    Settings
-                  </div>
-                  <div className="header-inforUser">
                     <img src={user.user.user.image} alt="" />
                     {user.user.user.username}
                   </div>

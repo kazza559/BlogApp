@@ -1,6 +1,7 @@
 import { GET_TAGLIST, GET_LISTVIEW, GET_FEED } from "../Constants/index";
 import { Service } from "../Services";
 import { userConstants } from "../Constants/index";
+import {  CREATE_EDIT_ARTICLE } from "../Constants/index";
 import { alertActions } from "../actions/alert.actions";
 import { history } from './../Helpers/history';
 
@@ -59,5 +60,20 @@ export const logout = () => {
 export const clearMessege = () => {
   return dispatch => {
       dispatch(alertActions.clear());
+  };
+};
+export const createArticle = (article) => {
+  return dispatch => {
+    Service.createArticle(article).then(
+      newArticle => {
+        dispatch({ type: CREATE_EDIT_ARTICLE.CREATE, newArticle });
+        dispatch(alertActions.clear());
+        history.push('/');
+      },
+      error => {
+        const { errors } = error.response.data;
+        dispatch(alertActions.error(errors));
+      }
+    );
   };
 };

@@ -7,7 +7,8 @@ export const Service = {
   getAllTags,
   getListView,
   loginRegister,
-  getFeed
+  getFeed,
+  createArticle
 };
 
 function loginRegister(User, infor) {
@@ -55,5 +56,12 @@ function getFeed(offset = 0, limit = 10) {
       limit: limit
     },
     headers: authHeader()
-  })
+  });
+}
+function createArticle(article) {
+  return axios
+    .post(API_ENDPOINTS.CREATE_ARTICLE.path, article, { headers: authHeader() })
+    .then(res => {
+      return res.data;
+    });
 }

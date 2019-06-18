@@ -3,6 +3,10 @@ export const LOGIN = "LOGIN";
 export const REGISTER = "REGISTER";
 export const GET_LISTVIEW = 'GET_LISTVIEW';
 export const GET_FEED = 'GET_FEED';
+export const CREATE_EDIT_ARTICLE = {
+  CREATE: 'CREATE_ARTICLE',
+  EDIT: 'EDIT_ARTICLE',
+};;
 export const alertConstants = {
   SUCCESS: 'ALERT_SUCCESS',
   ERROR: 'ALERT_ERROR',
