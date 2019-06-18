@@ -11,10 +11,10 @@ import ButtonCustomer from "../components/ButtonCustomer/Button";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import useForm from "react-hook-form";
 import { connect } from "react-redux";
-import { loginRegister, clearMessege } from "../actions/index";
+import { createArticle, clearMessege } from "../actions/index";
 import TextField from "@material-ui/core/TextField";
 import { Style } from "../components/Style/Style";
-import Chip from "@material-ui/core/Chip";
+import ChipInput from "material-ui-chip-input";
 
 const useStyles = makeStyles(theme => Style.styleForm);
 const themes = createMuiTheme({
@@ -24,30 +24,23 @@ const themes = createMuiTheme({
 });
 
 function EditArticle(props) {
-  const { alertErrors, clearMessege } = props;
+  const { alertErrors, clearMessege , createArticle} = props;
   const { handleSubmit, register, errors } = useForm();
-  const [tag, setTag] = useState([]);
-  const [valueTag, setValueTag] = useState("");
+  const [tagList, setTagList] = useState([]);
   const classes = useStyles();
   React.useEffect(() => {
     clearMessege();
   }, [clearMessege]);
-  const onSubmit = user => {
-    console.log(user);
+  const onSubmit = valueForm => {
+    const newArticle = { article: { ...valueForm, tagList } };
+    createArticle(newArticle);
   };
-  const handleChange = event => {
-    setValueTag(event.target.value);
+  const handleChange = chip => {
+    setTagList([...tagList, chip]);
   };
-  const keyPressed = event => {
-    const value = event.target.value.trim();
-    if (event.key === "Enter" && value !== "") {
-      setTag([...tag, value]);
-      setValueTag("");
-    }
+  const handleDeleteChip = chip => {
+    setTagList(tagList.filter(c => c !== chip));
   };
-  const renderTag = tag.map((tag, index) => (
-    <Chip className={classes.chip} label={tag} key={index} size="small" />
-  ));
 
   return (
     <div className={classes.container}>
@@ -124,17 +117,15 @@ function EditArticle(props) {
             )}
           </FormControl>
           <FormControl className={classes.formControl}>
-            <TextField
-              label="Enter tags"
-              margin="normal"
-              name="tagList"
-              inputRef={register({})}
-              value={valueTag}
-              onChange={handleChange}
-              onKeyPress={keyPressed}
+            <ChipInput
+              label ="Add a tag"
+              value={tagList}
+              onAdd={chip => handleChange(chip)}
+              onDelete={chip => handleDeleteChip(chip)}
+              classes={{
+                chip: classes.chip
+              }}
             />
-
-            {tag && renderTag}
           </FormControl>
           {alertErrors.message && (
             <FormHelperText className="component-error-text" error>
@@ -153,5 +144,5 @@ function mapStateToProps(state) {
 }
 export default connect(
   mapStateToProps,
-  { loginRegister, clearMessege }
+  { createArticle, clearMessege }
 )(EditArticle);

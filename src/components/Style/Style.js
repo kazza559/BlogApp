@@ -1,6 +1,6 @@
 export const Style = {
   buttonLogin: {
-    background:"#9c27b0" ,
+    background: "#9c27b0",
     borderRadius: "30px",
     border: 0,
     color: "white",
@@ -14,20 +14,30 @@ export const Style = {
     },
     formControl: {
       width: "100%",
-      margin: "20px 0",
+      margin: "20px 0"
+    },
+    chip: {
+      border: "0",
+      fontSize: "13px",
+      marginBottom: "6px",
+      marginTop: "1px",
+      outline: "none",
+      padding: "5px",
+      backgroundColor: "#00bcd4 !important",
+      color: "#fff"
     }
   },
   tag: {
     chip: {
-      margin: "5px",
+      margin: "5px"
     },
     active: {
-      textDecoration: 'underline',
+      textDecoration: "underline",
       color: "#FFF",
       backgroundColor: "#00acc1 !important"
     }
   },
-  Preview:{
+  Preview: {
     card: {
       width: "95%",
       marginBottom: "5px",
@@ -42,15 +52,15 @@ export const Style = {
       float: "right"
     },
     mgb10: {
-      marginBottom: '20px'
+      marginBottom: "20px"
     },
     chip: {
       margin: "5px",
       cursor: "pointer"
-    },
+    }
   },
-  buttonEditor : {
-    background:"#4caf50" ,
+  buttonEditor: {
+    background: "#4caf50",
     borderRadius: "30px",
     border: 0,
     color: "white",

@@ -50,9 +50,7 @@ function Header(props) {
                 <div className="header-title">Conduit</div>
                 <div className="header-right">
                   <NavLink to="/" exact activeClassName="selected">
-                    <div className="header-home">
-                      HOME
-                    </div>
+                    <div className="header-home">HOME</div>
                   </NavLink>
                   <NavLink to="/editor" activeClassName="selected">
                     <div className="header-item">
@@ -60,10 +58,12 @@ function Header(props) {
                       New Article
                     </div>
                   </NavLink>
-                  <div className="header-item">
-                    <Settings />
-                    Settings
-                  </div>
+                  <NavLink to="/login" activeClassName="selected">
+                    <div className="header-item">
+                      <Settings />
+                      Settings
+                    </div>
+                  </NavLink>
                   <div className="header-item">
                     <img src={user.user.user.image} alt="" />
                     {user.user.user.username}
