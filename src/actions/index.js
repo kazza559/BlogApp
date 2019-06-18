@@ -1,4 +1,4 @@
-import { GET_TAGLIST, GET_LISTVIEW, GET_FEED } from "../Constants/index";
+import { GET_TAGLIST, GET_LISTVIEW, GET_FEED, FAVORITE_ARTICLE } from "../Constants/index";
 import { Service } from "../Services";
 import { userConstants } from "../Constants/index";
 import { alertActions } from "../actions/alert.actions";
@@ -61,3 +61,19 @@ export const clearMessege = () => {
       dispatch(alertActions.clear());
   };
 };
+
+export const favoriteArticle = slug => async dispatch => {
+  const response = await Service.favoriteArticle(slug);
+  dispatch({
+    type: FAVORITE_ARTICLE,
+    payload: response.data
+  })
+}
+
+export const unfavoriteArticle = slug => async dispatch => {
+  const response = await Service.unfavoriteArticle(slug);
+  dispatch({
+    type: FAVORITE_ARTICLE,
+    payload: response.data
+  })
+}

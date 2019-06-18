@@ -3,6 +3,8 @@ export const LOGIN = "LOGIN";
 export const REGISTER = "REGISTER";
 export const GET_LISTVIEW = 'GET_LISTVIEW';
 export const GET_FEED = 'GET_FEED';
+export const FAVORITE_ARTICLE = 'FAVORITE_ARTICLE';
+export const UNFAVORITE_ARTICLE = 'UNFAVORITE_ARTICLE';
 export const alertConstants = {
   SUCCESS: 'ALERT_SUCCESS',
   ERROR: 'ALERT_ERROR',
@@ -71,6 +73,14 @@ export const API_ENDPOINTS = {
     CREATE_USERS: {
       path: APIURL + '/users',
       method: 'POST'
+    },
+    FAVORITE_ARTICLE: {
+      path: APIURL + '/articles/',
+      method: 'POST'
+    },
+    UNFAVORITE_ARTICLE: {
+      path: APIURL + '/articles/',
+      method: 'DELETE'
     }
   };
   

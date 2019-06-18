@@ -1,4 +1,6 @@
 import React from "react";
+import {connect} from 'react-redux';
+import {favoriteArticle, unfavoriteArticle} from '../actions'
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -16,13 +18,18 @@ const useStyles = makeStyles(theme => Style.Preview)
 
 function PreviewArticle(props) {
   const classes = useStyles();
-  const { author, createdAt, title, description, favoritesCount, tagList } = props;
+  const { author, createdAt, title, description, favoritesCount, tagList, isAuth, favorited, slug } = props;
 
   const renderTag = () => {
     return tagList.map((tag, index) => <Chip className={classes.chip} label={tag} key={index} size="small"
     />)
   }
-
+  const handleFavorite = () => {
+    if (!isAuth) {
+      return;
+    }
+    favorited ? props.unfavoriteArticle(slug) : props.favoriteArticle(slug)
+  }
   return (
     <Card className={classes.card}>
       <CardHeader
@@ -40,7 +47,7 @@ function PreviewArticle(props) {
         {tagList && renderTag()}
       </CardContent>
       <CardActions className={classes.float}>
-        <IconButton aria-label="Add to favorites">
+        <IconButton onClick={handleFavorite} aria-label="Add to favorites">
           <FavoriteIcon /> {favoritesCount}
         </IconButton>
       </CardActions>
@@ -48,4 +55,8 @@ function PreviewArticle(props) {
   );
 }
 
-export default PreviewArticle;
+const mapStateToProps = state => {
+  return {isAuth: state.auth}
+}
+
+export default connect(mapStateToProps, {favoriteArticle, unfavoriteArticle})(PreviewArticle);

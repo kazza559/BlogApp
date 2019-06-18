@@ -7,7 +7,9 @@ export const Service = {
   getAllTags,
   getListView,
   loginRegister,
-  getFeed
+  getFeed,
+  favoriteArticle,
+  unfavoriteArticle
 };
 
 function loginRegister(User, infor) {
@@ -54,6 +56,18 @@ function getFeed(offset = 0, limit = 10) {
       offset: offset,
       limit: limit
     },
+    headers: authHeader()
+  })
+}
+
+function favoriteArticle (slug)  {
+  return axios.post(`${API_ENDPOINTS.FAVORITE_ARTICLE.path}${slug}/favorite`, null, {
+    headers: authHeader()
+  })
+}
+
+function unfavoriteArticle(slug) {
+  return axios.delete(`${API_ENDPOINTS.UNFAVORITE_ARTICLE.path}${slug}/favorite`, {
     headers: authHeader()
   })
 }
