@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {favoriteArticle, unfavoriteArticle} from '../actions'
 import { makeStyles } from "@material-ui/core/styles";
@@ -30,10 +31,12 @@ function PreviewArticle(props) {
     }
     favorited ? props.unfavoriteArticle(slug) : props.favoriteArticle(slug)
   }
+  const path = `/profile/${author.username}`
+
   return (
     <Card className={classes.card}>
       <CardHeader
-        avatar={<img className={classes.face} src={author.image} alt="" />}
+        avatar={<Link to={path} > <img className={classes.face} src={author.image} alt="" /> </Link>}
         title={author.username}
         subheader={convertTime(createdAt)}
       />

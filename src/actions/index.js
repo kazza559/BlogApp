@@ -1,4 +1,4 @@
-import { GET_TAGLIST, GET_LISTVIEW, GET_FEED, FAVORITE_ARTICLE } from "../Constants/index";
+import { GET_TAGLIST, GET_LISTVIEW, GET_FEED, FAVORITE_ARTICLE, GET_PROFILE } from "../Constants/index";
 import { Service } from "../Services";
 import { userConstants } from "../Constants/index";
 import {  CREATE_EDIT_ARTICLE } from "../Constants/index";
@@ -93,3 +93,11 @@ export const createArticle = (article) => {
     );
   };
 };
+
+export const getProfile = user => async dispatch => {
+  const response = await Service.getProfile(user);
+  dispatch({
+    type: GET_PROFILE,
+    payload: response.data
+  })
+}

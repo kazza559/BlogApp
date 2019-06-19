@@ -7,6 +7,7 @@ import Register from "../Register/Register";
 import { Router, Route, Switch } from "react-router-dom";
 import { history } from "./../Helpers/history";
 import EditArticle from "../Editor/EditArticle";
+import Profile from '../Profile'
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/editor" component={EditArticle} />
+          <Route exact path="/profile/:user" component={Profile} />
         </Switch>
       </div>
     </Router>

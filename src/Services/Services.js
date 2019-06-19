@@ -10,7 +10,8 @@ export const Service = {
   getFeed,
   favoriteArticle,
   unfavoriteArticle,
-  createArticle
+  createArticle,
+  getProfile
 };
 
 function loginRegister(User, infor) {
@@ -76,6 +77,12 @@ function favoriteArticle (slug)  {
 
 function unfavoriteArticle(slug) {
   return axios.delete(`${API_ENDPOINTS.UNFAVORITE_ARTICLE.path}${slug}/favorite`, {
+    headers: authHeader()
+  })
+}
+
+function getProfile(user) {
+  return axios.get(`${API_ENDPOINTS.GET_PROFILE.path}${user}`, {
     headers: authHeader()
   })
 }
