@@ -24,7 +24,7 @@ function Feed(props) {
 }
 
 const mapStateToProps = state => {
-  return { feed: state.feed };
+  return { feed: state.listView };
 };
 
 export default connect(
