@@ -1,4 +1,5 @@
 export const GET_TAGLIST = "GET_TAGLIST";
+export const GET_ARTICLE = "GET_ARTICLE";
 export const LOGIN = "LOGIN";
 export const REGISTER = "REGISTER";
 export const GET_LISTVIEW = 'GET_LISTVIEW';
@@ -6,7 +7,11 @@ export const GET_FEED = 'GET_FEED';
 export const CREATE_EDIT_ARTICLE = {
   CREATE: 'CREATE_ARTICLE',
   EDIT: 'EDIT_ARTICLE',
-};;
+};
+export const COMNNENT= {
+  CREATE: 'CREATE_COMNNENT',
+  DELETE: 'DELETE_COMNNENT',
+};
 export const alertConstants = {
   SUCCESS: 'ALERT_SUCCESS',
   ERROR: 'ALERT_ERROR',
@@ -16,7 +21,6 @@ export const APIURL = 'https://conduit.productionready.io/api';
 export const userConstants = {
   LOGIN_REGISTER_SUCCESS: 'USERS_LOGIN_REGISTER_SUCCESS',
   LOGIN_REGISTER_FAILURE: 'USERS_LOGIN_REGISTER_FAILURE',
-
   LOGOUT: 'USERS_LOGOUT'
 }
 export const API_ENDPOINTS = {

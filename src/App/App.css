@@ -79,3 +79,7 @@ form {
   flex-direction: column;
   align-items: center;
 }
+.button-comment{
+  display: flex;
+  justify-content: flex-end;
+}

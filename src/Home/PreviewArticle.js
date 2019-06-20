@@ -10,13 +10,14 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import convertTime from '../Helpers/datePipe';
 import Chip from '@material-ui/core/Chip';
 import { Style } from './../components/Style/Style';
+import { NavLink } from 'react-router-dom';
 
 
 const useStyles = makeStyles(theme => Style.Preview)
 
 function PreviewArticle(props) {
   const classes = useStyles();
-  const { author, createdAt, title, description, favoritesCount, tagList } = props;
+  const { author, createdAt, title, description, favoritesCount, tagList , slug} = props;
 
   const renderTag = () => {
     return tagList.map((tag, index) => <Chip className={classes.chip} label={tag} key={index} size="small"
@@ -31,12 +32,14 @@ function PreviewArticle(props) {
         subheader={convertTime(createdAt)}
       />
       <CardContent>
+        <NavLink to={`/article/${slug}`}>
         <Typography variant="h5" color="textPrimary" component="p">
           {title}
         </Typography>
         <Typography className={classes.mgb10} variant="body1" color="textSecondary" component="p">
           {description}
         </Typography>
+        </NavLink>
         {tagList && renderTag()}
       </CardContent>
       <CardActions className={classes.float}>
