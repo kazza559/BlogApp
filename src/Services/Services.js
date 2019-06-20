@@ -8,7 +8,9 @@ export const Service = {
   getListView,
   loginRegister,
   getFeed,
-  createArticle
+  createArticle,
+  getArticle,
+  getcomment
 };
 
 function loginRegister(User, infor) {
@@ -64,4 +66,13 @@ function createArticle(article) {
     .then(res => {
       return res.data;
     });
+}
+function getArticle(slug) {
+  const path = `${API_ENDPOINTS.GET_ARTICLE.path}${slug}`;
+  return axios.get(path, { headers: authHeader() }).then(res => res.data);
+}
+
+function getcomment(slug) {
+  const path = `${API_ENDPOINTS.GET_COMMENTS.path}${slug}/comments`;
+  return axios.get(path, { headers: authHeader() }).then(res => res.data);
 }
