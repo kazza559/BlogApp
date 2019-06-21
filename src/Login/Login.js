@@ -1,4 +1,9 @@
 import React from "react";
+import { connect } from "react-redux";
+import { NavLink } from "react-router-dom";
+import useForm from "react-hook-form";
+
+// material-ui components
 import {
   makeStyles, createMuiTheme,
   MuiThemeProvider
@@ -6,27 +11,23 @@ import {
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Input from "@material-ui/core/Input";
-import ButtonCustomer from "../components/ButtonCustomer/Button";
 import FormHelperText from "@material-ui/core/FormHelperText";
-import useForm from "react-hook-form";
-import { connect } from "react-redux";
-import { loginRegister, logout, clearMessege } from "../actions/index";
-import { NavLink } from "react-router-dom";
-import { LOGIN } from "../Constants/index";
 import Button from "@material-ui/core/Button";
-import { Style } from './../components/Style/Style';
+import InputAdornment from "@material-ui/core/InputAdornment";
+
+// material-ui-icons
 import Face from "@material-ui/icons/Face";
 import EmailOutlined from "@material-ui/icons/EmailOutlined";
-import InputAdornment from "@material-ui/core/InputAdornment";
+
+import ButtonCustomer from "../components/ButtonCustomer/Button";
+import { loginRegister, logout, clearMessege } from "../actions/index";
+import { Style } from './../components/Style/Style';
+import { LOGIN } from "../Constants/index";
 
 
 
 const useStyles = makeStyles(theme => Style.styleForm);
-const themes = createMuiTheme({
-  palette: {
-    primary: { main: "#9c27b0" }
-  }
-});
+const themes = createMuiTheme(Style.muiThemes);
 function Login(props) {
   const { loginRegister, alertErrors, logout, clearMessege } = props;
   const { handleSubmit, register, errors } = useForm();

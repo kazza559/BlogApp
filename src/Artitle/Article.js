@@ -1,61 +1,24 @@
 import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+
+// material-ui components
 import Typography from "@material-ui/core/Typography";
 import Avatar from "@material-ui/core/Avatar";
-import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
-import { connect } from "react-redux";
+import { Chip } from "@material-ui/core";
+import LinearProgress from "@material-ui/core/LinearProgress";
+import CardHeader from "@material-ui/core/CardHeader";
+import Card from "@material-ui/core/Card";
+
 import { getArticle } from "../actions/index";
 import convertTime from "../Helpers/datePipe";
 import IsAuthorArticle from "./IsAuthorArticle";
-import { Chip } from "@material-ui/core";
-import LinearProgress from "@material-ui/core/LinearProgress";
 import FooterArticle from "./FooterArticle";
-import Card from "@material-ui/core/Card";
-import CardHeader from "@material-ui/core/CardHeader";
+import { Style } from "../components/Style/Style";
 
-const useStyles = makeStyles(() => ({
-  root: {
-    padding: "30px 10%",
-    boxShadow: "none",
-    background: "#333",
-    borderRadius: "0px"
-  },
-  card: {
-    background: "#333",
-    boxShadow: "none"
-  },
-  title: {
-    color: "#fff",
-    padding: "15px 0"
-  },
-  inforUser: {
-    display: "flex",
-    marginBottom: "15px",
-    alignItems: "center",
-    flexWrap: "wrap"
-  },
-  infor: {
-    marginLeft: "10px",
-    color: "#fff"
-  },
-  chip: {
-    color: "#fff",
-    backgroundColor: "#373a3c",
-    margin: "15px 5px",
-    height: "20px",
-    cursor: "pointer"
-  },
-  body: {
-    padding: "30px 10%"
-  },
-  linearProgress: {
-    height: "1px",
-    marginTop: "15px"
-  },
-  subheader: {
-    color: "#fff"
-  }
-}));
+
+const useStyles = makeStyles(() => Style.articlePageStyle);
 function Article(props) {
   const { article, getArticle, match } = props;
   const classes = useStyles();

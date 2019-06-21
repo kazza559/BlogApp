@@ -1,31 +1,20 @@
 import React from "react";
+import { connect } from "react-redux";
+
+// material-ui components
 import Avatar from "@material-ui/core/Avatar";
 import { withStyles } from "@material-ui/core/styles";
 import Chip from "@material-ui/core/Chip";
+
+// material-ui-icons
 import AddCircle from "@material-ui/icons/AddCircle";
 import Favorite from "@material-ui/icons/Favorite";
 import Edit from "@material-ui/icons/Edit";
 import Delete from "@material-ui/icons/Delete";
-import { connect } from "react-redux";
+import { Style } from "../components/Style/Style";
 
-const styles = () => ({
-  label: {
-    paddingLeft: "8px"
-  },
-  roots: {
-    backgroundColor: "#fff",
-    margin: "10px",
-    cursor: "pointer",
-    "&:hover, &:active": {
-      backgroundColor: "#5cb85c",
-      color: "#000"
-    }
-  },
-  avatar: {
-    backgroundColor: "#fff",
-    color: "#5cb85c"
-  }
-});
+
+const styles = () => Style.authorStyle;
 
 function IsAuthorArticle(props) {
   const { classes, favoritesCount, author, auth } = props;

@@ -1,11 +1,14 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+
+// material-ui components
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
+
 import { getListView } from "../actions";
 import PreviewArticle from "./PreviewArticle";
 import Pagination from "../components/Pagination";
@@ -26,8 +29,7 @@ TabContainer.propTypes = {
 
 const useStyles = makeStyles(theme => ({
   root: {
-    // flexGrow: 1,
-    width: '100%',
+    width: "100%",
     backgroundColor: theme.palette.background.paper
   },
   border: {
@@ -116,7 +118,9 @@ function ListPreview(props) {
   }, [getListView]);
 
   const renderList = list => {
-    return list.articles.map(item => <PreviewArticle {...item} key={item.slug} />);
+    return list.articles.map(item => (
+      <PreviewArticle {...item} key={item.slug} />
+    ));
   };
 
   return !list ? (
@@ -124,7 +128,9 @@ function ListPreview(props) {
   ) : (
     <>
       {renderList(list)}
-      {list.articlesCount > 10 &&<Pagination {...list} count={list.articlesCount} />}
+      {list.articlesCount > 10 && (
+        <Pagination {...list} count={list.articlesCount} />
+      )}
     </>
   );
 }
