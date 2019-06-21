@@ -2,7 +2,8 @@ import {
   GET_TAGLIST,
   GET_LISTVIEW,
   GET_FEED,
-  GET_ARTICLE
+  GET_ARTICLE,
+  CLEAR_ARTICLE
 } from "../Constants/index";
 import { Service } from "../Services";
 import { userConstants } from "../Constants/index";
@@ -95,5 +96,10 @@ export const getArticle = slug => {
         dispatch(alertActions.error(errors));
       }
     );
+  };
+};
+export const clearArticle = () => {
+  return dispatch => {
+    dispatch({ type: CLEAR_ARTICLE});
   };
 };

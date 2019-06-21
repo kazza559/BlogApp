@@ -22,7 +22,8 @@ import Delete from "@material-ui/icons/Delete";
 import {
   getComment,
   addComment,
-  deleteComment
+  deleteComment,
+  clearComment
 } from "../actions/comment.action";
 import convertTime from "../Helpers/datePipe";
 import { Style } from "../components/Style/Style";
@@ -33,11 +34,12 @@ function FooterArticle(props) {
   const {
     classes,
     getComment,
-    slug,
+    article,
     comments,
     auth,
     addComment,
-    deleteComment
+    deleteComment,
+    clearComment
   } = props;
   const [initialComment, setinitialComment] = useState("");
   const hanldeChange = event => {
@@ -46,16 +48,19 @@ function FooterArticle(props) {
   const postComment = () => {
     if (initialComment.trim().length > 0) {
       const valueComment = { comment: { body: initialComment.trim() } };
-      addComment(slug, valueComment);
+      addComment(article.slug, valueComment);
       setinitialComment("");
     }
   };
   const handleDelete = id => {
-    deleteComment(slug, id);
+    deleteComment(article.slug, id);
   };
   useEffect(() => {
-    getComment(slug);
-  }, [getComment]);
+    getComment(article.slug);
+    return () => {
+      clearComment();
+    };
+  }, [getComment, clearComment,article.slug]);
   const renderComment = () => {
     return comments.map(comment => {
       const isauthor = auth.user.user.username === comment.author.username;
@@ -117,10 +122,10 @@ function FooterArticle(props) {
   );
 }
 function mapStateToProps(state) {
-  const { comments, auth } = state;
-  return { comments, auth };
+  const { comments, auth, article } = state;
+  return { comments, auth, article };
 }
 export default connect(
   mapStateToProps,
-  { getComment, addComment, deleteComment }
+  { getComment, addComment, deleteComment, clearComment }
 )(withStyles(styles)(FooterArticle));

@@ -11,21 +11,23 @@ import LinearProgress from "@material-ui/core/LinearProgress";
 import CardHeader from "@material-ui/core/CardHeader";
 import Card from "@material-ui/core/Card";
 
-import { getArticle } from "../actions/index";
+import { getArticle, clearArticle } from "../actions/index";
 import convertTime from "../Helpers/datePipe";
 import IsAuthorArticle from "./IsAuthorArticle";
 import FooterArticle from "./FooterArticle";
 import { Style } from "../components/Style/Style";
 
-
 const useStyles = makeStyles(() => Style.articlePageStyle);
 function Article(props) {
-  const { article, getArticle, match } = props;
+  const { article, getArticle, match, clearArticle } = props;
   const classes = useStyles();
   useEffect(() => {
     const slug = match.params.slug;
     getArticle(slug);
-  }, [getArticle]);
+    return () => {
+      clearArticle();
+    };
+  }, [getArticle, clearArticle,match.params.slug]);
   return (
     <div className="article-page">
       {Object.keys(article).length !== 0 && (
@@ -69,7 +71,7 @@ function Article(props) {
               value={100}
             />
           </div>
-          <FooterArticle {...article}/>
+          <FooterArticle />
         </div>
       )}
     </div>
@@ -81,5 +83,5 @@ function mapStateToProps(state) {
 }
 export default connect(
   mapStateToProps,
-  { getArticle }
+  { getArticle, clearArticle }
 )(Article);

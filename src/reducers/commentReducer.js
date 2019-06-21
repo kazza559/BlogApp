@@ -9,6 +9,8 @@ export default (state = comments, action) => {
       return [action.comment, ...state];
     case COMMENT.DELETE:
       return state.filter(comment => comment.id !== action.id);
+    case COMMENT.CLEAR:
+      return []
     default:
       return state;
   }

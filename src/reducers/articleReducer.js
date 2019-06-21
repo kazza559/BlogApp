@@ -1,4 +1,8 @@
-import { CREATE_EDIT_ARTICLE ,GET_ARTICLE } from "../Constants/index";
+import {
+  CREATE_EDIT_ARTICLE,
+  GET_ARTICLE,
+  CLEAR_ARTICLE
+} from "../Constants/index";
 
 const article = {};
 export default (state = article, action) => {
@@ -9,6 +13,8 @@ export default (state = article, action) => {
       return action.newArticle;
     case GET_ARTICLE:
       return action.article;
+    case CLEAR_ARTICLE:
+      return {};
     default:
       return state;
   }

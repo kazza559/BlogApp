@@ -44,3 +44,8 @@ export const deleteComment = (slug, id) => {
     );
   };
 };
+export const clearComment = () => {
+  return dispatch => {
+    dispatch({ type: COMMENT.CLEAR });
+  };
+};
