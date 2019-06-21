@@ -1,4 +1,8 @@
 import React, { useState } from "react";
+import useForm from "react-hook-form";
+import { connect } from "react-redux";
+
+// material-ui components
 import {
   makeStyles,
   createMuiTheme,
@@ -7,21 +11,16 @@ import {
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Input from "@material-ui/core/Input";
-import ButtonCustomer from "../components/ButtonCustomer/Button";
 import FormHelperText from "@material-ui/core/FormHelperText";
-import useForm from "react-hook-form";
-import { connect } from "react-redux";
-import { createArticle, clearMessege } from "../actions/index";
 import TextField from "@material-ui/core/TextField";
+
+import { createArticle, clearMessege } from "../actions/index";
 import { Style } from "../components/Style/Style";
 import ChipInput from "material-ui-chip-input";
+import ButtonCustomer from "../components/ButtonCustomer/Button";
 
 const useStyles = makeStyles(theme => Style.styleForm);
-const themes = createMuiTheme({
-  palette: {
-    primary: { main: "#9c27b0" }
-  }
-});
+const themes = createMuiTheme(Style.muiThemes);
 
 function EditArticle(props) {
   const { alertErrors, clearMessege , createArticle} = props;

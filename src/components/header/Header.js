@@ -1,18 +1,25 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { NavLink } from "react-router-dom";
+import { connect } from "react-redux";
+
+// material-ui components
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import Slide from "@material-ui/core/Slide";
 import { withStyles } from "@material-ui/core/styles";
-import { NavLink } from "react-router-dom";
-import { connect } from "react-redux";
+
+// material-ui-icons
 import PersonAdd from "@material-ui/icons/PersonAdd";
 import Fingerprint from "@material-ui/icons/Fingerprint";
 import Settings from "@material-ui/icons/Settings";
 import Launch from "@material-ui/icons/Launch";
+
 import "./Header.css";
+import { Style } from "../Style/Style";
+
 
 function HideOnScroll(props) {
   const { children, window } = props;
@@ -30,13 +37,7 @@ HideOnScroll.propTypes = {
   window: PropTypes.func
 };
 
-const styles = {
-  root: {
-    background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
-    padding: "0 10%",
-    boxShadow: "none"
-  }
-};
+const styles = Style.header;
 function Header(props) {
   const { classes, auth } = props;
   return (

@@ -2,8 +2,7 @@ import {
   GET_TAGLIST,
   GET_LISTVIEW,
   GET_FEED,
-  GET_ARTICLE,
-  COMNNENT
+  GET_ARTICLE
 } from "../Constants/index";
 import { Service } from "../Services";
 import { userConstants } from "../Constants/index";
@@ -90,20 +89,6 @@ export const getArticle = slug => {
         let article = res.article;
         dispatch({ type: GET_ARTICLE, article });
         dispatch(alertActions.clear());
-      },
-      error => {
-        const { errors } = error.response.data;
-        dispatch(alertActions.error(errors));
-      }
-    );
-  };
-};
-export const getComment = slug => {
-  return dispatch => {
-    Service.getcomment(slug).then(
-      res => {
-        let { comments } = res;
-        dispatch({ type: COMNNENT.CREATE, comments });
       },
       error => {
         const { errors } = error.response.data;

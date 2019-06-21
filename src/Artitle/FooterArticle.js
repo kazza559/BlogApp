@@ -1,4 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
+
+// material-ui components
 import {
   withStyles,
   createMuiTheme,
@@ -10,41 +13,46 @@ import CardContent from "@material-ui/core/CardContent";
 import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
-import Delete from "@material-ui/icons/Delete";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import { getComment } from "../actions";
-import { connect } from "react-redux";
-import convertTime from "../Helpers/datePipe";
 
-const styles = () => ({
-  footer: {
-    padding: "0 25%"
-  },
-  card: {
-    maxWidth: "100%"
-  },
-  avatar: {
-    color: "#000"
-  },
-  button: {
-    color: "#fff",
-    backgroundColor: "#9c27b0",
-    marginTop: "15px",
-    marginBottom: "15px",
-    "&:hover": {
-      textDecoration: "none",
-      backgroundColor: "#9c27b0"
-    }
-  }
-});
-const themes = createMuiTheme({
-  palette: {
-    primary: { main: "#9c27b0" }
-  }
-});
+// material-ui-icons
+import Delete from "@material-ui/icons/Delete";
+
+import {
+  getComment,
+  addComment,
+  deleteComment
+} from "../actions/comment.action";
+import convertTime from "../Helpers/datePipe";
+import { Style } from "../components/Style/Style";
+
+const styles = () => Style.footerArticleStyle;
+const themes = createMuiTheme(Style.muiThemes);
 function FooterArticle(props) {
-  const { classes, getComment, slug, comments, auth } = props;
+  const {
+    classes,
+    getComment,
+    slug,
+    comments,
+    auth,
+    addComment,
+    deleteComment
+  } = props;
+  const [initialComment, setinitialComment] = useState("");
+  const hanldeChange = event => {
+    setinitialComment(event.target.value);
+  };
+  const postComment = () => {
+    if (initialComment.trim().length > 0) {
+      const valueComment = { comment: { body: initialComment.trim() } };
+      addComment(slug, valueComment);
+      setinitialComment("");
+    }
+  };
+  const handleDelete = id => {
+    deleteComment(slug, id);
+  };
   useEffect(() => {
     getComment(slug);
   }, [getComment]);
@@ -57,7 +65,11 @@ function FooterArticle(props) {
             avatar={<Avatar alt="" src={comment.author.image} />}
             action={
               isauthor ? (
-                <IconButton>
+                <IconButton
+                  onClick={() => {
+                    handleDelete(comment.id);
+                  }}
+                >
                   <Delete />
                 </IconButton>
               ) : (
@@ -67,7 +79,7 @@ function FooterArticle(props) {
             title={comment.author.username}
             subheader={
               <Typography variant="subtitle2" className={classes.avatar}>
-                {convertTime(comment.createAt)}
+                {convertTime(comment.createdAt)}
               </Typography>
             }
           />
@@ -86,6 +98,8 @@ function FooterArticle(props) {
           label="Write a comment..."
           multiline={true}
           rows={7}
+          value={initialComment}
+          onChange={hanldeChange}
         />
       </MuiThemeProvider>
       <div className="button-comment">
@@ -93,6 +107,7 @@ function FooterArticle(props) {
           variant="contained"
           size="medium"
           classes={{ root: classes.button }}
+          onClick={postComment}
         >
           Post Comment
         </Button>
@@ -107,5 +122,5 @@ function mapStateToProps(state) {
 }
 export default connect(
   mapStateToProps,
-  { getComment }
+  { getComment, addComment, deleteComment }
 )(withStyles(styles)(FooterArticle));

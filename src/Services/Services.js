@@ -10,7 +10,9 @@ export const Service = {
   getFeed,
   createArticle,
   getArticle,
-  getcomment
+  getcomment,
+  postComment,
+  deleteComment
 };
 
 function loginRegister(User, infor) {
@@ -75,4 +77,12 @@ function getArticle(slug) {
 function getcomment(slug) {
   const path = `${API_ENDPOINTS.GET_COMMENTS.path}${slug}/comments`;
   return axios.get(path, { headers: authHeader() }).then(res => res.data);
+}
+function postComment(slug, comment) {
+  const path = `${API_ENDPOINTS.POST_COMMENTS.path}${slug}/comments`;
+  return axios.post(path, comment, { headers: authHeader() }).then(res => res.data);
+}
+function deleteComment(slug, id) {
+  const path = `${API_ENDPOINTS.POST_COMMENTS.path}${slug}/comments/${id}`;
+  return axios.delete(path,{ headers: authHeader() }).then(res => res.data);
 }
