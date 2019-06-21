@@ -128,7 +128,7 @@ function EditArticle(props) {
           </FormControl>
           {alertErrors.message && (
             <FormHelperText className="component-error-text" error>
-              Email or Username has already been taken
+              Tag cannot be identical
             </FormHelperText>
           )}
           <ButtonCustomer text="Publish Article" style={Style.buttonEditor} />

@@ -2,6 +2,7 @@ export const GET_TAGLIST = "GET_TAGLIST";
 export const GET_ARTICLE = "GET_ARTICLE";
 export const CLEAR_ARTICLE = "CLEAR_ARTICLE";
 export const LOGIN = "LOGIN";
+export const FOLLOW_UNFOLLOW = "FOLLOW_UNFOLLOW";
 export const REGISTER = "REGISTER";
 export const GET_LISTVIEW = "GET_LISTVIEW";
 export const GET_FEED = "GET_FEED";

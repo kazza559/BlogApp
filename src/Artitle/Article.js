@@ -56,7 +56,7 @@ function Article(props) {
                   }
                 />
               </Card>
-              <IsAuthorArticle {...article} />
+              <IsAuthorArticle />
             </div>
           </div>
           <div className={classes.body}>
