@@ -1,5 +1,6 @@
 export const GET_TAGLIST = "GET_TAGLIST";
 export const GET_ARTICLE = "GET_ARTICLE";
+export const CLEAR_ARTICLE = "CLEAR_ARTICLE";
 export const LOGIN = "LOGIN";
 export const REGISTER = "REGISTER";
 export const GET_LISTVIEW = "GET_LISTVIEW";
@@ -11,7 +12,8 @@ export const CREATE_EDIT_ARTICLE = {
 export const COMMENT = {
   GET: "GET_COMMENT",
   CREATE: "CREATE_COMNNENT",
-  DELETE: "DELETE_COMNNENT"
+  DELETE: "DELETE_COMNNENT",
+  CLEAR: "CLEAR_COMMENT"
 };
 export const alertConstants = {
   SUCCESS: "ALERT_SUCCESS",
