@@ -12,21 +12,40 @@ import Favorite from "@material-ui/icons/Favorite";
 import Edit from "@material-ui/icons/Edit";
 import Delete from "@material-ui/icons/Delete";
 import { Style } from "../components/Style/Style";
-
+import {
+  favoriteArticle,
+  unFavoriteArticle,
+  followArticle,
+  unFollowArticle
+} from "../actions/favoriteFollow.action";
 
 const styles = () => Style.authorStyle;
 
 function IsAuthorArticle(props) {
-  const { classes, favoritesCount, author, auth } = props;
+  const {
+    classes,
+    article,
+    auth,
+    favoriteArticle,
+    unFavoriteArticle,
+    unFollowArticle,
+    followArticle
+  } = props;
+  const {
+    author: { username, following },
+    favorited,
+    favoritesCount,
+    slug
+  } = article;
   const handleFollow = () => {
-    console.table("article");
+    following ? unFollowArticle(username) : followArticle(username);
   };
   const handleFavorite = () => {
-    console.log("hello");
+    !favorited ? favoriteArticle(slug) : unFavoriteArticle(slug);
   };
   return (
     <span className="isArthorArticle">
-      {auth.user.user.username !== author.username && (
+      {auth.user.user.username !== username && (
         <span>
           <Chip
             avatar={
@@ -39,9 +58,7 @@ function IsAuthorArticle(props) {
               avatar: classes.avatar,
               label: classes.label
             }}
-            label={`${!author.following ? "Follow" : "UnFollow"} ${
-              author.username
-            }`}
+            label={`${!following ? "Follow" : "UnFollow"} ${username}`}
             onClick={handleFollow}
           />
           <Chip
@@ -56,13 +73,13 @@ function IsAuthorArticle(props) {
               label: classes.label
             }}
             label={`${
-              !author.favorited ? "Favorite" : "UnFavorite"
+              !favorited ? "Favorite" : "UnFavorite"
             } Article (${favoritesCount})`}
             onClick={handleFavorite}
           />
         </span>
       )}
-      {auth.user.user.username === author.username && (
+      {auth.user.user.username === username && (
         <span>
           <Chip
             avatar={
@@ -96,7 +113,10 @@ function IsAuthorArticle(props) {
   );
 }
 function mapStateToProps(state) {
-  const { auth } = state;
-  return { auth };
+  const { auth, article } = state;
+  return { auth, article };
 }
-export default connect(mapStateToProps)(withStyles(styles)(IsAuthorArticle));
+export default connect(
+  mapStateToProps,
+  { favoriteArticle, unFavoriteArticle, followArticle, unFollowArticle }
+)(withStyles(styles)(IsAuthorArticle));

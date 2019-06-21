@@ -12,7 +12,11 @@ export const Service = {
   getArticle,
   getcomment,
   postComment,
-  deleteComment
+  deleteComment,
+  favoriteArticle,
+  unFavoriteArticle,
+  followArticle,
+  unFollowArticle
 };
 
 function loginRegister(User, infor) {
@@ -73,16 +77,39 @@ function getArticle(slug) {
   const path = `${API_ENDPOINTS.GET_ARTICLE.path}${slug}`;
   return axios.get(path, { headers: authHeader() }).then(res => res.data);
 }
-
+function favoriteArticle(slug) {
+  const path = `${API_ENDPOINTS.GET_ARTICLE.path}${slug}/favorite`;
+  return axios
+    .post(path, null, { headers: authHeader() })
+    .then(res => res.data);
+}
+function unFavoriteArticle(slug) {
+  const path = `${API_ENDPOINTS.GET_ARTICLE.path}${slug}/favorite`;
+  return axios.delete(path, { headers: authHeader() }).then(res => res.data);
+}
+function followArticle(username) {
+  const path = `${API_ENDPOINTS.FOLLOW.path}${username}/follow`;
+  return axios
+    .post(path, null, { headers: authHeader() })
+    .then(res => res.data);
+}
+function unFollowArticle(username) {
+  const path = `${API_ENDPOINTS.FOLLOW.path}${username}/follow`;
+  return axios
+    .delete(path,{ headers: authHeader() })
+    .then(res => res.data);
+}
 function getcomment(slug) {
   const path = `${API_ENDPOINTS.GET_COMMENTS.path}${slug}/comments`;
   return axios.get(path, { headers: authHeader() }).then(res => res.data);
 }
 function postComment(slug, comment) {
   const path = `${API_ENDPOINTS.POST_COMMENTS.path}${slug}/comments`;
-  return axios.post(path, comment, { headers: authHeader() }).then(res => res.data);
+  return axios
+    .post(path, comment, { headers: authHeader() })
+    .then(res => res.data);
 }
 function deleteComment(slug, id) {
   const path = `${API_ENDPOINTS.POST_COMMENTS.path}${slug}/comments/${id}`;
-  return axios.delete(path,{ headers: authHeader() }).then(res => res.data);
+  return axios.delete(path, { headers: authHeader() }).then(res => res.data);
 }

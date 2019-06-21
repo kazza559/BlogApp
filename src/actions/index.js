@@ -71,8 +71,8 @@ export const clearMessege = () => {
 export const createArticle = article => {
   return dispatch => {
     Service.createArticle(article).then(
-      newArticle => {
-        dispatch({ type: CREATE_EDIT_ARTICLE.CREATE, newArticle });
+      article => {
+        dispatch({ type: CREATE_EDIT_ARTICLE.CREATE, article });
         dispatch(alertActions.clear());
         history.push("/");
       },
@@ -100,6 +100,6 @@ export const getArticle = slug => {
 };
 export const clearArticle = () => {
   return dispatch => {
-    dispatch({ type: CLEAR_ARTICLE});
+    dispatch({ type: CLEAR_ARTICLE });
   };
 };
