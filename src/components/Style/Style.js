@@ -58,7 +58,8 @@ export const Style = {
     face: {
       width: "40px",
       height: "40px",
-      borderRadius: "30px"
+      borderRadius: "30px",
+      cursor: 'pointer'
     },
     float: {
       float: "right"

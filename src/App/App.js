@@ -8,6 +8,7 @@ import Header from "../components/header/Header";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
 import EditArticle from "../Editor/EditArticle";
+import Profile from "../Profile";
 import Article from "./../Artitle/Article";
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/editor" component={EditArticle} />
+          <Route exact path="/profile/:user" component={Profile} />
           <Route exact path="/article/:slug" component={Article} />
         </Switch>
       </div>

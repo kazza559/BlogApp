@@ -4,7 +4,10 @@ export const CLEAR_ARTICLE = "CLEAR_ARTICLE";
 export const LOGIN = "LOGIN";
 export const FOLLOW_UNFOLLOW = "FOLLOW_UNFOLLOW";
 export const REGISTER = "REGISTER";
-export const GET_LISTVIEW = "GET_LISTVIEW";
+export const GET_LISTVIEW = 'GET_LISTVIEW';
+export const FAVORITE_ARTICLE = 'FAVORITE_ARTICLE';
+export const UNFAVORITE_ARTICLE = 'UNFAVORITE_ARTICLE';
+export const GET_PROFILE = 'GET_PROFILE';
 export const GET_FEED = "GET_FEED";
 export const CREATE_EDIT_ARTICLE = {
   CREATE: "CREATE_ARTICLE",
