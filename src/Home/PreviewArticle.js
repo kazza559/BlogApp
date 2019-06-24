@@ -1,5 +1,9 @@
 import React from "react";
+import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {favoriteArticle, unfavoriteArticle} from '../actions'
 import { NavLink } from "react-router-dom";
+import styled from 'styled-components'
 
 // material-ui components
 import { makeStyles } from "@material-ui/core/styles";
@@ -19,29 +23,32 @@ import { Style } from "./../components/Style/Style";
 
 const useStyles = makeStyles(theme => Style.Preview);
 
+const StyledLink = styled(Link)`
+    text-decoration: none;
+    color: black
+`;
+
 function PreviewArticle(props) {
   const classes = useStyles();
-  const {
-    author,
-    createdAt,
-    title,
-    description,
-    favoritesCount,
-    tagList,
-    slug
-  } = props;
+  const { author, createdAt, title, description, favoritesCount, tagList, isAuth, favorited, slug } = props;
 
   const renderTag = () => {
-    return tagList.map((tag, index) => (
-      <Chip className={classes.chip} label={tag} key={index} size="small" />
-    ));
-  };
+    return tagList.map((tag, index) => <Chip className={classes.chip} label={tag} key={index} size="small"
+    />)
+  }
+  const handleFavorite = () => {
+    if (!isAuth) {
+      return;
+    }
+    favorited ? props.unfavoriteArticle(slug) : props.favoriteArticle(slug)
+  }
+  const path = `/profile/${author.username}`
 
   return (
     <Card className={classes.card}>
       <CardHeader
-        avatar={<img className={classes.face} src={author.image} alt="" />}
-        title={author.username}
+        avatar={<StyledLink to={path} > <img className={classes.face} src={author.image} alt="" /> </StyledLink>}
+        title={<StyledLink to={path}>{author.username}</StyledLink> }
         subheader={convertTime(createdAt)}
       />
       <CardContent>
@@ -61,7 +68,7 @@ function PreviewArticle(props) {
         {tagList && renderTag()}
       </CardContent>
       <CardActions className={classes.float}>
-        <IconButton aria-label="Add to favorites">
+        <IconButton onClick={handleFavorite} aria-label="Add to favorites">
           <FavoriteIcon /> {favoritesCount}
         </IconButton>
       </CardActions>
@@ -69,4 +76,8 @@ function PreviewArticle(props) {
   );
 }
 
-export default PreviewArticle;
+const mapStateToProps = state => {
+  return {isAuth: state.auth}
+}
+
+export default connect(mapStateToProps, {favoriteArticle, unfavoriteArticle})(PreviewArticle);

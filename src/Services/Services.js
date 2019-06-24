@@ -16,7 +16,8 @@ export const Service = {
   favoriteArticle,
   unFavoriteArticle,
   followArticle,
-  unFollowArticle
+  unFollowArticle,
+  getProfile
 };
 
 function loginRegister(User, infor) {
@@ -112,4 +113,9 @@ function postComment(slug, comment) {
 function deleteComment(slug, id) {
   const path = `${API_ENDPOINTS.POST_COMMENTS.path}${slug}/comments/${id}`;
   return axios.delete(path, { headers: authHeader() }).then(res => res.data);
+}
+function getProfile(user) {
+  return axios.get(`${API_ENDPOINTS.GET_PROFILE.path}${user}`, {
+    headers: authHeader()
+  })
 }

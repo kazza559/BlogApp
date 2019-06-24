@@ -3,7 +3,9 @@ import {
   GET_LISTVIEW,
   GET_FEED,
   GET_ARTICLE,
-  CLEAR_ARTICLE
+  CLEAR_ARTICLE,
+  FAVORITE_ARTICLE,
+  GET_PROFILE
 } from "../Constants/index";
 import { Service } from "../Services";
 import { userConstants } from "../Constants/index";
@@ -68,6 +70,22 @@ export const clearMessege = () => {
     dispatch(alertActions.clear());
   };
 };
+
+export const favoriteArticle = slug => async dispatch => {
+  const response = await Service.favoriteArticle(slug);
+  dispatch({
+    type: FAVORITE_ARTICLE,
+    payload: response.data
+  })
+}
+
+export const unfavoriteArticle = slug => async dispatch => {
+  const response = await Service.unfavoriteArticle(slug);
+  dispatch({
+    type: FAVORITE_ARTICLE,
+    payload: response.data
+  })
+}
 export const createArticle = article => {
   return dispatch => {
     Service.createArticle(article).then(
@@ -83,6 +101,14 @@ export const createArticle = article => {
     );
   };
 };
+
+export const getProfile = user => async dispatch => {
+  const response = await Service.getProfile(user);
+  dispatch({
+    type: GET_PROFILE,
+    payload: response.data
+  })
+}
 export const getArticle = slug => {
   return dispatch => {
     Service.getArticle(slug).then(
