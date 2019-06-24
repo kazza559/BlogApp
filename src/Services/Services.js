@@ -17,7 +17,8 @@ export const Service = {
   unFavoriteArticle,
   followArticle,
   unFollowArticle,
-  getProfile
+  getProfile,
+  updateUser
 };
 
 function loginRegister(User, infor) {
@@ -96,9 +97,7 @@ function followArticle(username) {
 }
 function unFollowArticle(username) {
   const path = `${API_ENDPOINTS.FOLLOW.path}${username}/follow`;
-  return axios
-    .delete(path,{ headers: authHeader() })
-    .then(res => res.data);
+  return axios.delete(path, { headers: authHeader() }).then(res => res.data);
 }
 function getcomment(slug) {
   const path = `${API_ENDPOINTS.GET_COMMENTS.path}${slug}/comments`;
@@ -117,5 +116,13 @@ function deleteComment(slug, id) {
 function getProfile(user) {
   return axios.get(`${API_ENDPOINTS.GET_PROFILE.path}${user}`, {
     headers: authHeader()
-  })
+  });
+}
+function updateUser(inforEdit) {
+  return axios
+    .put(API_ENDPOINTS.EDIT_USER.path, inforEdit, { headers: authHeader() })
+    .then(res => {
+      localStorage.setItem("user", JSON.stringify(res.data));
+      return res.data;
+    });
 }

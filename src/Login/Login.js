@@ -12,7 +12,6 @@ import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Input from "@material-ui/core/Input";
 import FormHelperText from "@material-ui/core/FormHelperText";
-import Button from "@material-ui/core/Button";
 import InputAdornment from "@material-ui/core/InputAdornment";
 
 // material-ui-icons
@@ -20,7 +19,7 @@ import Face from "@material-ui/icons/Face";
 import EmailOutlined from "@material-ui/icons/EmailOutlined";
 
 import ButtonCustomer from "../components/ButtonCustomer/Button";
-import { loginRegister, logout, clearMessege } from "../actions/index";
+import { loginRegister, clearMessege } from "../actions/index";
 import { Style } from './../components/Style/Style';
 import { LOGIN } from "../Constants/index";
 
@@ -29,7 +28,7 @@ import { LOGIN } from "../Constants/index";
 const useStyles = makeStyles(theme => Style.styleForm);
 const themes = createMuiTheme(Style.muiThemes);
 function Login(props) {
-  const { loginRegister, alertErrors, logout, clearMessege } = props;
+  const { loginRegister, alertErrors, clearMessege } = props;
   const { handleSubmit, register, errors } = useForm();
   const classes = useStyles();
   React.useEffect(() => {
@@ -112,7 +111,6 @@ function Login(props) {
           <ButtonCustomer text="Sign in" style={Style.buttonLogin} />
         </form>
       </MuiThemeProvider>
-      <Button onClick={logout} fullWidth={true} variant="contained" color="primary">Log out</Button>
     </div>
   );
 }
@@ -122,5 +120,5 @@ function mapStateToProps(state) {
 }
 export default connect(
   mapStateToProps,
-  { loginRegister, logout, clearMessege }
+  { loginRegister, clearMessege }
 )(Login);
