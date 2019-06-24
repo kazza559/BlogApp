@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
+import { NavLink } from "react-router-dom";
 
 // material-ui components
 import {
@@ -60,7 +61,7 @@ function FooterArticle(props) {
     return () => {
       clearComment();
     };
-  }, [getComment, clearComment,article.slug]);
+  }, [getComment, clearComment, article.slug]);
   const renderComment = () => {
     return comments.map(comment => {
       const isauthor = auth.user.user.username === comment.author.username;
@@ -96,28 +97,40 @@ function FooterArticle(props) {
     });
   };
   return (
-    <div className={classes.footer}>
-      <MuiThemeProvider theme={themes}>
-        <TextField
-          fullWidth={true}
-          label="Write a comment..."
-          multiline={true}
-          rows={7}
-          value={initialComment}
-          onChange={hanldeChange}
-        />
-      </MuiThemeProvider>
-      <div className="button-comment">
-        <Button
-          variant="contained"
-          size="medium"
-          classes={{ root: classes.button }}
-          onClick={postComment}
-        >
-          Post Comment
-        </Button>
-      </div>
-      {comments.length > 0 && renderComment()}
+    <div>
+      {Object.keys(auth).length === 0 && (
+        <div className="signin-signup">
+          <NavLink to="/login">Sign in</NavLink>
+          <span> or </span>
+          <NavLink to="/register">Sign Up</NavLink>
+          <span>to add comments on this article</span>
+        </div>
+      )}
+      {Object.keys(auth).length > 0 && (
+        <div className={classes.footer}>
+          <MuiThemeProvider theme={themes}>
+            <TextField
+              fullWidth={true}
+              label="Write a comment..."
+              multiline={true}
+              rows={7}
+              value={initialComment}
+              onChange={hanldeChange}
+            />
+          </MuiThemeProvider>
+          <div className="button-comment">
+            <Button
+              variant="contained"
+              size="medium"
+              classes={{ root: classes.button }}
+              onClick={postComment}
+            >
+              Post Comment
+            </Button>
+          </div>
+          {comments.length > 0 && renderComment()}
+        </div>
+      )}
     </div>
   );
 }
