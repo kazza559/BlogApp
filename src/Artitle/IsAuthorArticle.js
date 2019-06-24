@@ -52,77 +52,72 @@ function IsAuthorArticle(props) {
         : unFavoriteArticle(slug)
       : history.push("/login");
   };
-  const renderFollowUnfollow = () => {
-    return (
-      <span>
-        <Chip
-          avatar={
-            <Avatar>
-              <AddCircle />
-            </Avatar>
-          }
-          classes={{
-            root: classes.roots,
-            avatar: classes.avatar,
-            label: classes.label
-          }}
-          label={`${!following ? "Follow" : "UnFollow"} ${username}`}
-          onClick={handleFollow}
-        />
-        <Chip
-          avatar={
-            <Avatar>
-              <Favorite />
-            </Avatar>
-          }
-          classes={{
-            root: classes.roots,
-            avatar: classes.avatar,
-            label: classes.label
-          }}
-          label={`${
-            !favorited ? "Favorite" : "UnFavorite"
-          } Article (${favoritesCount})`}
-          onClick={handleFavorite}
-        />
-        {console.log("renderFollowUnfollow")}
-      </span>
-    );
-  };
-  const renderEditDelete = () => {
-    return (
-      <span>
-        <Chip
-          avatar={
-            <Avatar>
-              <Edit />
-            </Avatar>
-          }
-          classes={{
-            root: classes.roots,
-            avatar: classes.avatar,
-            label: classes.label
-          }}
-          label="Edit Article"
-        />
-        <Chip
-          avatar={
-            <Avatar>
-              <Delete />
-            </Avatar>
-          }
-          classes={{
-            root: classes.roots,
-            avatar: classes.avatar,
-            label: classes.label
-          }}
-          label="Delete Article"
-        />
-      </span>
-    );
-  };
+  const renderFollowUnfollow = () => (
+    <span>
+      <Chip
+        avatar={
+          <Avatar>
+            <AddCircle />
+          </Avatar>
+        }
+        classes={{
+          root: classes.roots,
+          avatar: classes.avatar,
+          label: classes.label
+        }}
+        label={`${!following ? "Follow" : "UnFollow"} ${username}`}
+        onClick={handleFollow}
+      />
+      <Chip
+        avatar={
+          <Avatar>
+            <Favorite />
+          </Avatar>
+        }
+        classes={{
+          root: classes.roots,
+          avatar: classes.avatar,
+          label: classes.label
+        }}
+        label={`${
+          !favorited ? "Favorite" : "UnFavorite"
+        } Article (${favoritesCount})`}
+        onClick={handleFavorite}
+      />
+    </span>
+  );
+  const renderEditDelete = () => (
+    <span>
+      <Chip
+        avatar={
+          <Avatar>
+            <Edit />
+          </Avatar>
+        }
+        classes={{
+          root: classes.roots,
+          avatar: classes.avatar,
+          label: classes.label
+        }}
+        label="Edit Article"
+      />
+      <Chip
+        avatar={
+          <Avatar>
+            <Delete />
+          </Avatar>
+        }
+        classes={{
+          root: classes.roots,
+          avatar: classes.avatar,
+          label: classes.label
+        }}
+        label="Delete Article"
+      />
+    </span>
+  );
   const isAhth = () => {
-    auth.user.user.username === username
+    return auth.user.user.username === username
       ? renderEditDelete()
       : renderFollowUnfollow();
   };
