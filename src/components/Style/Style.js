@@ -37,6 +37,17 @@ export const Style = {
       padding: "5px",
       backgroundColor: "#00bcd4 !important",
       color: "#fff"
+    },
+    button: {
+      color: "#fff",
+      backgroundColor: "#9c27b0",
+      marginTop: "15px",
+      marginBottom: "15px",
+      borderRadius:"10px",
+      "&:hover": {
+        textDecoration: "none",
+        backgroundColor: "red"
+      }
     }
   },
   tag: {
@@ -59,7 +70,7 @@ export const Style = {
       width: "40px",
       height: "40px",
       borderRadius: "30px",
-      cursor: 'pointer'
+      cursor: "pointer"
     },
     float: {
       float: "right"

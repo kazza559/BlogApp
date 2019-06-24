@@ -59,7 +59,7 @@ function Header(props) {
                       New Article
                     </div>
                   </NavLink>
-                  <NavLink to="/login" activeClassName="selected">
+                  <NavLink to="/settings" activeClassName="selected">
                     <div className="header-item">
                       <Settings />
                       Settings

@@ -59,6 +59,22 @@ export const loginRegister = (User, infor) => {
     );
   };
 };
+export const updateUser = (inforEdit) => {
+  return dispatch => {
+    Service.updateUser(inforEdit).then(
+      user => {
+        dispatch(success(user));
+        dispatch(alertActions.clear());
+        history.push("/");
+      },
+      error => {
+        const { errors } = error.response.data;
+        dispatch(failure(errors));
+        dispatch(alertActions.error(errors));
+      }
+    );
+  };
+};
 export const logout = () => {
   Service.logout();
   history.push("/");
