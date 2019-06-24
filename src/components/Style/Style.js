@@ -73,7 +73,7 @@ export const Style = {
     }
   },
   buttonEditor: {
-    background: "#4caf50",
+    background: "#9c27b0",
     borderRadius: "30px",
     border: 0,
     color: "white",

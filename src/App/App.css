@@ -83,3 +83,13 @@ form {
   display: flex;
   justify-content: flex-end;
 }
+.signin-signup{
+  padding: 0 20%;
+}
+.signin-signup a{
+  text-decoration: none;
+  color: #9c27b0;
+}
+.signin-signup a:hover{
+  text-decoration: underline;
+}

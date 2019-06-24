@@ -18,6 +18,7 @@ import {
   followArticle,
   unFollowArticle
 } from "../actions/favoriteFollow.action";
+import { history } from "../Helpers/history";
 
 const styles = () => Style.authorStyle;
 
@@ -38,77 +39,91 @@ function IsAuthorArticle(props) {
     slug
   } = article;
   const handleFollow = () => {
-    following ? unFollowArticle(username) : followArticle(username);
+    Object.keys(auth).length !== 0
+      ? following
+        ? unFollowArticle(username)
+        : followArticle(username)
+      : history.push("/login");
   };
   const handleFavorite = () => {
-    !favorited ? favoriteArticle(slug) : unFavoriteArticle(slug);
+    Object.keys(auth).length !== 0
+      ? !favorited
+        ? favoriteArticle(slug)
+        : unFavoriteArticle(slug)
+      : history.push("/login");
+  };
+  const renderFollowUnfollow = () => (
+    <span>
+      <Chip
+        avatar={
+          <Avatar>
+            <AddCircle />
+          </Avatar>
+        }
+        classes={{
+          root: classes.roots,
+          avatar: classes.avatar,
+          label: classes.label
+        }}
+        label={`${!following ? "Follow" : "UnFollow"} ${username}`}
+        onClick={handleFollow}
+      />
+      <Chip
+        avatar={
+          <Avatar>
+            <Favorite />
+          </Avatar>
+        }
+        classes={{
+          root: classes.roots,
+          avatar: classes.avatar,
+          label: classes.label
+        }}
+        label={`${
+          !favorited ? "Favorite" : "UnFavorite"
+        } Article (${favoritesCount})`}
+        onClick={handleFavorite}
+      />
+    </span>
+  );
+  const renderEditDelete = () => (
+    <span>
+      <Chip
+        avatar={
+          <Avatar>
+            <Edit />
+          </Avatar>
+        }
+        classes={{
+          root: classes.roots,
+          avatar: classes.avatar,
+          label: classes.label
+        }}
+        label="Edit Article"
+      />
+      <Chip
+        avatar={
+          <Avatar>
+            <Delete />
+          </Avatar>
+        }
+        classes={{
+          root: classes.roots,
+          avatar: classes.avatar,
+          label: classes.label
+        }}
+        label="Delete Article"
+      />
+    </span>
+  );
+  const isAhth = () => {
+    return auth.user.user.username === username
+      ? renderEditDelete()
+      : renderFollowUnfollow();
   };
   return (
     <span className="isArthorArticle">
-      {auth.user.user.username !== username && (
-        <span>
-          <Chip
-            avatar={
-              <Avatar>
-                <AddCircle />
-              </Avatar>
-            }
-            classes={{
-              root: classes.roots,
-              avatar: classes.avatar,
-              label: classes.label
-            }}
-            label={`${!following ? "Follow" : "UnFollow"} ${username}`}
-            onClick={handleFollow}
-          />
-          <Chip
-            avatar={
-              <Avatar>
-                <Favorite />
-              </Avatar>
-            }
-            classes={{
-              root: classes.roots,
-              avatar: classes.avatar,
-              label: classes.label
-            }}
-            label={`${
-              !favorited ? "Favorite" : "UnFavorite"
-            } Article (${favoritesCount})`}
-            onClick={handleFavorite}
-          />
-        </span>
-      )}
-      {auth.user.user.username === username && (
-        <span>
-          <Chip
-            avatar={
-              <Avatar>
-                <Edit />
-              </Avatar>
-            }
-            classes={{
-              root: classes.roots,
-              avatar: classes.avatar,
-              label: classes.label
-            }}
-            label="Edit Article"
-          />
-          <Chip
-            avatar={
-              <Avatar>
-                <Delete />
-              </Avatar>
-            }
-            classes={{
-              root: classes.roots,
-              avatar: classes.avatar,
-              label: classes.label
-            }}
-            label="Delete Article"
-          />
-        </span>
-      )}
+      {Object.keys(auth).length === 0 ? renderFollowUnfollow() : isAhth()}
     </span>
   );
 }
