@@ -1,11 +1,17 @@
-import React from 'react'
+import React from 'react';
+import styled from 'styled-components'
 
-const Banner = ({profile}) => {
+const BannerImage = styled.img`
+  width: 100px;
+  margin-top: 150px;
+  border-radius: 100px
+`
+const Banner = ({ profile }) => {
   
   return !profile ? <div>Loading...</div> : (
     <div className="banner" >
       <div className="container" >
-        <div className="banner-image"> <img src={profile.image} /> </div>
+        <BannerImage alt='' src={profile.image} />
         <h3>{profile.username}</h3>
         <p>{profile.bio}</p>
         <div className="button-follow">{profile.following}</div>

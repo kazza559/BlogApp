@@ -1,9 +1,17 @@
-import { GET_TAGLIST, GET_LISTVIEW, GET_FEED, FAVORITE_ARTICLE, GET_PROFILE } from "../Constants/index";
+import {
+  GET_TAGLIST,
+  GET_LISTVIEW,
+  GET_FEED,
+  GET_ARTICLE,
+  CLEAR_ARTICLE,
+  FAVORITE_ARTICLE,
+  GET_PROFILE
+} from "../Constants/index";
 import { Service } from "../Services";
 import { userConstants } from "../Constants/index";
-import {  CREATE_EDIT_ARTICLE } from "../Constants/index";
+import { CREATE_EDIT_ARTICLE } from "../Constants/index";
 import { alertActions } from "../actions/alert.actions";
-import { history } from './../Helpers/history';
+import { history } from "./../Helpers/history";
 
 export const getTagList = () => {
   return dispatch => {
@@ -23,12 +31,12 @@ export const getListView = (offset, limit, byTag) => async dispatch => {
 };
 
 export const getFeed = (offset, limit) => async dispatch => {
-  const response = await Service.getFeed(offset,limit);
+  const response = await Service.getFeed(offset, limit);
   dispatch({
     type: GET_FEED,
     payload: response.data
-  })
-}
+  });
+};
 function success(user) {
   return { type: userConstants.LOGIN_REGISTER_SUCCESS, user };
 }
@@ -41,7 +49,7 @@ export const loginRegister = (User, infor) => {
       user => {
         dispatch(success(user));
         dispatch(alertActions.clear());
-        history.push('/');
+        history.push("/");
       },
       error => {
         const { errors } = error.response.data;
@@ -53,13 +61,13 @@ export const loginRegister = (User, infor) => {
 };
 export const logout = () => {
   Service.logout();
-  history.push('/');
+  history.push("/");
   return { type: userConstants.LOGOUT };
 };
 
 export const clearMessege = () => {
   return dispatch => {
-      dispatch(alertActions.clear());
+    dispatch(alertActions.clear());
   };
 };
 
@@ -78,13 +86,13 @@ export const unfavoriteArticle = slug => async dispatch => {
     payload: response.data
   })
 }
-export const createArticle = (article) => {
+export const createArticle = article => {
   return dispatch => {
     Service.createArticle(article).then(
-      newArticle => {
-        dispatch({ type: CREATE_EDIT_ARTICLE.CREATE, newArticle });
+      article => {
+        dispatch({ type: CREATE_EDIT_ARTICLE.CREATE, article });
         dispatch(alertActions.clear());
-        history.push('/');
+        history.push("/");
       },
       error => {
         const { errors } = error.response.data;
@@ -101,3 +109,23 @@ export const getProfile = user => async dispatch => {
     payload: response.data
   })
 }
+export const getArticle = slug => {
+  return dispatch => {
+    Service.getArticle(slug).then(
+      res => {
+        let article = res.article;
+        dispatch({ type: GET_ARTICLE, article });
+        dispatch(alertActions.clear());
+      },
+      error => {
+        const { errors } = error.response.data;
+        dispatch(alertActions.error(errors));
+      }
+    );
+  };
+};
+export const clearArticle = () => {
+  return dispatch => {
+    dispatch({ type: CLEAR_ARTICLE });
+  };
+};

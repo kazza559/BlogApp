@@ -1,4 +1,16 @@
 export const Style = {
+  header: {
+    root: {
+      background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
+      padding: "0 10%",
+      boxShadow: "none"
+    }
+  },
+  muiThemes: {
+    palette: {
+      primary: { main: "#9c27b0" }
+    }
+  },
   buttonLogin: {
     background: "#9c27b0",
     borderRadius: "30px",
@@ -68,5 +80,88 @@ export const Style = {
     height: 48,
     width: "30%",
     marginTop: "15px"
+  },
+  articlePageStyle: {
+    root: {
+      padding: "30px 10%",
+      boxShadow: "none",
+      background: "#333",
+      borderRadius: "0px"
+    },
+    card: {
+      background: "#333",
+      boxShadow: "none"
+    },
+    title: {
+      color: "#fff",
+      padding: "15px 0"
+    },
+    inforUser: {
+      display: "flex",
+      marginBottom: "15px",
+      alignItems: "center",
+      flexWrap: "wrap"
+    },
+    infor: {
+      marginLeft: "10px",
+      color: "#fff"
+    },
+    chip: {
+      color: "#fff",
+      backgroundColor: "#373a3c",
+      margin: "15px 5px",
+      height: "20px",
+      cursor: "pointer"
+    },
+    body: {
+      padding: "30px 10%"
+    },
+    linearProgress: {
+      height: "1px",
+      marginTop: "15px"
+    },
+    subheader: {
+      color: "#fff"
+    }
+  },
+  footerArticleStyle: {
+    footer: {
+      padding: "0 25%"
+    },
+    card: {
+      maxWidth: "100%",
+      margin: "15px 0"
+    },
+    avatar: {
+      color: "#000"
+    },
+    button: {
+      color: "#fff",
+      backgroundColor: "#9c27b0",
+      marginTop: "15px",
+      marginBottom: "15px",
+      "&:hover": {
+        textDecoration: "none",
+        backgroundColor: "#9c27b0"
+      }
+    }
+  },
+  authorStyle: {
+    label: {
+      paddingLeft: "8px"
+    },
+    roots: {
+      backgroundColor: "#fff",
+      margin: "10px",
+      cursor: "pointer",
+      "&:hover, &:active": {
+        backgroundColor: "#5cb85c",
+        color: "#000"
+      }
+    },
+    avatar: {
+      backgroundColor: "#fff",
+      color: "#5cb85c"
+    }
   }
 };

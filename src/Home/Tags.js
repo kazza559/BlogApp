@@ -1,9 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
+
+// material-ui components
 import { makeStyles } from "@material-ui/core/styles";
+import Chip from "@material-ui/core/Chip";
+
 import { getTagList, getListView } from "../actions/index";
-import Chip from '@material-ui/core/Chip';
-import { Style } from './../components/Style/Style';
+import { Style } from "./../components/Style/Style";
 
 const useStyles = makeStyles(() => Style.tag);
 
@@ -14,10 +17,10 @@ function Tags(props) {
     getTagList();
   }, [getTagList]);
 
-  const handleClick = (tag) => {
+  const handleClick = tag => {
     getListView(0, 10, tag);
     handleSetTag(tag);
-  }
+  };
 
   return (
     <div className="sidebar">

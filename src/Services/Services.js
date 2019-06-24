@@ -8,9 +8,15 @@ export const Service = {
   getListView,
   loginRegister,
   getFeed,
-  favoriteArticle,
-  unfavoriteArticle,
   createArticle,
+  getArticle,
+  getcomment,
+  postComment,
+  deleteComment,
+  favoriteArticle,
+  unFavoriteArticle,
+  followArticle,
+  unFollowArticle,
   getProfile
 };
 
@@ -68,19 +74,46 @@ function createArticle(article) {
       return res.data;
     });
 }
-
-function favoriteArticle (slug)  {
-  return axios.post(`${API_ENDPOINTS.FAVORITE_ARTICLE.path}${slug}/favorite`, null, {
-    headers: authHeader()
-  })
+function getArticle(slug) {
+  const path = `${API_ENDPOINTS.GET_ARTICLE.path}${slug}`;
+  return axios.get(path, { headers: authHeader() }).then(res => res.data);
 }
-
-function unfavoriteArticle(slug) {
-  return axios.delete(`${API_ENDPOINTS.UNFAVORITE_ARTICLE.path}${slug}/favorite`, {
-    headers: authHeader()
-  })
+function favoriteArticle(slug) {
+  const path = `${API_ENDPOINTS.GET_ARTICLE.path}${slug}/favorite`;
+  return axios
+    .post(path, null, { headers: authHeader() })
+    .then(res => res.data);
 }
-
+function unFavoriteArticle(slug) {
+  const path = `${API_ENDPOINTS.GET_ARTICLE.path}${slug}/favorite`;
+  return axios.delete(path, { headers: authHeader() }).then(res => res.data);
+}
+function followArticle(username) {
+  const path = `${API_ENDPOINTS.FOLLOW.path}${username}/follow`;
+  return axios
+    .post(path, null, { headers: authHeader() })
+    .then(res => res.data);
+}
+function unFollowArticle(username) {
+  const path = `${API_ENDPOINTS.FOLLOW.path}${username}/follow`;
+  return axios
+    .delete(path,{ headers: authHeader() })
+    .then(res => res.data);
+}
+function getcomment(slug) {
+  const path = `${API_ENDPOINTS.GET_COMMENTS.path}${slug}/comments`;
+  return axios.get(path, { headers: authHeader() }).then(res => res.data);
+}
+function postComment(slug, comment) {
+  const path = `${API_ENDPOINTS.POST_COMMENTS.path}${slug}/comments`;
+  return axios
+    .post(path, comment, { headers: authHeader() })
+    .then(res => res.data);
+}
+function deleteComment(slug, id) {
+  const path = `${API_ENDPOINTS.POST_COMMENTS.path}${slug}/comments/${id}`;
+  return axios.delete(path, { headers: authHeader() }).then(res => res.data);
+}
 function getProfile(user) {
   return axios.get(`${API_ENDPOINTS.GET_PROFILE.path}${user}`, {
     headers: authHeader()
