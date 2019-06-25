@@ -52,6 +52,9 @@ function IsAuthorArticle(props) {
         : unFavoriteArticle(slug)
       : history.push("/login");
   };
+  const handleEdit = () => {
+    history.push(`/editor/${slug}`);
+  };
   const renderFollowUnfollow = () => (
     <span>
       <Chip
@@ -100,6 +103,7 @@ function IsAuthorArticle(props) {
           label: classes.label
         }}
         label="Edit Article"
+        onClick={handleEdit}
       />
       <Chip
         avatar={

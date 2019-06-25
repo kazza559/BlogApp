@@ -59,7 +59,7 @@ export const loginRegister = (User, infor) => {
     );
   };
 };
-export const updateUser = (inforEdit) => {
+export const updateUser = inforEdit => {
   return dispatch => {
     Service.updateUser(inforEdit).then(
       user => {
@@ -92,16 +92,16 @@ export const favoriteArticle = slug => async dispatch => {
   dispatch({
     type: FAVORITE_ARTICLE,
     payload: response.data
-  })
-}
+  });
+};
 
 export const unfavoriteArticle = slug => async dispatch => {
   const response = await Service.unfavoriteArticle(slug);
   dispatch({
     type: FAVORITE_ARTICLE,
     payload: response.data
-  })
-}
+  });
+};
 export const createArticle = article => {
   return dispatch => {
     Service.createArticle(article).then(
@@ -123,14 +123,29 @@ export const getProfile = user => async dispatch => {
   dispatch({
     type: GET_PROFILE,
     payload: response.data
-  })
-}
+  });
+};
 export const getArticle = slug => {
   return dispatch => {
     Service.getArticle(slug).then(
       res => {
         let article = res.article;
         dispatch({ type: GET_ARTICLE, article });
+        dispatch(alertActions.clear());
+      },
+      error => {
+        const { errors } = error.response.data;
+        dispatch(alertActions.error(errors));
+      }
+    );
+  };
+};
+export const editArticle = (article, slug) => {
+  return dispatch => {
+    Service.editArticle(article, slug).then(
+      res => {
+        let article = res.article;
+        history.push(`/article/${article.slug}`);
         dispatch(alertActions.clear());
       },
       error => {
