@@ -19,6 +19,7 @@ import {
   unFollowArticle
 } from "../actions/favoriteFollow.action";
 import { history } from "../Helpers/history";
+import { deleteArticle } from "../actions/index";
 
 const styles = () => Style.authorStyle;
 
@@ -30,7 +31,8 @@ function IsAuthorArticle(props) {
     favoriteArticle,
     unFavoriteArticle,
     unFollowArticle,
-    followArticle
+    followArticle,
+    deleteArticle
   } = props;
   const {
     author: { username, following },
@@ -54,6 +56,9 @@ function IsAuthorArticle(props) {
   };
   const handleEdit = () => {
     history.push(`/editor/${slug}`);
+  };
+  const handleDelete = () => {
+    deleteArticle(slug);
   };
   const renderFollowUnfollow = () => (
     <span>
@@ -117,6 +122,7 @@ function IsAuthorArticle(props) {
           label: classes.label
         }}
         label="Delete Article"
+        onClick={handleDelete}
       />
     </span>
   );
@@ -137,5 +143,11 @@ function mapStateToProps(state) {
 }
 export default connect(
   mapStateToProps,
-  { favoriteArticle, unFavoriteArticle, followArticle, unFollowArticle }
+  {
+    favoriteArticle,
+    unFavoriteArticle,
+    followArticle,
+    unFollowArticle,
+    deleteArticle
+  }
 )(withStyles(styles)(IsAuthorArticle));
