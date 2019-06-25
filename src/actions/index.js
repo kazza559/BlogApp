@@ -155,6 +155,20 @@ export const editArticle = (article, slug) => {
     );
   };
 };
+export const deleteArticle = slug => {
+  return dispatch => {
+    Service.deleteArticle(slug).then(
+      res => {
+        history.push("/");
+        dispatch(alertActions.clear());
+      },
+      error => {
+        const { errors } = error.response.data;
+        dispatch(alertActions.error(errors));
+      }
+    );
+  };
+};
 export const clearArticle = () => {
   return dispatch => {
     dispatch({ type: CLEAR_ARTICLE });
