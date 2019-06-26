@@ -1,13 +1,13 @@
 import { Service } from "../Services";
 import { alertActions } from "../actions/alert.actions";
-import { FOLLOW_UNFOLLOW, FAVORITE_ARTICLE } from "../Constants";
+import { GET_ARTICLE, FOLLOW_UNFOLLOW } from "../Constants";
 
 export const favoriteArticle = slug => {
   return dispatch => {
     Service.favoriteArticle(slug).then(
       res => {
         const article = res.article;
-        dispatch({ type: FAVORITE_ARTICLE, article });
+        dispatch({ type: GET_ARTICLE, article });
       },
       error => {
         const { errors } = error.response.data;
@@ -21,7 +21,7 @@ export const unFavoriteArticle = slug => {
     Service.unFavoriteArticle(slug).then(
       res => {
         const article = res.article;
-        dispatch({ type: FAVORITE_ARTICLE, article });
+        dispatch({ type: GET_ARTICLE, article });
       },
       error => {
         const { errors } = error.response.data;
