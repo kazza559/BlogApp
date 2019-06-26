@@ -4,7 +4,7 @@ import { history } from "./../Helpers/history";
 
 import "./App.css";
 import Home from "../Home/index";
-import Header from "../components/Header/Header";
+import Header from "../components/header/Header";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
 import EditArticle from "../Editor/EditArticle";
