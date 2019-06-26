@@ -1,8 +1,9 @@
-import React, {useEffect} from 'react';
-import {connect} from 'react-redux';
-import {getProfile} from '../actions'
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { getProfile } from '../actions'
 import Banner from './Banner';
-const Profile = ({match, getProfile, profile}) => {
+import ListArticle from './ListArticle'
+const Profile = ({ match, getProfile, profile }) => {
 
   useEffect(() => {
     if (match.params.user) {
@@ -10,12 +11,15 @@ const Profile = ({match, getProfile, profile}) => {
     }
   },[getProfile, match.params.user] )
   return (
-    <Banner {...profile} />
+    <>
+      <Banner { ...profile } />
+      <ListArticle />
+    </>
   )
 }
 
 const mapStateToProps = state => {
-  return {profile: state.profile}
+  return { profile: state.profile }
 }
 
-export default connect(mapStateToProps, {getProfile})(Profile)
+export default connect(mapStateToProps, { getProfile })(Profile)

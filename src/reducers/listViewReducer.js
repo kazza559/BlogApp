@@ -6,8 +6,8 @@ export default (state = initial, action) => {
       return action.payload;
     case FAVORITE_ARTICLE :
       const newArr = state.articles.map(item =>{
-        if (item.slug === action.payload.article.slug) {
-          item = action.payload.article
+        if (item.slug === action.article.slug) {
+          item = action.article;
         }
         return item
       })

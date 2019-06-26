@@ -1,7 +1,7 @@
 import React from "react";
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {favoriteArticle, unfavoriteArticle} from '../actions'
+import {favoriteArticle, unFavoriteArticle} from '../actions/favoriteFollow.action'
 import { NavLink } from "react-router-dom";
 import styled from 'styled-components'
 
@@ -40,7 +40,7 @@ function PreviewArticle(props) {
     if (!isAuth) {
       return;
     }
-    favorited ? props.unfavoriteArticle(slug) : props.favoriteArticle(slug)
+    favorited ? props.unFavoriteArticle(slug) : props.favoriteArticle(slug)
   }
   const path = `/profile/${author.username}`
 
@@ -80,4 +80,4 @@ const mapStateToProps = state => {
   return {isAuth: state.auth}
 }
 
-export default connect(mapStateToProps, {favoriteArticle, unfavoriteArticle})(PreviewArticle);
+export default connect(mapStateToProps, {favoriteArticle, unFavoriteArticle})(PreviewArticle);
