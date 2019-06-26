@@ -105,10 +105,11 @@ export const unfavoriteArticle = slug => async dispatch => {
 export const createArticle = article => {
   return dispatch => {
     Service.createArticle(article).then(
-      article => {
+      res => {
+        const { article } = res;
         dispatch({ type: CREATE_EDIT_ARTICLE.CREATE, article });
         dispatch(alertActions.clear());
-        history.push("/");
+        history.push(`/article/${article.slug}`);
       },
       error => {
         const { errors } = error.response.data;
@@ -159,6 +160,7 @@ export const deleteArticle = slug => {
   return dispatch => {
     Service.deleteArticle(slug).then(
       res => {
+        dispatch({ type: CLEAR_ARTICLE });
         history.push("/");
         dispatch(alertActions.clear());
       },
