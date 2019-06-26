@@ -17,13 +17,13 @@ import TextField from "@material-ui/core/TextField";
 import {
   createArticle,
   clearMessege,
-  getArticle,
   clearArticle,
   editArticle
 } from "../actions/index";
 import { Style } from "../components/Style/Style";
 import ChipInput from "material-ui-chip-input";
 import ButtonCustomer from "../components/ButtonCustomer/Button";
+import { Service } from "../Services/Services";
 
 const useStyles = makeStyles(theme => Style.styleForm);
 const themes = createMuiTheme(Style.muiThemes);
@@ -34,35 +34,32 @@ function EditArticle(props) {
     clearMessege,
     createArticle,
     match,
-    getArticle,
-    article,
     clearArticle,
     editArticle
   } = props;
-  const { title, body, description, tagList } = article;
-  const { handleSubmit, register, errors } = useForm({
-    defaultValues: {
-      title: title,
-      body: body,
-      description: description
-    }
-  });
-  const [listTag, setlistTag] = useState(tagList);
+  const {
+    params: { slug }
+  } = match;
+  const { handleSubmit, register, errors, setValue } = useForm();
+  const [listTag, setlistTag] = useState([]);
   const classes = useStyles();
   useEffect(() => {
-    if (match.params.slug) {
-      getArticle(match.params.slug);
-    }
+    if (slug) {
+      Service.getArticle(slug).then(res => {
+        const { title, body, description, tagList } = res.article;
+        setValue("title", title);
+        setValue("body", body);
+        setValue("description", description);
+        setlistTag(tagList);
+      });
+    } else clearArticle();
     return () => {
       clearMessege();
-      clearArticle();
     };
-  }, [clearMessege, getArticle, match, clearArticle]);
+  }, [clearMessege, slug, clearArticle]);
   const onSubmit = valueForm => {
     const newArticle = { article: { ...valueForm, listTag } };
-    match.params.slug
-      ? editArticle(newArticle, match.params.slug)
-      : createArticle(newArticle);
+    slug ? editArticle(newArticle, slug) : createArticle(newArticle);
   };
   const handleChange = chip => {
     setlistTag([...listTag, chip]);
@@ -158,7 +155,7 @@ function EditArticle(props) {
           </FormControl>
           {alertErrors.message && (
             <FormHelperText className="component-error-text" error>
-              Tag cannot be identical
+              Article not owned by user or Tag cannot be identical
             </FormHelperText>
           )}
           <ButtonCustomer text="Publish Article" style={Style.buttonEditor} />
@@ -168,10 +165,10 @@ function EditArticle(props) {
   );
 }
 function mapStateToProps(state) {
-  const { alertErrors, article } = state;
-  return { alertErrors, article };
+  const { alertErrors } = state;
+  return { alertErrors };
 }
 export default connect(
   mapStateToProps,
-  { createArticle, clearMessege, getArticle, clearArticle, editArticle }
+  { createArticle, clearMessege, clearArticle, editArticle }
 )(EditArticle);
