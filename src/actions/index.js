@@ -4,8 +4,8 @@ import {
   GET_FEED,
   GET_ARTICLE,
   CLEAR_ARTICLE,
-  // FAVORITE_ARTICLE,
-  GET_PROFILE
+  GET_PROFILE,
+  CLEAR_PROFILE
 } from "../Constants/index";
 import { Service } from "../Services";
 import { userConstants } from "../Constants/index";
@@ -87,21 +87,6 @@ export const clearMessege = () => {
   };
 };
 
-// export const favoriteArticle = slug => async dispatch => {
-//   const response = await Service.favoriteArticle(slug);
-//   dispatch({
-//     type: FAVORITE_ARTICLE,
-//     payload: response.data
-//   })
-// }
-
-// export const unfavoriteArticle = slug => async dispatch => {
-//   const response = await Service.unfavoriteArticle(slug);
-//   dispatch({
-//     type: FAVORITE_ARTICLE,
-//     payload: response.data
-//   })
-// }
 export const createArticle = article => {
   return dispatch => {
     Service.createArticle(article).then(
@@ -145,3 +130,9 @@ export const clearArticle = () => {
     dispatch({ type: CLEAR_ARTICLE });
   };
 };
+
+export const clearProfile = () => dispatch => {
+  dispatch({
+    type: CLEAR_PROFILE
+  })
+}

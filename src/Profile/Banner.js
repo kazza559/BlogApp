@@ -35,7 +35,7 @@ const Right = styled.div`
   width: 100%
 `
 const BannerDiv = styled.div`
-  width: 80%;
+  width: 70%;
   margin: 0 auto
 `
 const Banner = ({ profile }) => {
