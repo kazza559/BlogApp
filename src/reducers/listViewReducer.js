@@ -1,4 +1,4 @@
-import {GET_LISTVIEW, FAVORITE_ARTICLE, GET_FEED} from '../Constants';
+import { GET_LISTVIEW, FAVORITE_ARTICLE, GET_FEED, CLEAR_ARTICLE } from '../Constants';
 const initial = {articles: [], articlesCount: 0}
 export default (state = initial, action) => {
   switch (action.type) {
@@ -14,6 +14,8 @@ export default (state = initial, action) => {
       return {...state, articles: newArr}
     case GET_FEED:
       return action.payload;
+    case CLEAR_ARTICLE:
+      return initial;
     default:
       return state;
   }

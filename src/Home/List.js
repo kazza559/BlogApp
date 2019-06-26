@@ -74,7 +74,7 @@ function List(props) {
           )}
           {value === 1 && (
             <TabContainer>
-              <WrappedComponent />
+              <WrappedComponent actived={value} />
             </TabContainer>
           )}
           {tag && (value === 1 || value === 2) && (
@@ -95,7 +95,7 @@ function List(props) {
           </AppBar>
           {value === 0 && (
             <TabContainer>
-              <WrappedComponent />
+              <WrappedComponent actived={value}/>
             </TabContainer>
           )}
           {tag && value === 1 && (
@@ -112,10 +112,12 @@ function List(props) {
 }
 
 function ListPreview(props) {
-  const { getListView, list } = props;
+  const { getListView, list, actived, isAuth} = props;
   useEffect(() => {
-    getListView();
-  }, [getListView]);
+    if (actived || (actived === 0 && !isAuth.loggedIn)) {
+      getListView()
+    }
+  }, [getListView, actived, isAuth]);
 
   const renderList = list => {
     return list.articles.map(item => (
@@ -136,7 +138,7 @@ function ListPreview(props) {
 }
 
 const mapStateToProps = state => {
-  return { list: state.listView };
+  return { list: state.listView, isAuth: state.auth };
 };
 const WrappedComponent = connect(
   mapStateToProps,

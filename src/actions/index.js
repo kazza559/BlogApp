@@ -5,7 +5,8 @@ import {
   GET_ARTICLE,
   CLEAR_ARTICLE,
   GET_PROFILE,
-  CLEAR_PROFILE
+  CLEAR_PROFILE,
+  CLEAR_LISTVIEW
 } from "../Constants/index";
 import { Service } from "../Services";
 import { userConstants } from "../Constants/index";
@@ -50,6 +51,7 @@ export const loginRegister = (User, infor) => {
         dispatch(success(user));
         dispatch(alertActions.clear());
         history.push("/");
+        clearListView();
       },
       error => {
         const { errors } = error.response.data;
@@ -134,5 +136,11 @@ export const clearArticle = () => {
 export const clearProfile = () => dispatch => {
   dispatch({
     type: CLEAR_PROFILE
+  })
+}
+
+export const clearListView = () => dispatch => {
+  dispatch({
+    type: CLEAR_LISTVIEW
   })
 }

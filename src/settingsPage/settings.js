@@ -13,7 +13,7 @@ import FormHelperText from "@material-ui/core/FormHelperText";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 
-import { updateUser, clearMessege, logout } from "../actions/index";
+import { updateUser, clearMessege, logout, clearListView } from "../actions/index";
 import { Style } from "../components/Style/Style";
 import ButtonCustomer from "../components/ButtonCustomer/Button";
 
@@ -21,7 +21,7 @@ const useStyles = makeStyles(() => Style.styleForm);
 const themes = createMuiTheme(Style.muiThemes);
 
 function Settings(props) {
-  const { auth, alertErrors, clearMessege, updateUser, logout } = props;
+  const { auth, alertErrors, clearMessege, updateUser, logout, clearListView } = props;
   const {
     user: {
       user: { bio, email, image, username }
@@ -46,6 +46,10 @@ function Settings(props) {
     const inforEdit = { user: valueForm };
     updateUser(inforEdit);
   };
+  const handleLogout = () => {
+    clearListView();
+    logout()
+  }
   return (
     <div className={classes.container}>
       <MuiThemeProvider theme={themes}>
@@ -138,7 +142,7 @@ function Settings(props) {
           variant="contained"
           size="medium"
           classes={{ root: classes.button }}
-          onClick={logout}
+          onClick={handleLogout}
         >
           Or click here to logout.
         </Button>
@@ -152,5 +156,5 @@ function mapStateToProps(state) {
 }
 export default connect(
   mapStateToProps,
-  { updateUser, clearMessege, logout }
+  { updateUser, clearMessege, logout, clearListView }
 )(Settings);
