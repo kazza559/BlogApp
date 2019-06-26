@@ -18,7 +18,9 @@ export const Service = {
   followArticle,
   unFollowArticle,
   getProfile,
-  updateUser
+  updateUser,
+  editArticle,
+  deleteArticle
 };
 
 function loginRegister(User, infor) {
@@ -78,6 +80,18 @@ function createArticle(article) {
 function getArticle(slug) {
   const path = `${API_ENDPOINTS.GET_ARTICLE.path}${slug}`;
   return axios.get(path, { headers: authHeader() }).then(res => res.data);
+}
+function editArticle(article, slug) {
+  const path = `${API_ENDPOINTS.GET_ARTICLE.path}${slug}`;
+  return axios
+    .put(path, article, { headers: authHeader() })
+    .then(res => res.data);
+}
+function deleteArticle(slug) {
+  const path = `${API_ENDPOINTS.DELETE_ARTICLE.path}${slug}`;
+  return axios
+    .delete(path, { headers: authHeader() })
+    .then(res => res.data);
 }
 function favoriteArticle(slug) {
   const path = `${API_ENDPOINTS.GET_ARTICLE.path}${slug}/favorite`;

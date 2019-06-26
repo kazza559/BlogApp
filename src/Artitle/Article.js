@@ -23,10 +23,8 @@ function Article(props) {
   const classes = useStyles();
   useEffect(() => {
     const slug = match.params.slug;
+    clearArticle();
     getArticle(slug);
-    return () => {
-      clearArticle();
-    };
   }, [getArticle, clearArticle,match.params.slug]);
   return (
     <div className="article-page">

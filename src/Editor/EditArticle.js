@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import useForm from "react-hook-form";
 import { connect } from "react-redux";
 
@@ -14,7 +14,13 @@ import Input from "@material-ui/core/Input";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import TextField from "@material-ui/core/TextField";
 
-import { createArticle, clearMessege } from "../actions/index";
+import {
+  createArticle,
+  clearMessege,
+  getArticle,
+  clearArticle,
+  editArticle
+} from "../actions/index";
 import { Style } from "../components/Style/Style";
 import ChipInput from "material-ui-chip-input";
 import ButtonCustomer from "../components/ButtonCustomer/Button";
@@ -23,22 +29,46 @@ const useStyles = makeStyles(theme => Style.styleForm);
 const themes = createMuiTheme(Style.muiThemes);
 
 function EditArticle(props) {
-  const { alertErrors, clearMessege , createArticle} = props;
-  const { handleSubmit, register, errors } = useForm();
-  const [tagList, setTagList] = useState([]);
+  const {
+    alertErrors,
+    clearMessege,
+    createArticle,
+    match,
+    getArticle,
+    article,
+    clearArticle,
+    editArticle
+  } = props;
+  const { title, body, description, tagList } = article;
+  const { handleSubmit, register, errors } = useForm({
+    defaultValues: {
+      title: title,
+      body: body,
+      description: description
+    }
+  });
+  const [listTag, setlistTag] = useState(tagList);
   const classes = useStyles();
-  React.useEffect(() => {
-    clearMessege();
-  }, [clearMessege]);
+  useEffect(() => {
+    if (match.params.slug) {
+      getArticle(match.params.slug);
+    }
+    return () => {
+      clearMessege();
+      clearArticle();
+    };
+  }, [clearMessege, getArticle, match, clearArticle]);
   const onSubmit = valueForm => {
-    const newArticle = { article: { ...valueForm, tagList } };
-    createArticle(newArticle);
+    const newArticle = { article: { ...valueForm, listTag } };
+    match.params.slug
+      ? editArticle(newArticle, match.params.slug)
+      : createArticle(newArticle);
   };
   const handleChange = chip => {
-    setTagList([...tagList, chip]);
+    setlistTag([...listTag, chip]);
   };
   const handleDeleteChip = chip => {
-    setTagList(tagList.filter(c => c !== chip));
+    setlistTag(listTag.filter(c => c !== chip));
   };
 
   return (
@@ -117,8 +147,8 @@ function EditArticle(props) {
           </FormControl>
           <FormControl className={classes.formControl}>
             <ChipInput
-              label ="Add a tag"
-              value={tagList}
+              label="Add a tag"
+              value={listTag}
               onAdd={chip => handleChange(chip)}
               onDelete={chip => handleDeleteChip(chip)}
               classes={{
@@ -138,10 +168,10 @@ function EditArticle(props) {
   );
 }
 function mapStateToProps(state) {
-  const { alertErrors } = state;
-  return { alertErrors };
+  const { alertErrors, article } = state;
+  return { alertErrors, article };
 }
 export default connect(
   mapStateToProps,
-  { createArticle, clearMessege }
+  { createArticle, clearMessege, getArticle, clearArticle, editArticle }
 )(EditArticle);
