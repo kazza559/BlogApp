@@ -16,7 +16,7 @@ const Profile = ({ match, getProfile, profile, clearProfile }) => {
   return (
     <>
       <Banner { ...profile } />
-      <ListArticle />
+      <ListArticle { ...profile } />
     </>
   )
 }

@@ -49,12 +49,14 @@ function getAllTags() {
     });
 }
 
-function getListView(offset = 0, limit = 10, byTag) {
+function getListView(offset = 0, limit = 10, tag, author, favorited) {
   return axios.get(API_ENDPOINTS.GET_LIST_ARTICLE.path, {
     params: {
-      offset: offset,
-      limit: limit,
-      tag: byTag
+      offset,
+      limit,
+      tag,
+      author,
+      favorited
     }
   });
 }

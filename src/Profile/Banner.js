@@ -21,7 +21,7 @@ const BannerImage = styled.img`
   border-radius: 100px;
   display: block
 `
-const Container = styled.div`
+export const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -34,9 +34,8 @@ const Right = styled.div`
   justify-content: flex-end;
   width: 100%
 `
-const BannerDiv = styled.div`
-  width: 70%;
-  margin: 0 auto
+export const BannerDiv = styled.div`
+  padding: 0 15%
 `
 const Banner = ({ profile }) => {
   const classes = useStyles();
