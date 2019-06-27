@@ -9,7 +9,7 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 
-import { getListView } from "../actions";
+import { getListView, clearListView } from "../actions";
 import PreviewArticle from "./PreviewArticle";
 import Pagination from "../components/Pagination";
 import Feed from "./Feed";
@@ -112,12 +112,15 @@ function List(props) {
 }
 
 function ListPreview(props) {
-  const { getListView, list, actived, isAuth} = props;
+  const { getListView, list, actived, isAuth, clearListView } = props;
   useEffect(() => {
     if (actived || (actived === 0 && !isAuth.loggedIn)) {
       getListView()
     }
-  }, [getListView, actived, isAuth]);
+    return () => {
+      clearListView()
+    }
+  }, [getListView, actived, isAuth, clearListView]);
 
   const renderList = list => {
     return list.articles.map(item => (
@@ -142,6 +145,6 @@ const mapStateToProps = state => {
 };
 const WrappedComponent = connect(
   mapStateToProps,
-  { getListView }
+  { getListView, clearListView }
 )(ListPreview);
 export default List;

@@ -19,7 +19,7 @@ import Face from "@material-ui/icons/Face";
 import EmailOutlined from "@material-ui/icons/EmailOutlined";
 
 import ButtonCustomer from "../components/ButtonCustomer/Button";
-import { loginRegister, clearMessege, clearListView } from "../actions/index";
+import { loginRegister, clearMessege } from "../actions/index";
 import { Style } from './../components/Style/Style';
 import { LOGIN } from "../Constants/index";
 
@@ -28,15 +28,12 @@ import { LOGIN } from "../Constants/index";
 const useStyles = makeStyles(theme => Style.styleForm);
 const themes = createMuiTheme(Style.muiThemes);
 function Login(props) {
-  const { loginRegister, alertErrors, clearMessege, clearListView } = props;
+  const { loginRegister, alertErrors, clearMessege } = props;
   const { handleSubmit, register, errors } = useForm();
   const classes = useStyles();
   React.useEffect(() => {
     clearMessege();
-    return () => {
-      clearListView()
-    }
-  }, [clearMessege, clearListView]);
+  }, [clearMessege]);
   const onSubmit = user => {
     const inforUser = { user };
     loginRegister(inforUser, LOGIN);
@@ -123,5 +120,5 @@ function mapStateToProps(state) {
 }
 export default connect(
   mapStateToProps,
-  { loginRegister, clearMessege, clearListView }
+  { loginRegister, clearMessege }
 )(Login);

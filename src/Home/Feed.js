@@ -1,15 +1,18 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 
-import { getFeed } from "../actions";
+import { getFeed, clearListView } from "../actions";
 import PreviewArticle from "./PreviewArticle";
 import Pagination from "../components/Pagination";
 
 function Feed(props) {
-  const { getFeed, feed } = props;
+  const { getFeed, feed, clearListView } = props;
   useEffect(() => {
     getFeed();
-  }, [getFeed]);
+    return () => {
+      clearListView()
+    }
+  }, [getFeed, clearListView]);
 
   const renderList = () => {
     return feed.articles.map(item => (
@@ -34,5 +37,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { getFeed }
+  { getFeed, clearListView }
 )(Feed);
