@@ -9,7 +9,7 @@ function MyArticles(props) {
   const { getListView, list, actived, username, clearListView } = props;
   useEffect(() => {
       if (username) {
-        getListView(0, 10, null, username)
+        getListView(0, 10, null, null, username)
       }
       return () => {
         clearListView()
@@ -26,12 +26,12 @@ function MyArticles(props) {
   };
 
   return !list ? (
-    <div>Loading...</div>
+    <div>No articles here...</div>
   ) : (
     <>
       {renderList(list)}
       {list.articlesCount > 10 && (
-        <Pagination {...list} count={list.articlesCount} author={username} />
+        <Pagination {...list} count={list.articlesCount} favorited={username} />
       )}
     </>
   );

@@ -1,9 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux'
 
 import { makeStyles } from '@material-ui/core/styles';
 import AddIcon from '@material-ui/icons/Add';
-import Button from '@material-ui/core/Button'
+import Settings from '@material-ui/icons/Settings';
+import Button from '@material-ui/core/Button';
+import {followArticle, unFollowArticle} from '../actions/favoriteFollow.action';
+import { history } from "../Helpers/history";
 
 
 const useStyles = makeStyles(theme => ({
@@ -35,32 +39,44 @@ const Right = styled.div`
   width: 100%
 `
 export const BannerDiv = styled.div`
-  padding: 0 15%
+  padding: 0 18%
 `
-const Banner = ({ profile }) => {
-  const classes = useStyles();
 
-  return !profile ? <div>Loading...</div> : (
+const Banner = ( props ) => {
+  const classes = useStyles();
+  const { profile, me, followArticle, unFollowArticle } = props;
+  const handleOnclick = () => {
+    me ? history.push('/settings') : ( profile.following ? unFollowArticle(profile.username) : followArticle(profile.username));
+    console.log(profile)
+  }
+  const renderButton = () => {
+    return (
+      <Button
+        variant="outlined"
+        size='small'
+        color="default"
+        aria-label="Add"
+        className={classes.margin}
+        onClick={handleOnclick}
+      >
+        { me ? <Settings className={classes.extendedIcon} />   :  <AddIcon className={classes.extendedIcon} /> }
+        {me ? `Edit Profile Settings` : (profile.following ? `Unfollow ${profile.username}` : `Follow ${profile.username}`)}
+      </Button>
+    )
+  }
+
+  return !profile ? <BannerDiv> <Container>Loading..</Container></BannerDiv> : (
     <BannerDiv>
       <Container>
         <BannerImage alt='' src={profile.image} />
         <h2>{profile.username}</h2>
         <p style={{margin: 0}}>{profile.bio}</p>
         <Right>
-          <Button
-            variant="outlined"
-            size='small'
-            color="default"
-            aria-label="Add"
-            className={classes.margin}
-          >
-            <AddIcon className={classes.extendedIcon} />
-            {profile.following ? `Unfollow ${profile.username}` : `Follow ${profile.username}`}
-          </Button>
+          {renderButton()}
         </Right>
       </Container>
     </BannerDiv>
   )
 }
 
-export default Banner;
+export default connect(null, {followArticle, unFollowArticle})(Banner);

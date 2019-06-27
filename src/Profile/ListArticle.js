@@ -10,7 +10,8 @@ import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 
 import { BannerDiv, Container } from './Banner';
-import MyArticles from './MyArticles'
+import MyArticles from './MyArticles';
+import FavoritedArticles from './FavoritedArticles'
 
 const WhiteDiv = Styled(BannerDiv)`
   background: white
@@ -59,12 +60,12 @@ function ListArticle({ profile }) {
               </AppBar>
               {value === 0 && (
                 <TabContainer>
-                  <MyArticles username={ profile ? profile.username : ''} />
+                  <MyArticles username={ profile ? profile.username : null} />
                 </TabContainer>
               )}
               {value === 1 && (
                 <TabContainer>
-                  list
+                  <FavoritedArticles username={ profile ? profile.username : null} />
                 </TabContainer>
               )}
             </div>

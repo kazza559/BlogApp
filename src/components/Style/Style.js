@@ -62,7 +62,7 @@ export const Style = {
   },
   Preview: {
     card: {
-      width: "95%",
+      width: "100%",
       marginBottom: "5px",
       clear: "both"
     },
