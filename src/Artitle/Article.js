@@ -42,6 +42,7 @@ function Article(props) {
             <div className={classes.inforUser}>
               <Card className={classes.card}>
                 <CardHeader
+                  classes={{title:classes.title}}
                   avatar={<Avatar alt="" src={article.author.image} />}
                   title={<Link to="/">{article.author.username}</Link>}
                   subheader={

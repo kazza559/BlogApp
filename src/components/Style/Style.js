@@ -96,15 +96,15 @@ export const Style = {
     root: {
       padding: "30px 10%",
       boxShadow: "none",
-      background: "#333",
+      background: "#cfd8dc",
       borderRadius: "0px"
     },
     card: {
-      background: "#333",
+      background: "#cfd8dc",
       boxShadow: "none"
     },
     title: {
-      color: "#fff",
+      color: "#d500f9",
       padding: "15px 0"
     },
     inforUser: {
@@ -115,7 +115,7 @@ export const Style = {
     },
     infor: {
       marginLeft: "10px",
-      color: "#fff"
+      color: "#d500f9"
     },
     chip: {
       color: "#fff",
@@ -132,7 +132,7 @@ export const Style = {
       marginTop: "15px"
     },
     subheader: {
-      color: "#fff"
+      color: "#d500f9"
     }
   },
   footerArticleStyle: {
@@ -154,6 +154,8 @@ export const Style = {
       "&:hover": {
         textDecoration: "none",
         backgroundColor: "#9c27b0"
+      },"&:after":{
+        backgroundColor: "#fff"
       }
     }
   },
@@ -166,13 +168,13 @@ export const Style = {
       margin: "10px",
       cursor: "pointer",
       "&:hover, &:active": {
-        backgroundColor: "#5cb85c",
-        color: "#000"
+        backgroundColor: "#dd33fa",
+        color: "#fff"
       }
     },
     avatar: {
       backgroundColor: "#fff",
-      color: "#5cb85c"
+      color: "#dd33fa"
     }
   }
 };
