@@ -61,6 +61,9 @@ export const Style = {
     }
   },
   Preview: {
+    iconFavorite: {
+      color: 'red'
+    },
     card: {
       width: "100%",
       marginBottom: "5px",
@@ -144,7 +147,10 @@ export const Style = {
       margin: "15px 0"
     },
     avatar: {
-      color: "#000"
+      cursor: 'pointer'
+    },
+    time: {
+      color: '#000'
     },
     button: {
       color: "#fff",

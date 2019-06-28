@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
+import styled from "styled-components";
 
 // material-ui components
 import {
@@ -28,7 +29,12 @@ import {
 } from "../actions/comment.action";
 import convertTime from "../Helpers/datePipe";
 import { Style } from "../components/Style/Style";
+import { history } from "../Helpers/history";
 
+const StyledLink = styled(NavLink)`
+  text-decoration: none;
+  color: black;
+`;
 const styles = () => Style.footerArticleStyle;
 const themes = createMuiTheme(Style.muiThemes);
 function FooterArticle(props) {
@@ -53,6 +59,9 @@ function FooterArticle(props) {
       setinitialComment("");
     }
   };
+  const handleClickauthor = user => {
+    history.push(`/profile/${user}`);
+  };
   const handleDelete = id => {
     deleteComment(article.slug, id);
   };
@@ -68,7 +77,14 @@ function FooterArticle(props) {
       return (
         <Card className={classes.card} key={comment.id}>
           <CardHeader
-            avatar={<Avatar alt="" src={comment.author.image} />}
+            avatar={
+              <Avatar
+                className={classes.avatar}
+                alt=""
+                src={comment.author.image}
+                onClick={() => handleClickauthor(comment.author.username)}
+              />
+            }
             action={
               isauthor ? (
                 <IconButton
@@ -82,9 +98,13 @@ function FooterArticle(props) {
                 ""
               )
             }
-            title={comment.author.username}
+            title={
+              <StyledLink to={`/profile/${comment.author.username}`}>
+                {comment.author.username}
+              </StyledLink>
+            }
             subheader={
-              <Typography variant="subtitle2" className={classes.avatar}>
+              <Typography variant="subtitle2" className={classes.time}>
                 {convertTime(comment.createdAt)}
               </Typography>
             }
