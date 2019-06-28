@@ -6,7 +6,7 @@ import PreviewArticle from "../Home/PreviewArticle";
 import Pagination from "../components/Pagination";
 
 function MyArticles(props) {
-  const { getListView, list, actived, username, clearListView } = props;
+  const { list, username, clearListView, getListView } = props;
   useEffect(() => {
       if (username) {
         getListView(0, 10, null, username)
@@ -14,7 +14,7 @@ function MyArticles(props) {
       return () => {
         clearListView()
       }
-  }, [getListView, actived, username, clearListView]);
+  }, [getListView, username, clearListView]);
 
   const renderList = list => {
     if (list.articles.length === 0) {

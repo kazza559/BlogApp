@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 import PropTypes from "prop-types";
-import Styled from 'styled-components'
+import Styled from "styled-components";
 
 // material-ui components
 import { makeStyles } from "@material-ui/core/styles";
@@ -9,13 +9,13 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 
-import { BannerDiv, Container } from './Banner';
-import MyArticles from './MyArticles';
-import FavoritedArticles from './FavoritedArticles'
+import { BannerDiv, Container } from "./Banner";
+import MyArticles from "./MyArticles";
+import FavoritedArticles from "./FavoritedArticles";
 
 const WhiteDiv = Styled(BannerDiv)`
   background: white
-`
+`;
 
 function TabContainer(props) {
   return (
@@ -48,30 +48,36 @@ function ListArticle({ profile }) {
   }
 
   const renderTab = () => {
-      return (
-        <WhiteDiv>
-          <Container>
-            <div className={classes.root}>
-              <AppBar className={classes.border} color="inherit" position="static">
-                <Tabs value={value} onChange={handleChange}>
-                  <Tab label="My Articles" />
-                  <Tab label="Favorited Articles" />
-                </Tabs>
-              </AppBar>
-              {value === 0 && (
-                <TabContainer>
-                  <MyArticles username={ profile ? profile.username : null} />
-                </TabContainer>
-              )}
-              {value === 1 && (
-                <TabContainer>
-                  <FavoritedArticles username={ profile ? profile.username : null} />
-                </TabContainer>
-              )}
-            </div>
-          </Container>
-        </WhiteDiv>
-      );
+    return (
+      <WhiteDiv>
+        <Container>
+          <div className={classes.root}>
+            <AppBar
+              className={classes.border}
+              color="inherit"
+              position="static"
+            >
+              <Tabs value={value} onChange={handleChange}>
+                <Tab label="My Articles" />
+                <Tab label="Favorited Articles" />
+              </Tabs>
+            </AppBar>
+            {value === 0 && (
+              <TabContainer>
+                <MyArticles username={profile ? profile.username : null} />
+              </TabContainer>
+            )}
+            {value === 1 && (
+              <TabContainer>
+                <FavoritedArticles
+                  username={profile ? profile.username : null}
+                />
+              </TabContainer>
+            )}
+          </div>
+        </Container>
+      </WhiteDiv>
+    );
   };
 
   return renderTab();

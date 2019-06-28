@@ -37,7 +37,7 @@ function PreviewArticle(props) {
     />)
   }
   const handleFavorite = () => {
-    if (!isAuth) {
+    if (!Object.keys(isAuth).length) {
       return;
     }
     favorited ? props.unFavoriteArticle(slug) : props.favoriteArticle(slug)

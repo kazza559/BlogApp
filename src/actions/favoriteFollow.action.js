@@ -51,9 +51,9 @@ export const unFollowArticle = usernane => {
     Service.unFollowArticle(usernane).then(
       res => {
         const {
-            profile: { following }
-          } = res;
-          dispatch({ type: FOLLOW_UNFOLLOW, following });
+          profile: { following }
+        } = res;
+        dispatch({ type: FOLLOW_UNFOLLOW, following });
       },
       error => {
         const { errors } = error.response.data;

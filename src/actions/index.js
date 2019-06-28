@@ -23,8 +23,20 @@ export const getTagList = () => {
   };
 };
 
-export const getListView = (offset, limit, byTag, author, favorited) => async dispatch => {
-  const response = await Service.getListView(offset, limit, byTag, author, favorited);
+export const getListView = (
+  offset,
+  limit,
+  byTag,
+  author,
+  favorited
+) => async dispatch => {
+  const response = await Service.getListView(
+    offset,
+    limit,
+    byTag,
+    author,
+    favorited
+  );
   dispatch({
     type: GET_LISTVIEW,
     payload: response.data
@@ -61,7 +73,7 @@ export const loginRegister = (User, infor) => {
     );
   };
 };
-export const updateUser = (inforEdit) => {
+export const updateUser = inforEdit => {
   return dispatch => {
     Service.updateUser(inforEdit).then(
       user => {
@@ -110,8 +122,8 @@ export const getProfile = user => async dispatch => {
   dispatch({
     type: GET_PROFILE,
     payload: response.data
-  })
-}
+  });
+};
 export const getArticle = slug => {
   return dispatch => {
     Service.getArticle(slug).then(
@@ -136,11 +148,11 @@ export const clearArticle = () => {
 export const clearProfile = () => dispatch => {
   dispatch({
     type: CLEAR_PROFILE
-  })
-}
+  });
+};
 
 export const clearListView = () => dispatch => {
   dispatch({
     type: CLEAR_LISTVIEW
-  })
-}
+  });
+};
