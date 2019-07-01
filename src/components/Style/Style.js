@@ -47,7 +47,8 @@ export const Style = {
       "&:hover": {
         textDecoration: "none",
         backgroundColor: "red"
-      }
+      },
+      transitionDuration: "0.6s"
     }
   },
   tag: {
@@ -96,16 +97,16 @@ export const Style = {
     root: {
       padding: "30px 10%",
       boxShadow: "none",
-      background: "#333",
+      background: "#F6F2F0",
       borderRadius: "0px"
     },
     card: {
-      background: "#333",
+      background: "#F6F2F0",
       boxShadow: "none"
     },
     title: {
-      color: "#fff",
-      padding: "15px 0"
+      color: "#F7A98F",
+      padding: "15px 0",
     },
     inforUser: {
       display: "flex",
@@ -115,7 +116,7 @@ export const Style = {
     },
     infor: {
       marginLeft: "10px",
-      color: "#fff"
+      color: "#F7A98F"
     },
     chip: {
       color: "#fff",
@@ -132,7 +133,7 @@ export const Style = {
       marginTop: "15px"
     },
     subheader: {
-      color: "#fff"
+      color: "#F7A98F"
     }
   },
   footerArticleStyle: {
@@ -154,25 +155,29 @@ export const Style = {
       "&:hover": {
         textDecoration: "none",
         backgroundColor: "#9c27b0"
-      }
+      },"&:after":{
+        backgroundColor: "#fff"
+      },
+      transitionDuration: "0.6s"
     }
   },
   authorStyle: {
     label: {
-      paddingLeft: "8px"
+      paddingLeft: "8px",
+      color: '#000'
     },
     roots: {
-      backgroundColor: "#fff",
+      backgroundColor: "#EFDEAA",
       margin: "10px",
       cursor: "pointer",
       "&:hover, &:active": {
-        backgroundColor: "#5cb85c",
-        color: "#000"
-      }
+        backgroundColor: "#F7A98F"
+      },
+      transitionDuration: "0.6s"
     },
     avatar: {
       backgroundColor: "#fff",
-      color: "#5cb85c"
+      color: "#F7A98F"
     }
   }
 };

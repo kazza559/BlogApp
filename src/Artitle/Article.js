@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import styled from 'styled-components'
 
 // material-ui components
 import Typography from "@material-ui/core/Typography";
@@ -18,6 +19,19 @@ import FooterArticle from "./FooterArticle";
 import { Style } from "../components/Style/Style";
 
 const useStyles = makeStyles(() => Style.articlePageStyle);
+const StyledLink = styled(Link)`
+    font-size: 110%;
+    font-weight: 500;
+    text-decoration: none;
+    color: #181818;
+    &:focus, &:visited, &:link, &:active {
+        text-decoration: none;
+    }
+    &:hover {
+      color: #F7A98F
+    };
+    transition-duration: 0.6s;
+`;
 function Article(props) {
   const { article, getArticle, match, clearArticle } = props;
   const classes = useStyles();
@@ -42,8 +56,9 @@ function Article(props) {
             <div className={classes.inforUser}>
               <Card className={classes.card}>
                 <CardHeader
+                  classes={{title:classes.title}}
                   avatar={<Avatar alt="" src={article.author.image} />}
-                  title={<Link to="/">{article.author.username}</Link>}
+                  title={<StyledLink to="/">{article.author.username}</StyledLink>}
                   subheader={
                     <Typography
                       variant="subtitle2"
