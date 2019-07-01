@@ -159,6 +159,9 @@ export const Style = {
         backgroundColor: "#fff"
       },
       transitionDuration: "0.6s"
+    },
+    comment:{
+      padding:"10px 10%"
     }
   },
   authorStyle: {
