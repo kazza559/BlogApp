@@ -64,7 +64,10 @@ function FooterArticle(props) {
   }, [getComment, clearComment, article.slug]);
   const renderComment = () => {
     return comments.map(comment => {
-      const isauthor = auth.user.user.username === comment.author.username;
+      let isauthor = false;
+      if (Object.keys(auth).length !== 0) {
+        isauthor = auth.user.user.username === comment.author.username;
+      } else isauthor = false;
       return (
         <Card className={classes.card} key={comment.id}>
           <CardHeader
@@ -104,6 +107,9 @@ function FooterArticle(props) {
           <span> or </span>
           <NavLink to="/register">Sign Up </NavLink>
           <span>to add comments on this article</span>
+          <div className={classes.comment}>
+            {comments.length > 0 && renderComment()}
+          </div>
         </div>
       )}
       {Object.keys(auth).length > 0 && (
