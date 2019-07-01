@@ -54,7 +54,6 @@ function PreviewArticle(props) {
     if (!Object.keys(isAuth).length) {
       history.push("/login");
     }
-    console.log(favorited)
     favorited ? props.unFavoriteArticle(slug) : props.favoriteArticle(slug);
   };
   const path = `/profile/${author.username}`;
