@@ -1,10 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import {
-  favoriteArticle,
-  unFavoriteArticle
-} from "../actions/favoriteFollow.action";
+
 import styled from "styled-components";
 
 // material-ui components
@@ -21,7 +18,12 @@ import Chip from "@material-ui/core/Chip";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 
 import convertTime from "../Helpers/datePipe";
+import { history } from "../Helpers/history";
 import { Style } from "./../components/Style/Style";
+import {
+  favoriteArticle,
+  unFavoriteArticle
+} from "../actions/favoriteFollow.action";
 
 const useStyles = makeStyles(theme => Style.Preview);
 
@@ -51,7 +53,7 @@ function PreviewArticle(props) {
   };
   const handleFavorite = () => {
     if (!Object.keys(isAuth).length) {
-      return;
+      history.push("/login");
     }
     favorited ? props.unFavoriteArticle(slug) : props.favoriteArticle(slug);
   };
@@ -87,7 +89,10 @@ function PreviewArticle(props) {
       </CardContent>
       <CardActions className={classes.float}>
         <IconButton onClick={handleFavorite} aria-label="Add to favorites">
-          <FavoriteIcon classes={ favorited ? {root: classes.iconFavorite} : null} /> {favoritesCount}
+          <FavoriteIcon
+            classes={favorited ? { root: classes.iconFavorite } : null}
+          />{" "}
+          {favoritesCount}
         </IconButton>
       </CardActions>
     </Card>
