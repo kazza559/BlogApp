@@ -49,6 +49,7 @@ const Banner = props => {
   const { profile, isMyProfile, followArticle, unFollowArticle, auth } = props;
   const handleOnclick = () => {
     if(!Object.keys(auth).length) {
+      history.push('/login');
       return;
     }
     isMyProfile
