@@ -53,6 +53,7 @@ function PreviewArticle(props) {
   const handleFavorite = () => {
     if (!Object.keys(isAuth).length) {
       history.push("/login");
+      return;
     }
     favorited ? props.unFavoriteArticle(slug) : props.favoriteArticle(slug);
   };
