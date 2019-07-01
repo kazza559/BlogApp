@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-
 import styled from "styled-components";
 
 // material-ui components
@@ -55,6 +54,7 @@ function PreviewArticle(props) {
     if (!Object.keys(isAuth).length) {
       history.push("/login");
     }
+    console.log(favorited)
     favorited ? props.unFavoriteArticle(slug) : props.favoriteArticle(slug);
   };
   const path = `/profile/${author.username}`;

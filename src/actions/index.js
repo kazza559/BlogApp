@@ -104,10 +104,11 @@ export const clearMessege = () => {
 export const createArticle = article => {
   return dispatch => {
     Service.createArticle(article).then(
-      article => {
+      res => {
+        const { article } = res;
         dispatch({ type: CREATE_EDIT_ARTICLE.CREATE, article });
         dispatch(alertActions.clear());
-        history.push("/");
+        history.push(`/article/${article.slug}`);
       },
       error => {
         const { errors } = error.response.data;
@@ -130,6 +131,36 @@ export const getArticle = slug => {
       res => {
         let article = res.article;
         dispatch({ type: GET_ARTICLE, article });
+        dispatch(alertActions.clear());
+      },
+      error => {
+        const { errors } = error.response.data;
+        dispatch(alertActions.error(errors));
+      }
+    );
+  };
+};
+export const editArticle = (article, slug) => {
+  return dispatch => {
+    Service.editArticle(article, slug).then(
+      res => {
+        let article = res.article;
+        history.push(`/article/${article.slug}`);
+        dispatch(alertActions.clear());
+      },
+      error => {
+        const { errors } = error.response.data;
+        dispatch(alertActions.error(errors));
+      }
+    );
+  };
+};
+export const deleteArticle = slug => {
+  return dispatch => {
+    Service.deleteArticle(slug).then(
+      res => {
+        dispatch({ type: CLEAR_ARTICLE });
+        history.push("/");
         dispatch(alertActions.clear());
       },
       error => {

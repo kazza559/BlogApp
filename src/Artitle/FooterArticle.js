@@ -122,7 +122,7 @@ function FooterArticle(props) {
         <div className="signin-signup">
           <NavLink to="/login">Sign in</NavLink>
           <span> or </span>
-          <NavLink to="/register">Sign Up</NavLink>
+          <NavLink to="/register">Sign Up </NavLink>
           <span>to add comments on this article</span>
         </div>
       )}

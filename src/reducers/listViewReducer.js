@@ -10,6 +10,7 @@ export default (state = initial, action) => {
     case GET_LISTVIEW:
       return action.payload;
     case FAVORITE_ARTICLE:
+      console.log(action.article)
       const newArr = state.articles.map(item => {
         if (item.slug === action.article.slug) {
           item = action.article;
