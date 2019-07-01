@@ -29,9 +29,6 @@ const StyledLink = styled(Link)`
   text-decoration: none;
   color: black;
 `;
-const StyledIconButton = styled(FavoriteIcon)`
-  color: ${props => props.favorited === 'true' ? '#FCB9C7' : '' }
-`
 
 function PreviewArticle(props) {
   const classes = useStyles();
@@ -90,7 +87,7 @@ function PreviewArticle(props) {
       </CardContent>
       <CardActions className={classes.float}>
         <IconButton onClick={handleFavorite} aria-label="Add to favorites">
-          <FavoriteIcon classes={{root: classes.iconFavorite}} /> {favoritesCount}
+          <FavoriteIcon classes={ favorited ? {root: classes.iconFavorite} : null} /> {favoritesCount}
         </IconButton>
       </CardActions>
     </Card>
