@@ -9,7 +9,7 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 
-import { getListView } from "../actions";
+import { getListView, clearListView } from "../actions";
 import PreviewArticle from "./PreviewArticle";
 import Pagination from "../components/Pagination";
 import Feed from "./Feed";
@@ -74,7 +74,7 @@ function List(props) {
           )}
           {value === 1 && (
             <TabContainer>
-              <WrappedComponent />
+              <WrappedComponent actived={value} />
             </TabContainer>
           )}
           {tag && (value === 1 || value === 2) && (
@@ -95,7 +95,7 @@ function List(props) {
           </AppBar>
           {value === 0 && (
             <TabContainer>
-              <WrappedComponent />
+              <WrappedComponent actived={value}/>
             </TabContainer>
           )}
           {tag && value === 1 && (
@@ -112,10 +112,15 @@ function List(props) {
 }
 
 function ListPreview(props) {
-  const { getListView, list } = props;
+  const { getListView, list, actived, isAuth, clearListView } = props;
   useEffect(() => {
-    getListView();
-  }, [getListView]);
+    if (actived || (actived === 0 && !isAuth.loggedIn)) {
+      getListView()
+    }
+    return () => {
+      clearListView()
+    }
+  }, [getListView, actived, isAuth, clearListView]);
 
   const renderList = list => {
     return list.articles.map(item => (
@@ -136,10 +141,10 @@ function ListPreview(props) {
 }
 
 const mapStateToProps = state => {
-  return { list: state.listView };
+  return { list: state.listView, isAuth: state.auth };
 };
 const WrappedComponent = connect(
   mapStateToProps,
-  { getListView }
+  { getListView, clearListView }
 )(ListPreview);
 export default List;

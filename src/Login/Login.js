@@ -32,7 +32,7 @@ function Login(props) {
   const { handleSubmit, register, errors } = useForm();
   const classes = useStyles();
   React.useEffect(() => {
-    clearMessege()
+    clearMessege();
   }, [clearMessege]);
   const onSubmit = user => {
     const inforUser = { user };

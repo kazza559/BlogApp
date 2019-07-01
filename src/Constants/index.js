@@ -1,6 +1,8 @@
 export const GET_TAGLIST = "GET_TAGLIST";
 export const GET_ARTICLE = "GET_ARTICLE";
 export const CLEAR_ARTICLE = "CLEAR_ARTICLE";
+export const CLEAR_PROFILE = 'CLEAR_PROFILE';
+export const CLEAR_LISTVIEW = 'CLEAR_LISTVIEW';
 export const LOGIN = "LOGIN";
 export const FOLLOW_UNFOLLOW = "FOLLOW_UNFOLLOW";
 export const REGISTER = "REGISTER";

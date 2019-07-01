@@ -4,8 +4,9 @@ import {
   GET_FEED,
   GET_ARTICLE,
   CLEAR_ARTICLE,
-  FAVORITE_ARTICLE,
-  GET_PROFILE
+  GET_PROFILE,
+  CLEAR_PROFILE,
+  CLEAR_LISTVIEW
 } from "../Constants/index";
 import { Service } from "../Services";
 import { userConstants } from "../Constants/index";
@@ -22,8 +23,20 @@ export const getTagList = () => {
   };
 };
 
-export const getListView = (offset, limit, byTag) => async dispatch => {
-  const response = await Service.getListView(offset, limit, byTag);
+export const getListView = (
+  offset,
+  limit,
+  byTag,
+  author,
+  favorited
+) => async dispatch => {
+  const response = await Service.getListView(
+    offset,
+    limit,
+    byTag,
+    author,
+    favorited
+  );
   dispatch({
     type: GET_LISTVIEW,
     payload: response.data
@@ -50,6 +63,7 @@ export const loginRegister = (User, infor) => {
         dispatch(success(user));
         dispatch(alertActions.clear());
         history.push("/");
+        clearListView();
       },
       error => {
         const { errors } = error.response.data;
@@ -87,21 +101,6 @@ export const clearMessege = () => {
   };
 };
 
-export const favoriteArticle = slug => async dispatch => {
-  const response = await Service.favoriteArticle(slug);
-  dispatch({
-    type: FAVORITE_ARTICLE,
-    payload: response.data
-  });
-};
-
-export const unfavoriteArticle = slug => async dispatch => {
-  const response = await Service.unfavoriteArticle(slug);
-  dispatch({
-    type: FAVORITE_ARTICLE,
-    payload: response.data
-  });
-};
 export const createArticle = article => {
   return dispatch => {
     Service.createArticle(article).then(
@@ -175,4 +174,16 @@ export const clearArticle = () => {
   return dispatch => {
     dispatch({ type: CLEAR_ARTICLE });
   };
+};
+
+export const clearProfile = () => dispatch => {
+  dispatch({
+    type: CLEAR_PROFILE
+  });
+};
+
+export const clearListView = () => dispatch => {
+  dispatch({
+    type: CLEAR_LISTVIEW
+  });
 };

@@ -46,6 +46,9 @@ function Settings(props) {
     const inforEdit = { user: valueForm };
     updateUser(inforEdit);
   };
+  const handleLogout = () => {
+    logout()
+  }
   return (
     <div className={classes.container}>
       <MuiThemeProvider theme={themes}>
@@ -138,7 +141,7 @@ function Settings(props) {
           variant="contained"
           size="medium"
           classes={{ root: classes.button }}
-          onClick={logout}
+          onClick={handleLogout}
         >
           Or click here to logout.
         </Button>
