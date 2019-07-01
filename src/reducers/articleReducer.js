@@ -2,7 +2,8 @@ import {
   CREATE_EDIT_ARTICLE,
   GET_ARTICLE,
   CLEAR_ARTICLE,
-  FOLLOW_UNFOLLOW
+  FOLLOW_UNFOLLOW,
+  FAVORITE_ARTICLE
 } from "../Constants/index";
 
 const article = {};
@@ -13,6 +14,8 @@ export default (state = article, action) => {
     case CREATE_EDIT_ARTICLE.EDIT:
       return action.article;
     case GET_ARTICLE:
+      return action.article;
+    case FAVORITE_ARTICLE:
       return action.article;
     case FOLLOW_UNFOLLOW:
       return {...state,author:{...state.author,following:action.following}}
