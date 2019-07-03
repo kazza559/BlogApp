@@ -67,7 +67,7 @@ function List(props) {
               {tag && <Tab label={tag} />}
             </Tabs>
           </AppBar>
-          {value === 0 && isAuth && (
+          {value === 0 && (
             <TabContainer>
               <Feed user={user} />
             </TabContainer>
